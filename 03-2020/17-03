@@ -1,0 +1,33 @@
+// 洛谷 新手村
+// #4
+// P1422
+// Electricity Bill Payment, input energy consume in kw/h, ouput how much you need to pay
+// 150 kw/h or below = $0.4463.      151-400 kw/h =$0.4663      401 kw/h or above = $0.5663
+// input: 267
+// output:121.5
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+	int energy;
+	cin >> energy;
+	float money = 0;
+	if (energy <= 150) {
+		money = energy * 0.4463;
+	}
+	else if (energy <= 400) {
+		money = 150 * 0.4463;
+		money += (energy - 150) * 0.4663;
+	}
+	else{
+		money = 150 * 0.4463;
+		money += (400 - 150) * 0.4663;
+		money += (energy - 400) * 0.5663;
+	}
+	cout << fixed<<setprecision(1)<<money << endl;
+	return 0;
+}
+----------------------------------------------------------------------------------------------------------------------
