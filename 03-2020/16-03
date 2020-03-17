@@ -1,5 +1,6 @@
 // 16-03-2020
 // 洛谷 初入洛谷
+// #1
 // P1116
 // input size of array, input data of array[i], count how many times to move if I need to sort the array by ascending order.
 // input: 4
@@ -27,6 +28,7 @@ int main()
 }
 ----------------------------------------------------------------------------------------------------------------------
 // 洛谷 新手村
+// #2
 // P1001 
 // input 2 number, output their sum
 
@@ -59,6 +61,7 @@ int main()
 }
 ----------------------------------------------------------------------------------------------------------------------
 // 洛谷 新手村
+// #3
 // P1425
 // input time, output their difference. The first two input is hh:mm, the last two is also hh:mm, assume the time of last two
 // must larger than first two
