@@ -31,3 +31,55 @@ int main()
 	return 0;
 }
 ----------------------------------------------------------------------------------------------------------------------
+// 洛谷 新手村
+// #5
+// P1089
+// Mum proposed that her son could stores his money to her in the beginning of month, after 1 year, she will give him 20% profit.
+// Mum will give her son $300 allowance every month, after that, son will predict how much he need to spend in the following month
+// if the reamaining money is larger or equal to $100, he would store $100*n to her mum (eg, 160 = store 100, 320 = store 300)
+// money he left in the current month will goes to next month
+// if he spend too much that spend is larger than $300, it will comes to negative remaining money
+// if negative remaining money exsists, output that month with the - sign(negative sign)
+// if no, then ouput son's money after 1 year(including stored money)
+// input:290
+	 230
+	 280
+	 200
+	 300
+	 170
+	 340
+	 50 
+	 90 
+	 80 
+	 200
+	 60
+// output:-7
+ 
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int current = 0, stored = 0, cost=0, deathMonth;
+	bool flag = true;
+	for (int i = 1; i <= 12; i++) {
+		current += 300;        //300  310  380  300  300  300  330  300  350  360  380  380
+		cin >> cost;              //290  230  280  200  300  170  340  50    90    80    200  60    
+		current -= cost;       //10    80    100  100  0      130  -10   250  260  280  180  320
+		if (current < 0) {
+			flag = false;
+			deathMonth = i;
+			break;
+		}
+		stored += current / 100;
+		current %= 100;
+	}
+	if (flag == false) {
+		cout << "-" << deathMonth << endl;
+	}
+	else {
+		cout << current + stored * 120 << endl;
+	}
+	return 0;
+}
