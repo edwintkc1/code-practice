@@ -137,4 +137,33 @@ int main()
 	}
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+//洛谷 新手村
+// #8
+// P1424
+// A fish could swim 250km per day, but it need to rest in Saturday and Sunday. Now input 2 number, x and n, 
+// x refers to day, ie. x = 5 = Friday    n refers to how many days the fish need to swim
+// output the distance it swim
+// input: 3 10
+// output:2000
 
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	unsigned long long x, n,ans = 0;
+	cin >> x >> n;
+	for (int i=0; i < n; i++) {   //x = 3   n = 10
+		if (x != 6 && x != 7) {
+			ans += 250;
+		}
+		if (x >7) {
+			x = 1;
+		}
+		x++;
+	}
+	cout << ans << endl;
+	return 0;
+}
