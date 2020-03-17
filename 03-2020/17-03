@@ -41,18 +41,18 @@ int main()
 // if he spend too much that spend is larger than $300, it will comes to negative remaining money
 // if negative remaining money exsists, output that month with the - sign(negative sign)
 // if no, then ouput son's money after 1 year(including stored money)
-// input:290
-	 230
-	 280
-	 200
-	 300
-	 170
-	 340
-	 50 
-	 90 
-	 80 
-	 200
-	 60
+// input: 290
+	  230
+	  280
+	  200
+	  300
+	  170
+	  340
+	  50 
+	  90 
+	  80 
+	  200
+	  60
 // output:-7
  
 
@@ -83,3 +83,35 @@ int main()
 	}
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// 洛谷 新手村
+// #6
+// P1909
+// Teacher wants to buy pencil for all students in the class. The convenient store have 3 kind of package for pencil.
+// The teacher need to choose the cheapest one to buy and ouput the price.
+// first input number of students, then input how many pencil in package1, price of package1.....etc
+// input: 57
+	  2 2
+	  50 30
+	  30 27
+// output:54
+
+#include <iostream>
+using namespace std;
+long int n, a1, a2, money1, b1, b2, money2, c1, c2, money3, ans;
+int main()
+{
+	cin >> n;  //57
+	cin >> a1 >> a2 >> b1 >> b2 >> c1 >> c2;  //a1 = 2, a2 = 2  b1 = 50, b2 = 30  c1 = 30, c2 = 27
+	if (n % a1 == 0) money1 = n / a1 * a2; else money1 = (n / a1 + 1) * a2;    // 57%2 = 1   money1 = (57/2+1）*2 = 29*2=58
+	if (n % b1 == 0) money2 = n / b1 * b2; else money2 = (n / b1 + 1) * b2;  //money2=60
+	if (n % c1 == 0) money3 = n / c1 * c2; else money3 = (n / c1 + 1) * c2;  //money3=54
+	if (money1 < money2 && money1 < money3) ans = money1;   
+	if (money2 < money1 && money2 < money3) ans = money2;
+	if (money3 < money1 && money3 < money2) ans = money3;
+	cout << ans << endl;   
+	return 0;
+}
+
+
+
