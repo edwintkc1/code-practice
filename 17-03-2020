@@ -1,0 +1,80 @@
+// 16-03-2020
+// 洛谷 初入洛谷
+// P1116
+// input size of array, input data of array[i], count how many times to move if I need to sort the array by ascending order.
+// input: 4
+//        4 3 2 1
+// output:6 
+
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int n, sum;
+int main()
+{
+    cin>>n;
+    int a[10000];
+    for(int i=0;i<n;i++)
+        cin>>a[i];
+    for(int i=0;i<n-1;i++)
+        for(int j=0;j<n-i-1;j++)
+            if(a[j]>a[j+1]){
+                swap(a[j],a[j+1]);
+                sum++;
+            }
+    cout<< sum <<endl;
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------------
+// 洛谷 新手村
+// P1001 
+// input 2 number, output their sum
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int a,b;
+    cin>>a>>b;
+    cout<<a+b<<endl;
+}
+----------------------------------------------------------------------------------------------------------------------
+// 洛谷 新手村
+// P1421
+// Your mother give you some money to let you to buy pencils. Count how many pencil could you buy, each pencil is $1.9.
+// The first input worth $1,the second input worth $0.1, eg, 10 3,  means $10.3 
+// input: 10 3
+// output:5
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int a,b;
+    cin>>a>>b;
+    double c = a+b/10.0;
+    cout<<int(c/1.9)<<endl;
+}
+----------------------------------------------------------------------------------------------------------------------
+// 洛谷 新手村
+// P1425
+// input time, output their difference. The first two input is hh:mm, the last two is also hh:mm, assume the time of last two
+// must larger than first two
+// input:12 50 19 10
+// output:6 20
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int a,b,c,d,hour,min;
+    cin>>a>>b>>c>>d;
+    a = a*60+b;          //change hour to minutes, then no need to consider negative case
+    c = c*60+d;
+    hour = (c-a)/60;
+    min = (c-a)%60;
+    cout<<hour<<" "<<min<<endl;
+}
