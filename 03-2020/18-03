@@ -128,3 +128,34 @@ int main()
 	cout << ans << endl;
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// 洛谷 新手村
+// #14
+// P1567
+// count how many consecutive increase of number in the array. Input size of array n(n<=10000000), input data.
+// output maximum consecutive increase.
+// input: 10
+          1 2 3 2 4 5 6 8 5 9
+// output:5
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	static int a[10000000]; //prevent stack overflow, set it to global array
+	int n, temp = 0, max = 0;
+	cin >> n;
+	for (int i = 0; i < n; i++) 
+		cin >> a[i]; 
+	for (int i = 0; i < n; i++) {
+		if (a[i] < a[i + 1])    //campare current data and next data
+			temp++;         //if next data> current data, means temperature increase, then temp++
+		else
+			temp = 0;	//if nex data < current data, means decrease, clear temp
+		if (temp > max)     
+			max = temp;     
+	}
+	cout << max+1 << endl;
+	return 0;
+}
