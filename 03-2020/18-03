@@ -94,4 +94,37 @@ int main()
 
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// 洛谷 新手村
+// #13
+// P2141
+// Input size of array(3<=n<=100), then input each data (data needs to be different, data<=10000)
+// count if there is any number of the array equals to sum of any other two numbers of the array.
+// duplicated case need to be canceled , eg 1+4 =5, 2+3 = 5, but we only count it one time as they all equals to 5.
+// input: 4
+	  1 2 3 4
+// output:2
 
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n, a[100], b[100] = { 0 }, ans = 0;    // array b for checking duplicated case, initial value=0 means not yet count
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];                   
+	}
+	for (int i = 0; i < n; i++) {  
+		for (int j = i + 1; j < n; j++) {     // just sum 2 numbers
+			for (int k = 0; k < n; k++) { // see if their sum euqals to any other number in the array
+				if (a[k] == a[i] + a[j] && b[k]==0) {  // if yes, and no duplicated case, ans++
+					ans++; 
+					b[k] = 1;
+				}
+			}
+		}
+	}
+	cout << ans << endl;
+	return 0;
+}
