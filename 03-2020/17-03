@@ -189,6 +189,6 @@ int main()
 	for (int i = 1; i <= n; i++) 
 		ss << i;   //ss=1234567891011
 	string s = ss.str();  //cannot directly output stringstream ss, use .str() and assign it to a string.
-	cout << count(s.begin(), s.end(), x + '0') << endl;  // x + '0', implicit conversion to string
+	cout << count(s.begin(), s.end(), x + '0') << endl;  // x + '0', x = 1 (ASCII = 49), + '0' means +48, we get 49 finally
 	return 0;
 }
