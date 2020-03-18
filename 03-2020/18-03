@@ -33,6 +33,32 @@ int main()
 	}
 	return 0;
 }
-
-
 ----------------------------------------------------------------------------------------------------------------------
+// 洛谷 新手村
+// #11
+// P1046
+// Mary want to pick some apples from the tree. Assume there are 10 apples in the tree, when apples are ready for pick, 
+// Mary will try to pick it without any tool. If Mary cannot reaches the apple, she will use a chair(30cm) to help her.
+// input 10 data, height of apples, and height of Mary. Output how many apples she could pick.
+// input: 100 200 150 140 129 134 167 198 200 111
+          110
+// output:5
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int a[10], height,ans=0;
+	for (int i = 0; i < 10; i++) {
+		cin >> a[i];
+	}
+	cin >> height;
+	height += 30;
+	for (int i = 0; i < 10; i++) {
+		if (a[i] <= height)
+			ans++;
+	}
+	cout << ans << endl;
+	return 0;
+}
