@@ -1,0 +1,38 @@
+// 洛谷 新手村
+// #10
+// P1146
+// flip n coins, input integer n(<100, even) to be number of coins. You could flip n-1 coins everytime
+// e.g If n = 4, flip 3 coins each time.
+// count the least possible rounds such that all coins are flipped.
+// all coins should have initial value 0 and final value 1.
+// the first output is number of round needed. The remaining part is status of those coins.
+// input: 4
+// output:4
+          0111
+          1100
+          0001
+          1111
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n, ans, a[150] = { 0 };
+	cin >> n;
+	cout << n << endl;                     //flip n-1 coins = flip 1 coin, then number of rounds must equals to how many coins.
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {       //0000 everytime flip tha last three coins
+			if (j != i) {                      //0111 flip 234 , 1st time, skip 1
+				if (a[j] == 0) a[j] = 1;         //1100 flip 341 , 2nd time, skip 2
+				else a[j] = 0;                   //0001 flip 412 , 3rd time, skip 3
+			}                                  //1111 flip 123, xth time, skip x
+			cout << a[j];
+		}                                              
+		cout << endl;
+	}
+	return 0;
+}
+
+
+----------------------------------------------------------------------------------------------------------------------
