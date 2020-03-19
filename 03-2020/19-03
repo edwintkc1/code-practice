@@ -1,0 +1,47 @@
+// 雜題
+// #17
+// intput odd number and print a cross shape just like the this one --> X
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int N;
+	cout << "Please input the integer N: ";
+	cin >> N;
+	while (N <= 1 || N % 2 == 0) {
+		cout << "Please input the integer N: ";
+		cin >> N;
+	}
+	int columnMidPoint = N;  // 7
+	int rowMidPoint = (N + 1) / 2;  // 4  
+	int row = N * 2 + 1;
+	for (int i = 1; i <= rowMidPoint; i++) { 	//an upper part with the shape of ‘V’ except the central point 
+		for (int j = 1; j <= 2 * N - 1; j++) {
+			if (i < rowMidPoint) {
+				if (2 * i - 1 == j || row - 2 * i == j)
+					cout << "*";
+				else
+					cout << " ";
+			}
+			if (i == rowMidPoint) {  	//the central point
+				if (j == columnMidPoint)
+					cout << "*";
+				else
+					cout << " ";
+			}
+		}
+		cout << endl;
+	}
+	// a lower part with the shape of ‘Ʌ’ except the central point
+	for (int i = 1; i <= rowMidPoint - 1; i++) {
+		for (int j = 1; j <= 2 * N - 1; j++) {
+			if (j == N - 2 * i || j == N + 2 * i)
+				cout << "*";
+			else
+				cout << " ";
+		}
+		cout << endl;
+	}
+		return 0;
+}
