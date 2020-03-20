@@ -1,0 +1,53 @@
+// 雜題
+// #19
+// given a positive number n , generate a upper triangular matrix of size n. 
+// The first row is ascending order, 2nd row descending order, 3rd row ascending..... 4th row descending...repeat
+// input: 3
+// output:1 2 3
+            5 4
+              6
+// input: 4
+// output:1 2 3 4                     //the last element of the row + number of elements of last row - 1
+            7 6 5                     //when 1st row temp == 4, the second row goes with 4 + 4 - 1 = 7 
+              8 9                     //when 3rd row temp == 9, the 4th row goes with 9 + 2 - 1 = 10
+                10
+                
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n;
+	cout << "Input: ";
+	cin >> n;
+
+	int temp = 1;
+	int count = 0;
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j < i; j++) {                   //print the space
+			cout << "\t";
+		}
+		if (i % 2 == 0) {                               //split it into 2 cases, case 1 = even row
+			for (int j = 1; j <= n + 1 - i; j++) {
+				cout << temp << "\t";
+				temp--;
+				count++;
+				if (j == n + 1 - i) {                       //when j == the last j, +count +1
+					temp += count + 1;
+				}
+			}
+		}
+		else {
+			for (int j = 1; j <= n + 1 - i; j++) {        //odd row
+				cout << temp << "\t";
+				temp++;
+				count++;
+				if (j == n + 1 - i) {                       //when j == the last j, +count -2 
+					temp += count - 2;
+				}
+			}
+		}
+		count = 0;
+		cout << endl;
+	}
+	return 0;
+}
