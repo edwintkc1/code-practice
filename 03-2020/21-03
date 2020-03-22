@@ -1,2 +1,44 @@
-pass
-1
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int size;
+	cout << "Please input the size of the matrix:";
+	cin >> size;                            //e.g 4
+	int** p = new int* [size];	
+	cout << endl;
+	for (int i = 0; i < size; i++) {
+		p[i] = new int[size];            //create 2 dimensional array
+	}
+	cout << "Please input the matrix row by row:\n";
+	for (int i = 0; i < size; i++) {        //1   2   3   4 
+		for (int j = 0; j < size; j++) {   //5   6   7   8       
+			cin >> p[i][j];                     //9   10 11 12
+		}                                            //13 14 15 16
+	}
+	int tempSize = size;                   //tempSize = 4
+	int i = 0, j = 0;
+	for (int round = 0; round < size/2; round++) {
+		for (; i < tempSize - 1; i++)              //i<3                          round2->              //i = 1, i<2
+			cout << p[i][j] << " ";                  //cout 1 5 9, i = 3                                   //cout 6
+		for (; j < tempSize - 1; j++)             //j<3                                                       //j=1, j<2
+			cout << p[i][j] << " ";                  //cout 13 14 15, j = 3                            //cout 10
+		for (i = tempSize - 1; i > round; i--)//set i = 3 (maximum)                            
+			cout << p[i][j] << " ";                 //cout 16 12 8 4                                     //cout 11
+		for (j = tempSize - 1; j > round; j--)//set j = 3
+			cout << p[i][j] << " ";                 //cout 3 2                                               //cout 7
+
+		tempSize--;
+		i++;
+		j++;
+	}
+	if (size % 2 != 0) {      //the above case is size = 4, so its ok.
+		cout << p[i][j];       //But when size = odd number, center data would not be printed, so print it here
+	}
+	return 0;
+}
+
+
+
