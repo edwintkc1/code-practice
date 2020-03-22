@@ -20,6 +20,7 @@ int main() {
 			cin >> p[i][j];                     //9   10 11 12
 		}                                           //13 14 15 16
 	}
+	cout << "The spiral form of the matrix is:\n";
 	int tempSize = size;                   //tempSize = 4
 	int i = 0, j = 0;
 	for (int round = 0; round < size/2; round++) {
