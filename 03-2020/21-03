@@ -1,6 +1,6 @@
 // 雜題
 // #20
-// input size of matrix, 螺旋輸出data
+// input size of matrix, use spiral form print its data，螺旋輸出矩陣數據
 
 #include <iostream>
 using namespace std;
