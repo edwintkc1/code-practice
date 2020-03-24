@@ -1,0 +1,42 @@
+// 雜題
+// #21
+// convert ciphertext to plaintext, the key is "cityu"， size of input string <100 characters
+// the alphabet number of character 'a' is 1, 'e' is 5, etc
+// input: kjjotsaifmdvghij
+// output:happyprogramming
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	int cipher[100] = { 0 }, key[100] = { 0 };
+	char plain[100] = {};
+	string input, s_key="cityu";
+	cout << "Input the ciphertext:\n";
+	cin >> input;
+
+	for (int i = 0; i < input.length(); i++) {       //put ciphertext into array
+		cipher[i] = input[i];
+	}
+
+	int count = 0;
+	for (int i = 0; i < 100; i++) {
+		key[i] = s_key[count];                         //put key "cityu" 's ASCII code into array
+		count++;
+		count %= 5;                                    //In key array, the data should be repeated ASCII code of "cityu" 
+		if (cipher[i] - key[i] > 0) {                  //If subtract > 0, it is ok
+			plain[i] = cipher[i] - key[i];
+		}
+		else {                                         //If subtract < 0, it will generate negative ASCII code, it is impossible
+			plain[i] = cipher[i] - key[i] + 26;          //Add 26 if it is negative
+		}
+		plain[i] += 96;                                //now range of all data in plain array is [1,26], so add 96 to change the range = [97,122]
+	}
+	cout << "The corresponding plaintext is: ";
+	for (int i = 0; i < input.length(); i++) {
+		cout << plain[i];                              //print result
+	}
+
+	return 0;
+}
