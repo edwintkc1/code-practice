@@ -1,69 +1,55 @@
 // 雜題
 // #22
-// 記錄
+// find the maximum sum of sub matrix，最大子矩陣和
 
 #include <iostream>
 using namespace std;
 
-int kadane(int temp[], int start, int end, int size) {
-	int sum = 0, tempMax = -9999;
-	end = -1;
-	int localStart = 0;
+int kadane(int temp[], int &start, int &end, int size) {
+	int sum = 0, localStart=0, tempMax = -9999;                                  
+	end = 0;
 	for (int i = 0; i < size; i++) {
 		sum += temp[i];
 		if (sum < 0) {
 			sum = 0;
 			localStart = i + 1;
 		}
-		if (sum > tempMax) {
+		if (sum >= tempMax) {
 			tempMax = sum;
 			start = localStart;
 			end = i;
 		}
 	}
-	//if (end != -1)
-	//	return tempMax;
-
-	//tempMax = temp[0];
-	//start = 0;
-	//end = 0;
-
-	//for (int i = 1; i < size; i++) {
-	//	if (temp[i] > tempMax) {
-	//		tempMax = temp[i];
-	//		start = i;
-	//		end = i;
-	//	}
-	//}
 	return tempMax;
 }
 
 void solution() {
-	int size, X = -9999, L = 0, R = 0, T = 0, B = 0;
-	int start=0, end=0, tempSum;
+	int size, X = -9999, L = 0, R = 0, T = 0, B = 0;                 //cannot set current max sum to 0, because return value may smaller than 0
+	int start = 0, end = 0, tempSum;
 	cout << "Input the size of the matrix:\n";
 	cin >> size;
 	int** p = new int* [size];
 	for (int i = 0; i < size; i++)                                              //create 2 dimensional array
 		p[i] = new int[size];
 
-	cout << "Input the content of the matrix:\n";                 //input data
+	cout << "Input the content of the matrix:\n";             //input data
 	for (int i = 0; i < size; i++)
 		for (int j = 0; j < size; j++)
 			cin >> p[i][j];
 
 	int* temp = new int[size];                                            //using kardane's algorithm, so create a temp array
-	for (int i = 0; i < size; i++)
-		temp[i] = 0;                                                               //initialize temp array
 
 	for (int left = 0; left < size; left++) {
+		for (int i = 0; i < size; i++)
+			temp[i] = 0;                                                          //initialize temp array every time
+
 		for (int right = left; right < size; right++) {
-			for (int i = 0; i < size; i++) {
-				temp[i] += p[i][right];
-			}
-			tempSum = kadane(temp, start, end, size);
-			if (tempSum > X) {
-				X = tempSum;
+			for (int i = 0; i < size; i++)                 
+				temp[i] += p[i][right];                                      //add the row data to temp array
+
+			tempSum = kadane(temp, start, end, size);      //kadane's algorithm
+			if (tempSum >= X) {                                              //If return value of kadane's algorithm is larger than current max sum
+				X = tempSum;                                                // change its value and change all LRTB
 				L = left;
 				R = right;
 				T = start;
@@ -71,9 +57,8 @@ void solution() {
 			}
 		}
 	}
-
-	cout << "Max: " << X << endl;
-	cout << L << " " << R << " " << T << " " << B;
+	cout << "The maximum sum submatrix can be represented as:\n";
+	cout << X<<" "<< L << " " << R << " " << T << " " << B;
 
 	for (int i = 0; i < size; i++)
 		delete[]p[i];
@@ -86,6 +71,7 @@ int main() {
 	return 0;
 }
 
+// for testing
 //12 4 -34 21 3
 //-32 23 - 16 2 9
 //18 12 - 34 - 14 3
