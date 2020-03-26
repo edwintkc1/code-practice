@@ -1,3 +1,63 @@
 //雜題
-//22
+//#23
 //記錄
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	char max = ' ', i[20] = { 0 }, temp[20] = { 0 }, ans[20] = { 0 };
+	int indexArray[20] = { 0 };                 //max is current maximum value
+	int k, index = 0;
+	cout << "Input the integer number:";
+	cin >> i;
+	cout << "Input the value of k:";
+	cin >> k;											//example, 4
+	int left = k;                                       //remaining number of the array
+	for (int j = 0; j < strlen(i); j++) {
+		temp[j] = i[j];                               //example, 5378694010
+	}
+
+	for (int j = 0; j < k; j++) {
+		for (int z = 0; z < strlen(i); z++) {
+			if (temp[z] > max) {                                    
+				max = i[z];							//put the maximum data in the temp array to max, at first max = 9
+				index = z;								//also store its index, at first index = 5
+			}
+		}
+		if (strlen(i) - 1 - index < k) {			//2 cases, the first one is the remaining number of data after max is NOT enough for k 
+			indexArray[index] = max - 48;  //which means some data may chosen from the front
+			temp[index] = 0;
+		}
+		else {											//if remaining number of data after index of max (5) is enough, in this case, 10 - 1 - 5 = 4 >= 4
+			indexArray[index] = max - 48;
+			for (int x = 0; x <= index; x++)  // 4 data in the back (4010), enough, set all the data before current max index to 0
+				temp[x] = 0;                        //then we only need to focus on the remaining data
+		}
+
+		cout << endl;
+		cout << "index: "<<index<<"\tmax: "<<max<<"\t\t";
+		for (int j = 0; j < 9; j++) {
+			cout << temp[j];
+		}
+		cout << "\t\t";
+		for (int j = 0; j < 9; j++) {
+			cout << indexArray[j];
+		}
+		max = 0;
+	}
+
+	//for (int j = 0; j < 20; j++) {
+	//	if (indexArray[j] != 0) {
+	//		cout << indexArray[j];
+	//	}
+	//}
+
+	
+	//for (int j = 0; j < strlen(i); j++) {
+
+	//}
+
+	//cout << max<<" "<<index;
+	return 0;
+}
