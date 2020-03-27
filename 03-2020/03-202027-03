@@ -1,0 +1,53 @@
+// 雜題
+// #24
+// find() function
+// input a string and substr, find the index of that substr in the string, if it occurs more than 1 times, 
+// print the first index of the last one, if it does not occur in the string ,return -1
+// 實現find()函數
+// input: hello llo
+// output:2
+// input: find-character-code-c
+// output: 14
+// input: programming ran
+// output: -1
+
+#include <iostream>
+using namespace std;
+
+int findChar(char input[], char key[], int length1, int length2) {
+	int result = 0, i = length1 - 1, j = length2 - 1;
+	for (int x = length1 - 1; x >= 0; x--) {                  //iterate from the back
+		if (input[i] == key[j] && j != 0) {               
+			i--;                                      //if equal, index of string and substr both - 1
+			result = i;				  //update result
+			j--;   //j = 0
+		}
+		if (j == -1) {
+			return result;				  //check if j == -1 because after compare i (0) and j(0)
+			break;					  //if they are equal, i = -1 and j = -1, if not, j become last index of the subsrr
+		}
+		if (input[i] != key[j]) {                        //not equal, than index of string - 1
+			j = length2 - 1;                         //and set the substr index to the last index. eg substr = llo, j = 2
+			i--;
+		}
+	}
+	return -1;						 //if no substr in that str, return -1
+}
+
+int main() {
+	char input[50], key[50];
+	cout << "The word and chars are: ";
+	cin >> input >> key;
+	int length1 = 0, length2 = 0;
+
+	while (input[length1] != '\0') {            	         //length, could use strlen() actually
+		length1++;
+	}
+	while (key[length2] != '\0') {
+		length2++;
+	}
+
+	int ans = findChar(input, key, length1, length2);
+	cout << "The last position of " << key << " is: "<<ans;
+	return 0;
+}
