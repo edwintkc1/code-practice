@@ -18,9 +18,9 @@ int main() {
 		temp[j] = i[j];                               //example, 5378694010
 	}
 
-	for (int j = 0; j < k; j++) {
+	for (int j = 0; j < k; j++) {					
 		for (int z = 0; z < strlen(i); z++) {
-			if (temp[z] > max) {                                    
+			if (temp[z] > max) {
 				max = i[z];							//put the maximum data in the temp array to max, at first max = 9
 				index = z;								//also store its index, at first index = 5
 			}
@@ -36,12 +36,12 @@ int main() {
 		}
 
 		cout << endl;
-		cout << "index: "<<index<<"\tmax: "<<max<<"\t\t";
-		for (int j = 0; j < 9; j++) {
+		cout << "index: " << index << "\tmax: " << max << "\t\t";
+		for (int j = 0; j < strlen(i); j++) {
 			cout << temp[j];
 		}
 		cout << "\t\t";
-		for (int j = 0; j < 9; j++) {
+		for (int j = 0; j < strlen(i); j++) {
 			cout << indexArray[j];
 		}
 		max = 0;
@@ -53,7 +53,7 @@ int main() {
 	//	}
 	//}
 
-	
+
 	//for (int j = 0; j < strlen(i); j++) {
 
 	//}
