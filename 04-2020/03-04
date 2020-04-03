@@ -1,3 +1,14 @@
+// 雜題
+// #26
+// 輸入一句句子，計算每一個詞語的長度，並計算句子中有多個詞語
+// input: I am a CS student
+// output:Word 1 has 1 characters.
+	  Word 2 has 2 characters.
+	  Word 3 has 1 characters.
+	  Word 4 has 2 characters.
+	  Word 5 has 7 characters.
+	  The number of words in the string is: 5
+
 #include <iostream>
 using namespace std;
 
@@ -29,3 +40,49 @@ int main() {
 
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// 雜題
+// #26
+// 比較2個string的每一個char，輸出較大的一個
+
+#include <iostream>
+using namespace std;
+
+int stringCompare(char* str1, char* str2, int *i) {
+	while (str1[*i] != '\0' || str2[*i] != '\0') {
+		if (str1[*i] == str2[*i]) {
+			*i+=1;
+			continue;
+		}
+		else if (str1[*i] > str2[*i])
+			return 1;
+		else if (str2[*i] > str1[*i]) 
+			return -1;
+	}
+	if (str1[*i] == '\0' && str2[*i] == '\0')
+		return 0;
+	else if (str1[*i] == '\0')
+		return -1;
+	else if (str2[*i] == '\0')
+		return 1;
+}
+
+
+int main() {
+	char str1[100], str2[100];
+	int i = 0;
+	cout << "Enter the first string:\n";
+	cin >> str1;
+	cout << "Enter the second string:\n";
+	cin >> str2;
+	int result = stringCompare(str1, str2, &i);
+	if (result == 1)
+		cout << "The first string is larger.\n";
+	else if (result == -1)
+		cout << "The second string is larger.\n";
+	else if (result == 0)
+		cout << "The two strings are equal.\n";
+	return 0;
+}
+
+
