@@ -35,20 +35,22 @@ int main() {
 	cout << "Enter the string:\n";
 	cin >> input;
 	cout << "\nBefore:\n";
-	for (int i = 0 ; i < input.length(); i++) {
+	for (int i = 0 ; i < input.length(); i++) {                   
 		string temp = "";
-		for (int j = i; j < input.length(); j++) {
-			temp += input[j];
+		for (int j = i; j < input.length(); j++) {              //put all possible suffix into ans array
+			temp += input[j];                               //use a temp to store current suffix
 		}
-		ans[i] = temp;
+		ans[i] = temp;                                          //store it into ans[i]
 		cout << ans[i] << endl;
 	}
 
-	for (int i = 0; i < input.length() - 1; i++) {
+	for (int i = 0; i < input.length() - 1; i++) {                 //bubble sort
 		for (int j = 0; j < input.length() - 1 - i; j++) {
-			if (strcmp(ans[j].c_str(), ans[j + 1].c_str()) > 0) {  //strcmp 's argument are const char*, but we are using string
-				swap(ans[j], ans[j + 1]);									 //use .c_str() member function change string to const char*
+			if (strcmp(ans[j].c_str(), ans[j + 1].c_str()) > 0) { 
+				swap(ans[j], ans[j + 1]);		
 			}
+			//strcmp 's argument are const char*, but we are using string
+			//use .c_str() member function change string to const char*
 		}
 	}
 	cout << "\nAfer:\n";
