@@ -42,7 +42,7 @@ int main() {
 }
 ----------------------------------------------------------------------------------------------------------------------
 // 雜題
-// #26
+// #27
 // 比較2個string的每一個char，輸出較大的一個
 
 #include <iostream>
@@ -84,5 +84,62 @@ int main() {
 		cout << "The two strings are equal.\n";
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// 雜題
+// #28
+// input n number of string, compare each char in string, sort them from small to large
+// input: 5
+	  Qwer
+	  qwer
+	  qwe
+	  qwexty
+	  asdf
+// output:Qwer
+	  asdf
+	  qwe
+	  qwer
+	  qwexty
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+void swap(char s1[], char s2[]) {
+	char temp[50];
+	int i;
+	for (i = 0; s1[i] != '\0'; i++)
+		temp[i] = s1[i];
+	temp[i] = s1[i];                 // after the for loop, data of index i is now '\0', also store it into temp
+
+	for (i = 0; s2[i] != '\0'; i++)
+		s1[i] = s2[i];
+	s1[i] = s2[i];						// also
+
+	for (i = 0; temp[i] != '\0'; i++)
+		s2[i] = temp[i];
+	s2[i] = temp[i];					//also
+}
 
 
+int main() {
+	char input[15][50];
+	int number;
+	cout << "Enter the number of the strings:" << endl;
+	cin >> number;
+	cout << "Enter the contents of each string:" << endl;
+	for (int i = 0; i < number; i++)
+		cin >> input[i];
+	for (int i = 0; i < number - 1; i++) {
+		for (int j = 0; j < number - 1 - i; j++) {
+			if (strcmp(input[j], input[j + 1]) > 0) {           //built in function in string, compare each char of 2 string
+				swap(input[j], input[j + 1]);                       //return 0 when equal, 1 when first string > second, 2 when second > first
+			}
+		}
+	}
+	cout << "The sorted strings are:\n";
+	for (int i = 0; i < number; i++)
+		cout << input[i] << endl;
+
+
+	return 0;
+}
