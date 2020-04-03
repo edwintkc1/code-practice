@@ -43,7 +43,7 @@ int main() {
 ----------------------------------------------------------------------------------------------------------------------
 // 雜題
 // #27
-// 比較2個string的每一個char，輸出較大的一個
+// 比較2個string的每一個char，輸出較大的一個  
 
 #include <iostream>
 using namespace std;
@@ -88,6 +88,8 @@ int main() {
 // 雜題
 // #28
 // input n number of string, compare each char in string, sort them from small to large
+// solution: bubble sort, condition is when str1 > str2, we could use strcmp to compare 2 str, this is a build in function
+// in string, then swap 2 string use swap()
 // input: 5
 	  Qwer
 	  qwer
@@ -131,8 +133,9 @@ int main() {
 		cin >> input[i];
 	for (int i = 0; i < number - 1; i++) {
 		for (int j = 0; j < number - 1 - i; j++) {
-			if (strcmp(input[j], input[j + 1]) > 0) {           //built in function in string, compare each char of 2 string
-				swap(input[j], input[j + 1]);                       //return 0 when equal, 1 when first string > second, 2 when second > first
+			if (strcmp(input[j], input[j + 1]) > 0) {    //built in function in string, compare each char of 2 string
+				swap(input[j], input[j + 1]);        //return 0 when equal, return 1 when first string > second 
+								     //return 2 when second > first
 			}
 		}
 	}
