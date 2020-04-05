@@ -1,41 +1,40 @@
-//雜題
-//#23
-//記錄！！asm q4 未完成. 改良
+// 雜題
+// #23
+// input integer to string, and k digit needed , ouput k digit maximum number from the string. 
+// output need to follow the order of the string, not just ouput maximum
+// input: 136845398 3
+// output:898
+// input: 5378694010 4
+// output 9410
+// input: 900743112 4
+// output: 9743
 
 #include <iostream>
 using namespace std;
 
 int main() {
-	char max = ' ', i[20] = { 0 }, temp[20] = { 0 };
-	int k, index = 0, count = 0;
+	char max = ' ', i[20] = { 0 }, temp[20] = { 0 }, ans[20];
+	int k, max_index = 0, count = 0;
 	cout << "Input the integer number:\n";
 	cin >> i;
 	cout << "Input the value of k:\n";
-	cin >> k;											//example, 4
-	int left = k;                                       //remaining number of the array
+	cin >> k;							//example, 4
 	for (int j = 0; j < strlen(i); j++) {
-		temp[j] = i[j];                               //example, 5378694010
+		temp[j] = i[j];						//example, 5378694010
 	}
 
 	cout << "The largest k bit is: ";
-	for (int j = 0; j < k; j++) {
-		for (int z = strlen(i)-1; z >= 0; z--) {
-			if (temp[z] > max && strlen(i) - z + count>= k) {
-				max = i[z];							//put the maximum data in the temp array to max, at first max = 9
-				index = z;								//also store its index, at first index = 5
-				count++;
-			}
+	while (count <= k) {
+		for (int j = max_index; j < strlen(i) + count - k; j++) {  //range of number must come form [0,strlen(i) + count - k]
+			if (temp[j + 1] > temp[max_index])                 //check all cases, if the next number larger than current number
+				max_index = j + 1;											   //change the max to next number
 		}
-		if (strlen(i) - index -1 >= k) {			//2 cases, the first one is the remaining number of data after max is enough for k 
-			for (int x = 0; x <= index; x++) //which means data in the front is useless
-				temp[x] = 0;						   //delete all data before current index (including current index)
-			temp[index] = 0;
-		}
-		else {											//if remaining number of data after index of max (5) is not enough, in this case, 10 - 5 - 1= 4 >= 4
-			temp[index] = 0;
-		}
-		cout << max;
-		max = 0;
+		ans[count] = temp[max_index];				//store it
+		count++;						//update count
+		max_index++;						//need + 1 to next index, if have not + 1, then the max is always current number
+	}
+	for (int j = 0; j < k; j++) {					//print result
+		cout << ans[j];
 	}
 	return 0;
 }
