@@ -1,63 +1,41 @@
 //雜題
 //#23
-//記錄！！asm q4 未完成.
+//記錄！！asm q4 未完成. 改良
 
 #include <iostream>
 using namespace std;
 
 int main() {
-	char max = ' ', i[20] = { 0 }, temp[20] = { 0 }, ans[20] = { 0 };
-	int indexArray[20] = { 0 };                 //max is current maximum value
-	int k, index = 0;
-	cout << "Input the integer number:";
+	char max = ' ', i[20] = { 0 }, temp[20] = { 0 };
+	int k, index = 0, count = 0;
+	cout << "Input the integer number:\n";
 	cin >> i;
-	cout << "Input the value of k:";
+	cout << "Input the value of k:\n";
 	cin >> k;											//example, 4
 	int left = k;                                       //remaining number of the array
 	for (int j = 0; j < strlen(i); j++) {
 		temp[j] = i[j];                               //example, 5378694010
 	}
 
-	for (int j = 0; j < k; j++) {					
-		for (int z = 0; z < strlen(i); z++) {
-			if (temp[z] > max) {
+	cout << "The largest k bit is: ";
+	for (int j = 0; j < k; j++) {
+		for (int z = strlen(i)-1; z >= 0; z--) {
+			if (temp[z] > max && strlen(i) - z + count>= k) {
 				max = i[z];							//put the maximum data in the temp array to max, at first max = 9
 				index = z;								//also store its index, at first index = 5
+				count++;
 			}
 		}
-		if (strlen(i) - 1 - index < k) {			//2 cases, the first one is the remaining number of data after max is NOT enough for k 
-			indexArray[index] = max - 48;  //which means some data may chosen from the front
+		if (strlen(i) - index -1 >= k) {			//2 cases, the first one is the remaining number of data after max is enough for k 
+			for (int x = 0; x <= index; x++) //which means data in the front is useless
+				temp[x] = 0;						   //delete all data before current index (including current index)
 			temp[index] = 0;
 		}
-		else {											//if remaining number of data after index of max (5) is enough, in this case, 10 - 1 - 5 = 4 >= 4
-			indexArray[index] = max - 48;
-			for (int x = 0; x <= index; x++)  // 4 data in the back (4010), enough, set all the data before current max index to 0
-				temp[x] = 0;                        //then we only need to focus on the remaining data
+		else {											//if remaining number of data after index of max (5) is not enough, in this case, 10 - 5 - 1= 4 >= 4
+			temp[index] = 0;
 		}
-
-		cout << endl;
-		cout << "index: " << index << "\tmax: " << max << "\t\t";
-		for (int j = 0; j < strlen(i); j++) {
-			cout << temp[j];
-		}
-		cout << "\t\t";
-		for (int j = 0; j < strlen(i); j++) {
-			cout << indexArray[j];
-		}
+		cout << max;
 		max = 0;
 	}
-
-	//for (int j = 0; j < 20; j++) {
-	//	if (indexArray[j] != 0) {
-	//		cout << indexArray[j];
-	//	}
-	//}
-
-
-	//for (int j = 0; j < strlen(i); j++) {
-
-	//}
-
-	//cout << max<<" "<<index;
 	return 0;
 }
