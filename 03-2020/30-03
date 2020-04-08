@@ -1,5 +1,26 @@
 // 雜題
-// #25   rat in the maze (try)
+// #25   rat in the maze， 01 maze,  use depth first search (dfs), classic recursion problem
+// input size of 2D array (size * size), it is a maze, then assign value to it
+// 1 means the rat could go through that road, 0 means could not
+// if the rat could go to exit finally, ouput yes, otherwise, ouput no.
+// input: 5
+//        4 4
+// 	  1 0 0 1 0
+	  1 1 1 1 0
+	  0 1 1 0 1
+	  0 0 0 0 1
+	  0 1 1 1 1
+// output:There is no way to get to the exit!
+// input: 7
+//	  5 0
+//        1 0 0 1 0 0 1
+	  1 1 1 1 0 1 1
+	  0 1 0 1 1 0 1
+	  0 0 0 0 1 1 1
+	  0 1 1 1 1 0 0
+	  1 1 0 0 0 1 0
+	  0 0 1 1 1 1 1
+// output:Congratulation! You can get to the exit!
 
 #include <iostream>
 using namespace std;
@@ -85,31 +106,3 @@ int walk(int x, int y, int endX, int endY, int size) {
 	return 0;
 }
 
-
-
-//test
-//1 0 0 1 0
-//1 1 1 1 0
-//0 1 1 0 1
-//0 0 0 0 1
-//0 1 1 1 1
-
-
-//1 0 0 1 0 0 1
-//1 1 1 1 0 1 1
-//0 1 0 1 1 0 1
-//0 0 0 0 1 1 1
-//0 1 1 1 1 0 0
-//1 1 0 0 0 1 0
-//0 0 1 1 1 1 1
-
-
-
-
-
-//test
-//1 0 0 1 0
-//1 1 1 1 0
-//0 1 1 0 1
-//0 0 0 0 1
-//0 1 1 1 1
