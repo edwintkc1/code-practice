@@ -1,0 +1,47 @@
+// 洛谷
+// #31
+// check the ISBN number correct or not. A ISBN number contain 13 char, if all number * x = the last ISBN number % 11
+// cout rirght, else, rectify the ISB number and ouput the correct one
+// after using x, x increaced by 1 each time.
+// special case: if the last ISBN number % 11 is 10, the last ISBN number would be 'X', not 10
+// input: 0-670-82162-4
+// output: Right
+// input: 0-670-82162-0
+// output:0-670-82162-4
+
+// 1. sum (validate number * x), when it comes to '-', continue
+// 2. if correct, cout Right, if not, split it into 2 cases
+//    case 1: cout X, case 2: correct it and ouput the right one
+
+#include <iostream>
+using namespace std;
+
+char input[14] = { 0 };
+int sum = 0, x = 1;
+
+void solution() {
+	for (int i = 0; i < 12; i++) {
+		if (input[i] == '-')
+			continue;
+		sum += (input[i] - '0') * x++;
+	}
+
+	if (sum % 11 == input[12] - '0') 
+		cout << "Right";
+	else {
+		if (sum % 11 == 10 && input[12] == 'X') {
+			cout << "Right";
+			return;
+		}
+		input[12] = sum % 11 + '0';
+		if (sum % 11 == 10)
+			input[12] = 'X';
+		cout << input;
+	}
+}
+
+int main() {
+	cin.getline(input,14);
+	solution();
+	return 0;
+}
