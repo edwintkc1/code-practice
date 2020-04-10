@@ -90,3 +90,39 @@ int main() {
 	solution();
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// 洛谷
+// #33
+// remove the light
+// input n light, maximum distance that the light could cover, and places (number) of each light
+// we need to remove some light to save the energy
+// if the distance of 2 adjacent lights <= maximum distance that the light could cover
+// delete that light, count how many light need to be deleted, ouput number of deleted lights
+// input: 3 3
+//        1 2 3
+// output:1
+
+// 1. use array to stroe position of lights
+// 2. sort it, sort(address, address)
+// 3. if statement, and remove that light
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	int n, distance, deleted= 0, light[100001] = { 0 };
+	cin >> n >> distance;
+	for (int i = 0; i < n; i++)
+		cin >> light[i];
+	sort(light, light + n);       // sort algorithm need address, the end address should be first address + how many element in the array
+
+	for (int i = 1; i < n - 1; i++) {                 //cuz the first light and the last light must be turned on, skip them
+		if (light[i + 1] - light[i - 1] <= distance) {
+			light[i] = light[i - 1];         //we need to delete light[i], so after remove that light.
+			deleted++;                       //move the light before it to its place, otherwise we still consider it is a light next time
+		}
+	}
+	cout << deleted;
+	return 0;
+}
