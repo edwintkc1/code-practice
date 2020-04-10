@@ -68,7 +68,6 @@ int main() {
 	}
 	cout << endl;
 
-
 	// Game starts and player1 plays first
 	int rounds = 0;  // count number of rounds
 	while (true) {
