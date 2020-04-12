@@ -173,5 +173,32 @@ int main() {
 	return 0;
 }
 
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 110A
+// #38
+// input a number, if it contain 4 or 7, count ++, if count finally achieve 4 or 7, output yes, otherwise, output no
+// input: 7747774
+// output:YES
+// input: 40047
+// output:NO
+
+#include <iostream>
+using namespace std;
+
+string input;
+int cnt = 0;
+int main() {
+	cin >> input;
+	for (int i = 0; i < input.length();i++) {
+		if (input[i] == '4' || input[i] == '7')
+			cnt++;
+	}
+	if (cnt == 4 || cnt == 7)
+		cout << "YES";
+	else
+		cout << "NO";
+	return 0;
+}
+
 
 
