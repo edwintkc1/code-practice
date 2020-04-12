@@ -297,6 +297,57 @@ int main() {
 	
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 144A
+// #42
+// input n, and data of n number. You need to make the maximum number in those data to be the first data
+// and the minimum number in those data be the last data. You could swap any two neighboring number
+// count the least swap times you need
+// 將最大嘅數移到最前，最細嘅數移到最後
+// input: 4
+	  33 44 11 22
+// output:2
+// input: 7
+	  10 10 58 31 63 40 76
+// output:10
+
+// 1. find the index of maximum and minimum data
+//    tricky part:cuz you need to move the maximum number to the front
+//    the index of maximum need to be as small as possible
+//    if there is a data equals to (=) the current max, no need to change
+//    as for minimum, we need to move it to the end
+//    then the index of it is as large as possible, when it comes to equal, we need to change its index
+// 2. count how many times you need
+//    if the max index > min index, as the max need to move to front
+//    during the process, you'll also move the min index 1 times forward.
+//    so subtract total time by 1
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n, x[101];
+	int max = INT_MIN, min=INT_MAX;
+	int indexMax= 0 , indexMin=0;
+	cin >> n;
+	for (int i = 1; i <= n; i++) {
+		cin >> x[i];
+		if (x[i] > max) {
+			max = x[i];
+			indexMax = i;
+		}
+		if (x[i] <= min) {
+			min = x[i];
+			indexMin = i;
+		}
+
+	if (indexMax > indexMin) 
+		cout << indexMax - 1 + n - indexMin - 1;
+	else
+		cout << indexMax - 1 + n - indexMin;
+
+	return 0;
+}
 
 
 
