@@ -228,6 +228,53 @@ int main() {
 	cout << count;
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 80A
+// #40
+// input 2 number, n and m, check if m is the next prime number of n.
+// if yes, cout YES, no, cout NO
+// input: 3 5
+// output:YES
+// input: 7 9
+// output:NO
+
+// first generate a array containing prime number in the given boundary
+// find the index of n
+// if statement, if next index of index n == m, cout yes
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n, m, index = 0, arr[100] = { 0 };
+	int i, j;
+	for (i = 2; i < 100; i++) {
+		for (j = 2; j <=i ; j++) {
+			if (i % j == 0)
+				break;
+		}
+		if (j == i) {
+			arr[index] = i;
+			index++;
+		}
+	}
+	cin >> n >> m;
+	int indexN;
+	for (int i = 0; i < 100; i++) {
+		if (arr[i] == n) {
+			indexN = i;
+			break;
+		}
+	}
+	if (arr[indexN] == n && arr[indexN + 1] == m)
+		cout << "YES";
+	else
+		cout << "NO";
+
+	return 0;
+}
+
+
 
 
 
