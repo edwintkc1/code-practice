@@ -126,7 +126,52 @@ int main() {
 	
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 59A
+// #37
+// input a string, change it to uppercase or lowercase by given condition
+// if lowercase of the input is >= uppercase, change all char into lowercase
+// if upper > lower, change all the char into uppercase
+// 2 special case, vip and house, given in the question, need to change it to specific string
 
+
+#include <iostream>
+using namespace std;
+
+string input;
+int countUpper = 0, countLower = 0;
+
+int main() {
+	cin >> input;
+	if (input == "HoUse") {
+		cout << "house";
+		return 0;
+	}
+	if (input == "ViP") {
+		cout << "VIP";
+		return 0;
+	}
+	for (int i = 0; i < input.length(); i++) {
+		if (input[i] >= 'a' && input[i] <= 'z') {
+			countLower++;
+		}
+		if (input[i] >= 'A' && input[i] <= 'Z') {
+			countUpper++;
+		}
+	}
+	if (countLower >= countUpper ) {
+		for (int i = 0; i < input.length(); i++) {
+			input[i] = tolower(input[i]);
+		}
+	}
+	else if (countUpper > countLower) {
+		for (int i = 0; i < input.length(); i++) {
+			input[i] = toupper(input[i]);
+		}
+	}
+	cout << input;
+	return 0;
+}
 
 
 
