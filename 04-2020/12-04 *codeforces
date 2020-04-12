@@ -273,6 +273,30 @@ int main() {
 
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 61A
+// #41
+// input 2 number, if i digit in s1 == i digit in s2, then i digit in ans = 1, otherwise i digit in ans = 0
+// input: 1010100
+	  0100101
+// output:1110001
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	string s1, s2, ans="";
+	cin >> s1 >> s2;
+	for (int i = 0; i < s1.length(); i++) {
+		if (s1[i] != s2[i])
+			ans += '1';
+		else
+			ans += '0';
+	}
+	cout << ans;
+	
+	return 0;
+}
 
 
 
