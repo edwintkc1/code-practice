@@ -99,4 +99,34 @@ int main() {
 	return 0;
 }
 
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 271A
+// #36
+// We say the year is a beautiful year when all number of the year are different.
+// 1000<=year<=9000
+// input a year, output the next beautiful year
+// input: 1987
+// output:2013
+
+#include <iostream>
+using namespace std;
+
+int input;
+int a, b, c, d;
+int main() {
+	cin >> input;
+	while (true) {
+		input += 1;
+		a = input / 1000, b = input / 100 % 10, c = input / 10 % 10, d = input % 10;
+		if (a != b && a!=c && a!=d && b != c && b!= d && c != d) {
+			break;
+		}
+	}
+	cout << input;
+	
+	return 0;
+}
+
+
+
 
