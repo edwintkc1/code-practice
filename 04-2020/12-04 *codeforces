@@ -199,6 +199,35 @@ int main() {
 		cout << "NO";
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 266A
+// #39
+// input a string represent stones with different colours, R = red , B = blue, etc.
+// we need to take away any two neighboring stones if their colours are the same
+// count how many stone(s) need to be taken away.
+// input: 3
+	  RRG
+// output:1
+// input: 5
+	  RRRRR
+// output:4
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n, count=0, lastValidIndex = 0;
+	string s;
+	cin >> n >> s;
+	for (int i = 1; i < s.length(); i++) {
+		if (s[i] == s[lastValidIndex] || s[i] == s[i + 1])
+			count++;
+		else
+			lastValidIndex = i;
+	}
+	cout << count;
+	return 0;
+}
 
 
 
