@@ -10,7 +10,7 @@
           0 0 0 0 0
 // output:3
 
-//just count the difference of coordiante 1 and middle(3,3)
+// just count the difference of coordiante 1 and middle(3,3)
 
 #include <iostream>
 #include <cmath>
@@ -34,5 +34,36 @@ int main() {
 
 	return 0;
 }
+
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 266B
+// #34
+// queue in school. input n and k , n = number of children, k = after k second. Also input a string with B and G,
+// represent the gender of n children.
+// in current second, if i position is a B, and i-1 position is a G, change it in the next second.
+
+// when it comes to even second, no changes
+// just use the condition 
+
+#include <iostream>
+using namespace std;
+
+int n, t;
+string input;
+int main() {
+	cin >> n >> t >> input;
+	while (t--) {
+		for (int i = 1; i < n; i++) {
+			if (input[i] == 'G' && input[i - 1] == 'B') {
+				input[i] = 'B';
+				input[i - 1] = 'G';
+				i++;
+			}
+		}
+	}
+	cout << input;
+	return 0;
+}
+
 
 
