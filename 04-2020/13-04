@@ -67,4 +67,35 @@ int main() {
 	return 0;
 }
 
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 155A
+// #45
+// input n number, if any number is larger than current max, or lesser than current min
+// ans++
+// input: 10
+	  4664 6496 5814 7010 5762 5736 6944 4850 3698 7242
+// output:4
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n, x, max, min, ans = 0;
+	cin >> n >> x;
+	max = x, min = x;
+	n -= 1;
+	while (n--) {
+		cin >> x;
+		if (max > x) {
+			max = x;
+			ans++;
+		}
+		if (min < x) {
+			min = x;
+			ans++;
+		}
+	}
+	cout << ans;
+	return 0;
+}
 
