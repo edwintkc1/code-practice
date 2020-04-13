@@ -98,4 +98,31 @@ int main() {
 	cout << ans;
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 116A
+// #46
+// tram. input n stops. each stop ppl can get into the tram and exit the tram.
+// ppl always exit first.
+// you need to ouput the maximum capacity of the tram
+// input: 4
+	  0 3
+	  2 5
+	  4 2
+	  4 0
+// output:6
 
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n, exit, enter, ppl = 0, max = 0;
+	cin >> n;
+	while (n--) {
+		cin >> exit >> enter;
+		ppl = ppl - exit + enter;
+		if (ppl > max)
+			max = ppl;
+	}
+	cout << max;
+	return 0;
+}
