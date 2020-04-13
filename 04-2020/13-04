@@ -186,7 +186,7 @@ int main() {
 	return 0;
 }
 ----------------------------------------------------------------------------------------------------------------------
-// codeforces 71A
+// codeforces 228A
 // #48
 // input 4 numbers, those number may consists of same number, you need to change it to different numbers
 // count the time you need
@@ -214,6 +214,37 @@ int main() {
 	
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 71A
+// #49
+// input n string, if size of ith string is > than 10, split it into 3 part, s[0], length of middle part, s.back()
+// input: 4
+	  word
+	  localization
+	  internationalization
+	  pneumonoultramicroscopicsilicovolcanoconiosis
+// output:word
+	  l10n
+	  i18n
+	  p43s
 
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n;
+	string s;
+	cin >> n;
+	while (n--) {
+		cin >> s;
+		if (s.length() <= 10)
+			cout << s << endl;
+		else {
+			cout << s[0] << s.length() - 2 << s.back() << endl;
+		}
+	}
+	
+	return 0;
+}
 
 
