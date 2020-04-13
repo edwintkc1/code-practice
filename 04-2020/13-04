@@ -1,0 +1,27 @@
+// codeforces 126B
+// #43
+// input n drinks, and their volume, ouput the average volume.
+// input: 3
+          50 50 100
+// output:66.666666666667
+
+// care about the precision
+// we could simply use while(n--), no need new a array
+
+#include <iostream>
+#include<iomanip>
+using namespace std;
+
+int main() {
+	int n, t, replace_n;
+	cin >> n;
+	replace_n = n;
+	double sum = 0;
+	while (n--) {
+			cin >> t;
+			sum += t;
+	}
+	sum = sum / replace_n;
+	cout << fixed<<setprecision(12)<<sum;
+	return 0;
+}
