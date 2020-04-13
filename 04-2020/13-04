@@ -25,3 +25,46 @@ int main() {
 	cout << fixed<<setprecision(12)<<sum;
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 248A
+// #44
+// input integer n , it represent number of array[2], each data in column contains 0 or 1.
+// You need to change element in the same row, to make the row become the same.
+// You need to take the least step.
+// input: 5
+	  0 1
+	  1 0
+	  0 1
+	  1 1
+	  0 1
+// output:3
+
+// in the row of the example, turn two 1 into 0 (2 steps), turn one 0 into 1 ( 1 step), total 3 steps.
+// Dont need a array acutally
+// use variable left and right to store, and use count0_left and count0_right to count the total number of 0.
+// if n - count0_left is larger than count0_left, indicates that we need to change the 0, cuz it will take fewer steps.
+// So do the right part.
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	int n, left, right;
+	int count0_left = 0, count0_right = 0;
+	int ans = 0;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> left >> right;
+		if (left == 0)
+			count0_left++;
+		if (right == 0)
+			count0_right++;
+	}
+	ans = min(count0_left, n - count0_left) + min(count0_right, n - count0_right);
+	cout << ans;
+
+	return 0;
+}
+
+
