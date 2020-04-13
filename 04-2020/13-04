@@ -185,6 +185,35 @@ int main() {
 	
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 71A
+// #48
+// input 4 numbers, those number may consists of same number, you need to change it to different numbers
+// count the time you need
+// input: 1 7 3 3
+// output:1         (change one 3)
+// input: 7 7 7 7
+// output:3
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	int arr[4], ans = 0;
+	for (int i = 0; i < 4; i++) {
+		cin >> arr[i];
+	}
+	sort(arr, arr + 4);
+	for (int i = 0; i < 4; i++) {
+			if (arr[i] == arr[i + 1])
+				ans++;
+	}
+	cout << ans;
+	
+	
+	return 0;
+}
 
 
 
