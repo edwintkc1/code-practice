@@ -90,6 +90,34 @@ int main() {
 
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 282A
+// #53
+// ouput the finally value of x, the initial value of x is 0
+// input n, then input the operation, you could input X++, ++X, X-- ,--X
+// input: 2
+	  X++
+	  --X
+// output:0
 
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	string s;
+	int add = 0, sub = 0;
+	while (n--) {
+		cin >> s;
+		if (s == "X++" || s == "++X")
+			add++;
+		if (s == "X--" || s == "--X")
+			sub++;
+	}
+	cout << add - sub;
+
+	return 0;
+}
 
 
