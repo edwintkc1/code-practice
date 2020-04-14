@@ -133,9 +133,9 @@ int main() {
 // input: 1+1+3+1+3
 // output:1+1+1+3+3
 
-// 1.用string接收，再整個int array擺翻曬d numbers落去
-// 2.sort int array
-// 3.再擺翻int array d numbers落string
+// 用string接收，再整個int array擺翻曬d numbers落去
+// sort int array
+// 再擺翻int array d numbers落string
 
 #include <iostream>
 #include<algorithm>
