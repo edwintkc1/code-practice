@@ -1,0 +1,31 @@
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 146A
+// #50
+// input a string type name. count how many distinct chars in the name. 
+// if the number of distinct chars is odd, he is a male, otherwise, female.
+// cout IGNORE HIM! when he is a male, cout CHAT WITH HER! when she is a female.
+
+// 1. put all char into a array, array = {0}.
+// 2. same char have the same array index, so count how many number != 0 means you get how many distinct chars
+// 3. odd or even
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	string s;
+	cin >> s;
+	int a[26] = { 0 }, count = 0;
+	for (int i = 0; i < s.length();i++) {
+		a[s[i]-'a'] = s[i];
+	}
+	for (int i = 0; i < 26; i++) {
+		if (a[i] != 0)
+			count++;
+	}
+	if (count % 2 == 0)
+		cout << "CHAT WITH HER!";
+	else
+		cout << "IGNORE HIM!";
+	return 0;
+}
