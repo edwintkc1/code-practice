@@ -60,3 +60,36 @@ int main() {
 
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 231A
+// #52
+// 3 ppl go to a contest. There are n problems in the contest.
+// if at least 2 of them know the solution, they could submit the right answer of that question.
+// now input number n, in line 1 to line n, input a, b, c, which contains 0 or 1
+// 1 means he/she knows the solution of that problem
+// input: 3
+	  1 1 0
+	  1 1 1
+	  1 0 0
+// output:2
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	int a, b, c;
+	int cnt = 0;
+	while (n--) {
+		cin >> a >> b >> c;
+		if (a + b + c >= 2)
+			cnt++;
+	}
+	cout << cnt;
+
+	return 0;
+}
+
+
+
