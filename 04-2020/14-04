@@ -4,9 +4,9 @@
 // if the number of distinct chars is odd, he is a male, otherwise, female.
 // cout IGNORE HIM! when he is a male, cout CHAT WITH HER! when she is a female.
 
-// 1. put all char into a array, array = {0}.
-// 2. same char have the same array index, so count how many number != 0 means you get how many distinct chars
-// 3. odd or even
+// put all char into a array, array = {0}.
+// same char have the same array index, so count how many number != 0 means you get how many distinct chars
+// odd or even
 
 #include <iostream>
 using namespace std;
