@@ -1,4 +1,3 @@
-----------------------------------------------------------------------------------------------------------------------
 // codeforces 146A
 // #50
 // input a string type name. count how many distinct chars in the name. 
@@ -27,5 +26,37 @@ int main() {
 		cout << "CHAT WITH HER!";
 	else
 		cout << "IGNORE HIM!";
+	return 0;
+}
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 85A
+// #51
+// input 2 string, each consists of uppercase of lowercase char.
+// consider uppercase char = lowercase char  , ie, 'A' = 'a'
+// if they are the same, cout 0, if str1 > str2, cout 1, if str2 > str1, cout -1
+
+// 我嘅做法係首先將char的數值加到cnt1,cnt2中，再比較
+// 但並不實用，下面嘅做法最好
+// 因為uppercase = lowercase，咁將所有char轉曬做lowercase先
+// 佢要嘅output其實同strcmp (string compare) 一樣
+// 都係return 0， 1 ，-1   
+// 直接用呢個function, 要include cstring
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main() {
+	string s1, s2;
+	cin >> s1 >> s2;
+	int cnt1 = 0, cnt2 = 0;
+	for (int i = 0; i < s1.length(); i++) {
+		s1[i] = tolower(s1[i]);
+	}
+	for (int i = 0; i < s2.length(); i++) {
+		s2[i] = tolower(s2[i]);
+	}
+	cout << strcmp(s1.c_str(), s2.c_str());
+
 	return 0;
 }
