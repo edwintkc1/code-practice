@@ -1,0 +1,60 @@
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 450A
+// #55
+// getting candies. There are n students queueing up to get the candy. Number all the students from 1 to n
+// teacher asks children to line up. 
+// initially, the i-th child stands at the i-th place of the line. 
+// then the teacher start distribution of the candies. He follows the algorithm:
+// 1. Give m candies to the first child of the line.
+// 2. If this child still haven't got enough candies, then the child goes to the end of the line, else the child go home.
+// 3. Repeat the first two steps while the line is not empty.
+// output who is the last child (number of that child).
+// input: 5 2
+          1 3 1 4 2
+// output:4
+// 第一次，走左。剩翻 3(2), 1(3), 4(4), 2(5) 
+// 第二次，隊尾。剩翻 1(3), 4(4), 2(5), 1(2)
+// 第三次，走左。剩翻 4(4)，2(5)，1(2)
+// 第四次，隊尾。剩翻 2(5)，1(2)，2(4)
+// 第五次，第六次，2(5)，同1(2)，走左，剩翻4
+
+// 用vector，v做push_back,erase第一個。
+// 用第二個vector，index記錄每個人嘅編號
+// 每次移位，刪除，同v一樣
+// 計算係v果邊計
+
+#include <iostream>
+#include <vector>
+using namespace std;
+#define LL long long
+
+int main() {
+	int n,m;
+	cin >> n >> m;
+	vector<int> v, index;
+	for (int i = 1; i <= n; i++) {
+		int x;
+		cin >> x;
+		v.push_back(x);
+		index.push_back(i);
+	}
+
+	while (n != 1) {
+		if (v[0] - m <= 0) {
+			v.erase(v.begin());
+			index.erase(index.begin());
+			n--;
+		}
+		else {
+			v[0] -= m;
+			v.push_back(v[0]);
+			index.push_back(index[0]);
+			v.erase(v.begin());
+			index.erase(index.begin());
+		}
+	}
+	for (auto it : index) {
+		cout << it << endl;
+	}
+	return 0;
+}
