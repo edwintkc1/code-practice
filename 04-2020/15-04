@@ -58,3 +58,33 @@ int main() {
 	}
 	return 0;
 }
+
+// 改良後，不再用模擬
+// 直接計算每個學生需要領取的次數，次數最多者肯定係留到最後
+// 下面除法係 x - 1，係因為有marginal cases
+// 如果n = 3, m = 4
+// 學生係 4, 3, 3，應該output 3，但係如果淨係除4，會output 1，因為3/4 = 0, 4/4 = 1，1最大
+// 所以將所有人需要嘅糖 - 1，當遇到想要嘅糖 == m果陣，除完都係變 0
+
+#include <iostream>
+using namespace std;
+#define LL long long
+
+int main() {
+	int n, m;
+	cin >> n >> m;
+	int max = 0, id = 0;
+	int x;
+	for (int i = 1; i <= n; i++) {
+		cin >> x;
+		int currentMax = (x - 1)/ m;
+		if (currentMax >= max) {
+			max = currentMax;
+			id = i;
+		}
+	}
+	cout << id;
+	// 4 3 3
+	return 0;
+}
+
