@@ -21,7 +21,7 @@
 // 用第二個vector，index記錄每個人嘅編號
 // 每次移位，刪除，同v一樣
 // 計算係v果邊計
-
+....
 #include <iostream>
 #include <vector>
 using namespace std;
