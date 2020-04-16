@@ -82,3 +82,44 @@ int main() {
 
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 34A
+// #58
+// input n height of man, if the height difference of neiboring man is minimum, output their index
+// they stand in a circle, means that the last one could compare with the first one
+// input: 5
+	  10 12 13 15 10
+// output:5 1
+
+// just use loop to update the mim value
+// be reminded that need to use % operator
+// and need to add one to both indices at the end
+// because index start from 0, not start from 1
+
+#include <iostream>
+#include <vector>
+using namespace std;
+#define LL long long
+
+int main() {
+	int n;
+	cin >> n;
+	vector<int> v;
+	for (int i = 0; i < n; i++){
+		int x;
+		cin >> x;
+		v.push_back(x);
+	}
+	int min = INT_MAX;
+	int index1, index2;
+	for (int i = 0; i < n; i++) {
+		if (abs(v[i] - v[(i + 1)%n]) < min) {
+			min = abs(v[i] - v[(i + 1)%n]);
+			index1 = i;
+			index2 = i + 1;
+		}
+	}
+
+	cout << (index1+1 == n? n : (index1+1)%n) << " " << (index2 + 1 == n ? n : (index2 + 1) % n);
+	return 0;
+}
