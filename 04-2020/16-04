@@ -1,0 +1,51 @@
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 165A
+// #56
+// central point in Cartesian coordiante system.
+// we consider a point is a central point, if it is surrounded by 4 points.
+// ie. (0,0) is a central point, surrounded by (-1,0), (1,0), (0,1), (0,-1)
+// now input n coordinate, figure out if there are any central point there
+// ouput how many central point(s)
+
+// learn 2 dimensional vector，學到2維vector構造方法
+// focus on single coordiante each time, test all the other coordiante
+// see if there are any point on left,right,up,down
+// if 4 direction both have points
+// means it is a central point, cnt ++
+
+#include <iostream>
+#include <vector>
+using namespace std;
+#define LL long long
+
+int main() {
+	int n;
+	cin >> n;
+	vector<vector<int>> v(n,vector<int>(2));
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < 2; j++) {
+			cin >> v[i][j];
+		}
+	}
+	int cnt = 0;
+	for (int i = 0; i <n; i++) {
+		int x = v[i][0];
+		int y = v[i][1];
+		int up = 0, down = 0, right = 0, left = 0;
+		for (int j = 0; j <n; j++) {
+			if (v[j][0] == x && v[j][1] > y)
+				up++;
+			else if (v[j][0] == x && v[j][1] < y)
+				down++;
+			else if (v[j][1] == y && v[j][0] > x)
+				right++;
+			else if (v[j][1] == y && v[j][0] < x)
+				left++;
+		}
+		if (up != 0 && down != 0 && right != 0 && left != 0)
+			cnt++;
+	}
+	cout << cnt;
+
+	return 0;
+}
