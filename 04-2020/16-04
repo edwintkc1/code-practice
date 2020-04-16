@@ -123,3 +123,22 @@ int main() {
 	cout << (index1+1 == n? n : (index1+1)%n) << " " << (index2 + 1 == n ? n : (index2 + 1) % n);
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// codeforces 318A
+// #59
+
+#include <iostream>
+using namespace std;
+#define LL long long
+
+int main() {
+	LL n, m, ans;
+	cin >> n >> m;
+	if (m <= (n+1) / 2) {
+		ans = 2 * m - 1;
+	}
+	else
+		ans = (m - (n+1) / 2) * 2;
+	cout << ans;
+	return 0;
+}
