@@ -1,4 +1,3 @@
-----------------------------------------------------------------------------------------------------------------------
 // 雜題
 // #60
 // delete char in a string. input a string, and a char.
@@ -40,8 +39,16 @@ int main() {
 	
 	return 0;
 }
-
-
+----------------------------------------------------------------------------------------------------------------------
+// 雜題
+// #61
+// similiar to the above question
+// but this time not delete a char in the string
+// input a sentence, there are spaces between string
+// now input a string to fill all the spaces
+// input: Enter the input string: count the number of char_
+	  Enter the input space str: &&&
+// output:The modified string is: &&&count&&&the&&&number&&&of&&&char&&&
 
 #include <iostream>
 using namespace std;
