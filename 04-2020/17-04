@@ -1,3 +1,12 @@
+----------------------------------------------------------------------------------------------------------------------
+// 雜題
+// #60
+// delete char in a string. input a string, and a char.
+// delete that char in the string. If there are mutilple char in the string, delete all
+// input: Enter the input string: we are happy
+//        Enter the input delete_char: _      //input a space (_ means space in this case)
+// output:The modified string is: wearehappy
+
 #include <iostream>
 using namespace std;
 #define LL long long
