@@ -1,5 +1,5 @@
 // 雜題
-// #601
+// #60
 // delete char in a string. input a string, and a char.
 // delete that char in the string. If there are mutilple char in the string, delete all
 // input: Enter the input string: we are happy
