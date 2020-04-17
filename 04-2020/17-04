@@ -28,3 +28,59 @@ int main() {
 
 	return 0;
 }
+
+
+#include <iostream>
+using namespace std;
+#define LL long long
+
+char* replace(char* str, char* space) {
+	int len1 = 0;
+	int len2 = 0;
+	int count_space = 0;
+
+	while (str[len1] != '\0') {
+		if (str[len1] == ' ') {
+			count_space++;
+		}
+		len1++;
+	}
+	while (space[len2] != '\0') {
+		len2++;
+	}
+	char* result = new char[len1 + count_space * (len2 - 1) + 1];
+
+	int j = 0;
+	for (int i = 0; i < len1; i++) {
+		if (str[i] == ' ') {
+			for (int k = 0; k < len2; k++) {
+				result[j] = space[k];
+				j++;
+			}
+		}
+		else {
+			result[j] = str[i];
+			j++;
+		}
+	}
+	result[len1 + count_space * (len2 - 1)] = '\0';
+	cout << result << endl;
+	return 0;
+}
+
+int main() {
+
+	char input[101];
+	char space[101];
+	char *result = NULL;
+	cout << "Enter the input string: ";
+	cin.getline(input, 101);
+	cout << "Enter the input space str: ";
+	cin.getline(space,101);
+	cout << "The modified string is: ";
+	result = replace(input, space);
+
+	delete[] result;
+
+	return 0;
+}
