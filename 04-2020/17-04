@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+#define LL long long
+
+char result[101] = { 0 };
+
+char* deleteStr(char* str, char delete_char) {
+	int index = 0;
+	for (int i = 0; i < strlen(str); i++) {
+		if (str[i] == delete_char)
+			continue;
+		result[index] += str[i];
+		index++;
+	}
+	return result;
+}
+
+int main() {
+
+	char input[101];
+	char delete_char;
+	cout << "Enter the input string: ";
+	cin.getline(input, 101);
+	cout << "Enter the input delete_char: ";
+	cin.get(delete_char);
+	cout << "The modified string is: ";
+	cout << deleteStr(input, delete_char) << endl;
+
+	return 0;
+}
