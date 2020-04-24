@@ -1,0 +1,61 @@
+// 雜題
+// #62
+// class, area of triangle
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+#define LL long long
+ 
+class Triangle {
+private:
+    int side1;
+    int side2;
+    int side3;
+    double area;
+    void computeArea();
+ 
+public:
+    Triangle();
+    Triangle(int, int, int);
+    void setSides(int, int, int);
+    double getArea();
+};
+Triangle::Triangle() {
+    this->side1 = 0;
+    this->side2 = 0;
+    this->side3 = 0;
+    computeArea();
+}
+Triangle::Triangle(int a, int b, int c) {
+    this->side1 = a;
+    this->side2 = b;
+    this->side3 = c;
+    computeArea();
+}
+void Triangle::computeArea() {
+    double s = 0.5 * (side1 + side2 + side3);
+    this->area = sqrt(s * (s - side1) * (s - side2) * (s - side3));
+}
+void Triangle::setSides(int a, int b, int c) {
+    this->side1 = a;
+    this->side2 = b;
+    this->side3 = c;
+    computeArea();
+}
+double Triangle::getArea() {
+    return area;
+}
+ 
+int main() {
+    Triangle triangle1, triangle2(3,4,5);
+    cout << "Area of Triangle (i.e. triangle1): " << triangle1.getArea() << endl;
+    cout << "Area of Triangle (i.e. triangle2 with sides 3, 4 and 5): " << triangle2.getArea() << endl;
+    int a, b, c;
+    cout << "Enter New Sides for Triangle: " << endl;
+    cin >> a >> b >> c;
+    triangle1.setSides(a, b, c);
+    cout << "Area of Triangle: " << triangle1.getArea();
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------------
