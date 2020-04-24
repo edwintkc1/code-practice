@@ -1,6 +1,6 @@
 // 雜題
 // #62
-// class, area of triangle
+// class practice, area of triangle
 
 #include <iostream>
 #include <cmath>
