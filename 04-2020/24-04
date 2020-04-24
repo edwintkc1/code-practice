@@ -59,3 +59,79 @@ int main() {
     return 0;
 }
 ----------------------------------------------------------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+#define LL long long
+
+class Record {
+private:
+	int month;
+	int day;
+	double bal;
+public:
+	void set(int mon, int day, double bal) {
+		this->month = mon;
+		this->day = day;
+		this->bal = bal;
+	}
+	int getMon() { return month; }
+	int getDay() { return day; }
+	double getBal() { return bal; }
+};
+
+bool compare(Record r1, Record r2) {
+	if (r1.getMon() > r2.getMon())
+		return true;
+	else if (r1.getMon() == r2.getMon() && r1.getDay() > r2.getDay())
+		return true;
+	else if (r1.getMon() == r2.getMon() && r1.getDay() == r2.getDay() && r2.getBal() > r1.getBal())
+		return true;
+
+	return false;
+}
+
+int main() {
+	Record arr[30];
+	int mon, day;
+	double bal;
+	int size;
+	cout << "Enter the number of the records: ";
+	cin >> size;
+	cout << "Enter the contents of each records: " << endl;
+	for (int i = 0; i < size; i++) {
+		cin >> mon >> day >> bal;
+		arr[i].set(mon, day, bal);
+	}
+
+	cout << "Sort according to the balance: " << endl;
+	for (int i = 0; i < size - 1; i++) {
+		for (int j = 0; j < size - i - 1; j++) {
+			if (arr[j].getBal() > arr[j+1].getBal()) {
+				Record temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+	for (int i = 0; i < size; i++) {
+		cout << arr[i].getMon() << " " << arr[i].getDay() << " " << arr[i].getBal();
+		cout << endl;
+	}
+
+	cout << "Sort according to the time:" << endl;
+	for (int i = 0; i < size - 1; i++) {
+		for (int j = 0; j < size - i - 1; j++) {
+			if (compare(arr[j] , arr[j+1])) {
+				Record temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+	for (int i = 0; i < size; i++) {
+		cout << arr[i].getMon() << " " << arr[i].getDay() << " " << arr[i].getBal();
+		cout << endl;
+	}
+
+	return 0;
+}
