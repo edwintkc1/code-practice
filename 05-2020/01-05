@@ -1,0 +1,53 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+#define LL long long
+
+void readFile(const string& filename) {
+	ifstream in(filename);
+	if (in.fail()) {
+		cout << "The file cannot be found!" << endl;
+		return;
+	}
+	ofstream out("lab13_output.txt"); //create a output stream, object is out. create a txt named lab13_output.txt;
+	int n, phone, sid;
+	char temp[1000];
+	in >> n;
+	char x;   // put a '\0' in the current line
+	in >> x;  // in order to skip to next line
+	for (int i = 1; i <= n; i++) {
+		in.getline(temp,100);
+		out << "Student " << i << ":" << endl;
+		out << "Name: ";
+		int j = 0;
+		while (temp[j] != ',') {
+			out << temp[j];
+			j++;                    // j is pointing to the comma
+		}    //6 
+		     //LAW Ching Nam Morris, 91376218 50001234
+		j+=2;                     // we need to skip the comma, point to the first number 9, so +=2
+		out << endl << "Student ID: ";
+		while (temp[j] != ' ') {
+			out << temp[j];
+			j++;
+		}
+		j ++;
+		out << endl << "Tel: ";
+		while (temp[j] != '\0') {
+			out << temp[j];
+			j++;
+		}
+		out << endl << endl;
+	}
+	in.close();
+	out.close();
+}
+
+
+int main() {
+	string filename = "lab13.txt";
+	readFile(filename);
+
+	return 0;
+}
