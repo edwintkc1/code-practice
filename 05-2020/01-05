@@ -51,3 +51,77 @@ int main() {
 
 	return 0;
 }
+
+
+
+#include <iostream>
+using namespace std;
+#define LL long long
+
+void merge(int arr[], int first, int mid, int last) {
+	int size = last - first + 1;
+	int* temp = new int[size];
+	int i = first;
+	int j = mid + 1;
+	int k = 0;
+	while (i <= mid && j <= last) {    
+		if (arr[i] > arr[j]) {
+			temp[k] = arr[j];
+			k++;
+			j++;
+		}
+		else {
+			temp[k] = arr[i];
+			k++;
+			i++;
+		}
+	}
+	//if one of the array comes to end, 
+	//then forget that array, just put all elements in another array into the merge array
+  //if the first array comes to the end
+	while (j <= last) {
+		temp[k] = arr[j];
+		k++;
+		j++;
+	}
+	
+  //if the second array comes to the end
+	while (i <= mid) {
+		temp[k] = arr[i];
+		k++;
+		i++;
+	}
+	
+	for (int i = 0; i < k; i++) {
+		arr[first + i] = temp[i];
+	}
+	delete[]temp;
+}
+
+void mergeSort(int arr[], int first, int last) {
+	if (first >= last)     //base condition, the subarray has only 1 element (considered it is a sorted array)
+		return;
+	int mid = (first + last) / 2;
+	mergeSort(arr, first, mid);
+	mergeSort(arr, mid + 1, last);
+	merge(arr, first, mid, last);
+}
+
+int main() {
+	cout << "Enter the size of the array:" << endl;
+	int n;
+	cin >> n;
+	int* arr = new int[n];
+	cout << "Enter the content of the array:" << endl;
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i];
+	}
+	mergeSort(arr, 0, n - 1);
+
+	cout << "The sorted array is:" << endl;
+	for (int i = 0; i < n; i++) {
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+	return 0;
+}
