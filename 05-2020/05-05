@@ -1,0 +1,51 @@
+// 雜題
+// #66
+// file io, read data from a txt, and ouput some value
+// the txt have n lines, each line represent a student's test score, each line have 3 scores
+// now read the data form txt, if a student have a course less than 60 (fail)
+// output all scores of that student
+// the testing.txt contains
+// 4
+// 85 89 64 
+// 93 82 94
+// 55 92 59
+// 59 88 70
+
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+#define LL long long
+
+
+int main() {
+	ifstream in("testing.txt");
+	if (in.fail()) { exit(1); }
+	int n;
+	in >> n;
+	int** p = new int* [n];
+	for (int i = 0; i < n; i++) {
+		p[i] = new int[3];
+		for (int j = 0; j < 3; j++) {
+			in >> p[i][j];
+		}
+	}
+	in.close();
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (p[i][j] < 60) {
+				for (int k = 0; k < 3; k++) {
+					cout << p[i][k] << " ";
+				}
+				cout << endl;
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		delete[]p[i];
+	}
+	delete[]p;
+	return 0;
+}
