@@ -1,0 +1,161 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+using namespace std;
+#define LL long long
+
+int n;
+
+class hotel {                //hotel class
+public:
+	void change_room(char roomNumber[]) {
+		strcpy(this->room, roomNumber);
+	}
+	void change_floor(char floorNumber[]) {
+		strcpy(this->floor, floorNumber);
+	}
+	void change_price(int price) {
+		this->price = price;
+	}
+	void change_status(int status) {
+		this->status = status;
+	}
+	char* get_room() {
+		return room;
+	}
+	char* get_floor() {
+		return floor;
+	}
+	int get_price() {
+		return price;
+	}
+	int get_status() {
+		return status;
+	}
+
+private:
+	char room[99];
+	char floor[99];
+	int price;
+	int status;
+};
+
+bool compare(hotel h1, hotel h2) {
+	if (h1.get_price() > h2.get_price())
+		return true;
+	else if (h1.get_price() == h2.get_price()) {
+		int ret = strcmp(h1.get_room(), h2.get_room());
+		if (ret > 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void showHotel(hotel p[]) {
+	for (int i = 0; i < n - 1; i++) {
+		for (int j = 0; j < n - i - 1; j++) {
+			if (compare(p[j], p[j + 1])) {  //return true if p[j]'s price > p[j+1]'s price
+				hotel temp = p[j];            //if prices are equal, return true if p[j]'s room number > p[j+1]'s room number (use strcmp())
+				p[j] = p[j + 1];
+				p[j + 1] = temp;
+			}
+		}
+	}
+	cout << "All rooms in the hotel:\n";   //output the data of hotel
+	for (int i = 0; i < n; i++) {
+		cout << p[i].get_room() << " " << p[i].get_floor() << " " << p[i].get_price() << " " << p[i].get_status() << endl;
+	}
+	cout << endl;
+}
+
+
+int main() {
+	cout << "Input the number of rooms:\n";
+	cin >> n;   //already definded in the top, not defind here because we need to use it in showHotel()
+
+	hotel* p = new hotel[n];   //create a hotel array p
+	char roomNumber[99], floorNumber[99];
+	int price, status;
+
+	cout << "Input the information of rooms (room number, floor, price, status):\n";
+	for (int i = 0; i < n; i++) {            //initialize hotel array p
+		cin >> roomNumber >> floorNumber >> price >> status;
+		p[i].change_room(roomNumber);
+		p[i].change_floor(floorNumber);
+		p[i].change_price(price);
+		p[i].change_status(status);
+	}
+	cout << endl;
+	showHotel(p);     //show the sorted hotel array p
+
+	char instruction[99];
+	int looptime = 0;
+	while (1) {
+		cout << "Input the instruction:\n";
+		if (looptime == 0) {      // in first while loop, cin.getline will read one more char (\n) from the buffer
+			cin.ignore();            // so cin.getline will not function in the first loop
+			looptime++;          // debug here, ignore the \n  in the first loop 
+		}
+		cin.getline(instruction, 99);
+
+		if (instruction[0] == 'B' || instruction[0] == 'R') {    // means instruction == Book roomX || Return roomX
+			//we need to record the room number, so record everything after the space char, eg Return room3
+			//so find the index of space first
+			int space_index = 0;
+			for (int i = 0; i < strlen(instruction); i++) {
+				if (instruction[i] == ' ') {
+					space_index = i;
+					break;
+				}
+			}
+
+			char room[10] = { 0 };  // for record the room number
+			int x = 0;              //index for room variable
+
+			for (int i = space_index + 1; i < strlen(instruction); i++) {  // record the room number from space_index to the end
+				room[x] = instruction[i];                       //eg Book room1, we could store room1 into the variable
+				x++;
+			}
+
+			if (instruction[0] == 'B') {
+				for (int i = 0; i < n; i++) {
+					if (strcmp(p[i].get_room(), room) == 0) {   //find the room first, then check its status
+						if (p[i].get_status() == 0) {  // 0 means not available, 1 means the room is available
+							cout << "Sorry, the room is not available. Try again.\n";
+							break;
+						}
+						else {    // else the room is available (status == 1)
+							p[i].change_status(0);   // change the status 
+							cout << "Succeed!\n";
+							break;
+						}
+					}
+				}
+				cout << endl;
+				continue;
+			}
+
+			else if (instruction[0] == 'R') {
+				for (int i = 0; i < n; i++) {
+					if (strcmp(p[i].get_room(), room) == 0) {
+						p[i].change_status(1);
+						cout << "Thanks for using our services!\n";
+						break;
+					}
+				}
+				cout << endl;
+				continue;
+			}
+		}
+
+		else if (strcmp(instruction, "Leave") == 0) {
+			cout << "See you again!" << endl;;
+			break;
+		}
+		cout << endl;
+	}
+
+	delete[]p;
+
+	return 0;
+}
