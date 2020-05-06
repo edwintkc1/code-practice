@@ -223,7 +223,7 @@ void showResult(char result[][21], int n) {
 
 int main() {
 	char input[21];
-	cout << "Please input a string:";
+	cout << "Please input a string:"<<endl;
 	cin >> input;
 	cout << "The result is:" << endl;
 
