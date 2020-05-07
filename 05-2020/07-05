@@ -1,0 +1,121 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+using namespace std;
+#define LL long long
+
+class node {
+public:
+	int data;
+	node* next;
+};
+
+void remove(node* root) {
+	node* now = root;
+	node* temp_next = NULL;
+	node* temp = NULL;
+	while (now != NULL && now->next != NULL) {
+		temp_next = now;
+		while (temp_next->next != NULL) {
+			if (now->data == temp_next->next->data) {
+				temp = temp_next->next;
+				temp_next->next = temp_next->next->next;
+				delete(temp);
+			}
+			else
+				temp_next = temp_next->next;
+		}
+		now = now->next;
+	}
+}
+
+void sort(node* root) {
+	int swapped;
+	node* now;
+	node* next = NULL;
+	do {
+		swapped = 0;
+		now = root;
+		while (now->next != next) {
+			if (now->data   >   now->next->data) {  // compare 2 data, swap them if head->data  >  next->data
+				int temp = now->data;
+				now->data = now->next->data;
+				now->next->data = temp;
+
+				swapped = 1;
+			}
+			now = now->next;   // update head's current address
+		}
+		next = now;     
+	} while (swapped);
+}
+
+void add(node** root, int x) {
+	node* temp = new node;
+	temp->data = x;
+	temp->next = *root;
+	*root = temp;
+}
+
+node* toList(int arr[],int size) {
+	node* root = NULL;
+	for (int i = 0; i < size; i++) {
+		add(&root, arr[i]);
+	}
+	return root;
+}
+
+node* merge(node* list1, node* list2) {
+	node* ret = NULL;
+	if (list1 == NULL)
+		return list2;
+	if (list2 == NULL)
+		return list1;
+	if (list1->data < list2->data) {
+		ret = list1;
+		ret->next = merge(list1->next, list2);
+	}
+	else {
+		ret = list2;
+		ret->next = merge(list1, list2->next);
+	}
+	return ret;
+}
+
+void output(node *p) {
+	while (p != NULL) {
+		cout << p->data << " ";
+		p = p->next;
+	}
+	cout << endl;
+}
+
+int main() {
+	int size1, size2;
+	cout << "Please input the count of the numbers:";
+	cin >> size1 >> size2;
+	int* arr1 = new int[size1];
+	int* arr2 = new int[size2];
+
+	cout << "Please input the content of the numbers of first linked list:";
+	for (int i = 0; i < size1; i++) {
+		cin >> arr1[i];
+	}
+	cout << "Please input the content of the numbers of second linked list:";
+	for (int i = 0; i < size2; i++) {
+		cin >> arr2[i];
+	}
+
+	node* list1 = toList(arr1, size1);
+	node* list2 = toList(arr2, size2);
+	remove(list1);
+	remove(list2);
+
+	sort(list1);
+	sort(list2);
+
+	node* result = merge(list1, list2);
+	remove(result);
+	cout << "The merged linked list is: ";
+	output(result);
+	return 0;
+}
