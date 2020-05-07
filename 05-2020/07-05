@@ -133,3 +133,42 @@ int main() {
 	output(result);
 	return 0;
 }
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+using namespace std;
+#define LL long long
+
+void count(int start, int product, int num, int &result) {
+	if (start > num || product > num)   // base case
+		return;
+	if (product == num) {  // if product is equals to num after recursion
+		result++;                // means the product is mutipled by num's factors 
+		return;                   // so it is one of the combination, increase the result by 1
+	}
+
+	for (int i = start; i < num; i++) {    
+		if (i * product > num) 
+			break;                     
+
+		if (num % i == 0) { // if num % i == 0, means i   is a factor of num
+			count(i, i * product, num, result);  // call the function again, but change the product by i*porduct
+		}                                                          // also change the start variable by current i
+	}
+}
+
+
+int main() {
+	int num;
+	cout << "Please input the number:";
+	cin >> num;
+
+	int result = 1;
+	count(2, 1, num, result);
+	cout << "The amount of possible combinations is " << result;
+
+	return 0;
+}
+
