@@ -10,10 +10,10 @@ public:
 };
 
 void remove(node* root) {
-	node* now = root;
-	node* temp_next = NULL;
-	node* temp = NULL;
-	while (now != NULL && now->next != NULL) {
+	node* now = root;          // current node
+	node* temp_next = NULL; // next node
+	node* temp = NULL;  // for storing data
+	while (now != NULL && now->next != NULL) {  
 		temp_next = now;
 		while (temp_next->next != NULL) {
 			if (now->data == temp_next->next->data) {
@@ -51,14 +51,14 @@ void sort(node* root) {
 
 void add(node** root, int x) {
 	node* temp = new node;
-	temp->data = x;
+	temp->data = x;          
 	temp->next = *root;
 	*root = temp;
 }
 
 node* toList(int arr[],int size) {
-	node* root = NULL;
-	for (int i = 0; i < size; i++) {
+	node* root = NULL;          // create linked list's head
+	for (int i = 0; i < size; i++) { // add all the elements into the list
 		add(&root, arr[i]);
 	}
 	return root;
@@ -66,12 +66,12 @@ node* toList(int arr[],int size) {
 
 node* merge(node* list1, node* list2) {
 	node* ret = NULL;
-	if (list1 == NULL)
-		return list2;
+	if (list1 == NULL)     // when its address == NULL means no more elements
+		return list2;        
 	if (list2 == NULL)
 		return list1;
 	if (list1->data < list2->data) {
-		ret = list1;
+		ret = list1;         // use recursion to merge
 		ret->next = merge(list1->next, list2);
 	}
 	else {
@@ -90,31 +90,46 @@ void output(node *p) {
 }
 
 int main() {
+	//1. ask user to input the size of two array, and the data of each element
+	//2. convert the two array to linked list
+	//3. remove the duplicate elements in two unsorted linked list
+	//4. sort two linked list
+	//5. merge them into one linked list
+	//6. sort the result linked list
+	//7. output result
 	int size1, size2;
-	cout << "Please input the count of the numbers:";
+	cout << "Please input the count of the numbers:" << endl;
 	cin >> size1 >> size2;
 	int* arr1 = new int[size1];
 	int* arr2 = new int[size2];
 
-	cout << "Please input the content of the numbers of first linked list:";
+	cout << "Please input the content of the numbers of first linked list:" << endl;
 	for (int i = 0; i < size1; i++) {
 		cin >> arr1[i];
 	}
-	cout << "Please input the content of the numbers of second linked list:";
+	cout << "Please input the content of the numbers of second linked list:" << endl;
 	for (int i = 0; i < size2; i++) {
 		cin >> arr2[i];
 	}
 
+	// step 2 convert two array into two linked list
 	node* list1 = toList(arr1, size1);
 	node* list2 = toList(arr2, size2);
+
+	// step 3 remove duplicated element
 	remove(list1);
 	remove(list2);
 
+	// step 4 sort it
 	sort(list1);
 	sort(list2);
 
+	// step 5 merge two linked list into one
 	node* result = merge(list1, list2);
+
+	// step 6 remove duplicated elements in the result linked list
 	remove(result);
+
 	cout << "The merged linked list is: ";
 	output(result);
 	return 0;
