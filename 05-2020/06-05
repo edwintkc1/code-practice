@@ -259,6 +259,18 @@ Notes:
 	e.g., char *strs[]. Then, you can further sort these substrings. 
 3.	You can NOT include the <string> library. 
 
+example are as follow
+
+Please input a string: eraser 
+There is no palindromic substring 
+
+Please input a string: madam 
+The result is:  
+ada madam 
+
+Please input a string: ddbbaacc 
+The result is: 
+aa bb cc dd
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
