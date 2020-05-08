@@ -1,3 +1,10 @@
+----------------------------------------------------------------------------------------------------------------------
+// 雜題
+// #69      2310 asm3 q3
+// create a linked list to store int data, also need to sort data in ascending order
+
+
+
 #include <iostream>
 using namespace std;
 #define LL long long
