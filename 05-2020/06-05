@@ -1,9 +1,69 @@
 // 雜題
-// #67
+// #67     2310 asm3 q2
+Room Booking 
+In this question, you will implement a simple room reservation system according to the following requirements: 
+1.	Accept the information about the room, including the room number, floor, price and status. 
+	The status records whether the room is available for booking.  
+2.	List all the rooms and their corresponding information. The rooms should be sorted by the price in ascending order. 
+	If two rooms have the same price, further sort them by their room numbers in ascending order. 
+	There are only 3 floors in the building, which is from “Floor 1” to “Floor 3”. 
+3.	Accept the input from the user. There are three kinds of tasks: 
+•	Book a room: the user can input “Book” followed by a room number to book this room, e.g., 
+	Book room1. If this room is unavailable (booked already), ask the user to input again. 
+•	Return a room: the user can input “Return” followed by a room number to return this room,
+	e.g., Return room1. We assume that the user does not return a room that is not booked yet. 
+•	Leave: leave the hotel. 
 
-
-
-
+Notes: 
+1.	The hotel should be implemented as a C++ class using the name “hotel”.  
+2.	The status of each room should be updated after a user booked or returned it.   
+3.	All the data should be private. 
+4.	The room number is “room” + an integer. To sort them, 
+	you need to compare the name of two objects by the integer rather than directly comparing the two strings,
+	e.g. “room11” > “room2” rather than “room11” < “room2”. 
+5.	The input will contain the total amount of the rooms first. 
+	Use dynamic array to store them, and delete the array before the program terminates.   
+	
+example is as follow
+Input the number of rooms:  
+9 
+Input the information of rooms (room number, floor, price, status):  
+room1 Floor1 320 0 
+room2 Floor1 200 0
+room3 Floor2 200 1 
+room4 Floor3 200 1 
+room5 Floor1 320 0 
+room6 Floor3 400 1 
+room7 Floor3 400 0 
+room8 Floor2 150 1 
+room9 Floor2 150 0 
+ 
+All rooms in the hotel:  
+room8 Floor2 150 1 
+room9 Floor2 150 0 
+room2 Floor1 200 0 
+room3 Floor2 200 1    (sort the hotel room by price,if prices are same, sort them by smaller room number)
+room4 Floor3 200 1 
+room1 Floor1 320 0 
+room5 Floor1 320 0 
+room6 Floor3 400 1 
+room7 Floor3 400 0 
+ 
+Input the instruction:  
+Book room1 
+Sorry, the room is not available. Try again. 
+ 
+Input the instruction:  
+Book room3  
+Succeed!  
+ 
+Input the instruction:  
+Return room3 
+Thanks for using our services! 
+     
+Input the instruction: 
+Leave 
+See you again! 
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
@@ -166,7 +226,38 @@ int main() {
 
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// 雜題
+// #68     2310 asm3 q1
+// palindromic substring
+// ouput all palindromic substr, and sort them by strcmp()
 
+A palindrome is a word or number, which reads the same backward as forward. 
+For example, madam, abcdcba, and 120021 are all palindromes. 
+ 
+Given a string, if it has palindromic substring(s) of the length greater than one, 
+print all such palindromic substrings in an increasing order according to their lengths.
+If two substring have the same length, further sort them using the stringCompare() 
+following an increasing order. If this string does not have a palindromic substring, 
+print “There is no palindromic substring”. 
+
+•	The length of one string is defined as the number of characters of this string, 
+	e.g., the length of “abcd123” is 7. 
+	
+•	A substring of one string is part of consecutive characters from this string. 
+	For example, for string “abcdef”, “abc” is one substring, but “abd” is not 
+	(because these three characters are not consecutive in the original string). 
+	
+•	The string itself is also considered as its substring.  
+ 
+For example, if the input is madam, it has two palindromic substrings ada and madam. 
+Then your program should output ada, then madam. 
+ 
+Notes: 
+1.	Assume the size of the input string is no more than 20. 
+2.	You can obtain all the palindromic substrings first and store them in one char-type pointer array,
+	e.g., char *strs[]. Then, you can further sort these substrings. 
+3.	You can NOT include the <string> library. 
 
 
 #define _CRT_SECURE_NO_WARNINGS
