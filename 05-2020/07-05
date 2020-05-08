@@ -1,7 +1,38 @@
-----------------------------------------------------------------------------------------------------------------------
 // 雜題
 // #69      2310 asm3 q3
 // create a linked list to store int data, also need to sort data in ascending order
+
+Write a program to implement: 
+1)	Ask the user to input two integers indicating the numbers of elements of the two linked lists 
+	(we assume the integers are all positive integers and the input of users are valid). 
+	Then ask the user to input the elements of the first and second linked lists 
+	(You can ONLY use array to store the input elements in this step, but not in the following steps). 
+	
+2)	Covert the user input elements into two linked lists for the further operations.  
+
+3)	Delete reduplicative digits in two linked lists and sort them in an ascending order. 
+
+4)	Merge this two sorted linked lists and keep the integers in an ascending order in the merged list as well. 
+	Moreover, no reduplicative digits are in the merged linked list.  
+ 
+For example, given the user’s inputs for the linked lists, 
+whose elements are 5, 3, 2, 4, 2 and 9, 7, 1, 2 respectively.  
+•	First, you should check these two linked lists and delete reduplicative digits. 
+	The remaining elements are 5, 3, 2, 4 and 9, 7, 1, 2. 
+•	Then you need to sort two linked lists, e.g., 2, 3, 4, 5 and 1, 2, 7, 9. 
+•	Finally, you should merge the 2 linked lists, e.g., 1, 2, 3, 4, 5, 7, 9.  
+
+examples are as follow
+Please input the count of the numbers: 4 4 
+Please input the content of the numbers of first linked list: 3 2 2 3 
+Please input the content of the numbers of second linked list: 4 2 3 1 
+The merged linked list is: 1 2 3 4 
+
+Please input the count of the numbers: 5 4 
+Please input the content of the numbers of first linked list: 5 3 2 4 2 
+Please input the content of the numbers of second linked list: 9 7 1 2 
+The merged linked list is: 1 2 3 4 5 7 9 
+
 
 
 
@@ -140,8 +171,31 @@ int main() {
 	output(result);
 	return 0;
 }
+----------------------------------------------------------------------------------------------------------------------
+// 雜題
+// #70      2310 asm3 q4
+// recursion, output how many factor combinations of a number
+In this question, you are required to find how many possible combinations that 
+a number can be decomposed into the multiple of integers 
+(smaller than the number itself) by a recursion function. 
+ 
+Suppose we have a positive number X as input, and it need to be 
+decomposed into the multiple of several integers, xi, where each xi is smaller than X 
+(e.g., X = x1 * x2 * x3 * ... * xn). In addition, 
+these decomposed integers can only be arranged in an ascending order (x1<=…<= xn). 
+Then, output how many kinds of combinations in total. 
+ 
+For example, when X is 20, the combinations are: 1*20, 2*10, 2*2*5, 4*5. So your program should output 4. 
 
+examples
+Please input the number: 32000 
+The amount of possible combinations is 401 
 
+Please input the number: 100 
+The amount of possible combinations is 9 
+
+Please input the number: 10000 
+The amount of possible combinations is 109 
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
