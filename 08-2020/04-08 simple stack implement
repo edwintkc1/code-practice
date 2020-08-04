@@ -1,0 +1,103 @@
+#include <iostream>
+using namespace std;
+#define SIZE 5
+
+// A simple stack with 5 integers
+class Stack
+{
+private:
+	int top;
+	int arr[SIZE];
+
+public:
+	Stack()
+	{
+		top = -1;   // current position
+		for (int i = 0; i < SIZE; i++)  // initialization
+		{
+			arr[i] = 0;
+		}
+	}
+
+	bool isEmpty()
+	{
+		if (top == -1)
+			return true;
+		else
+			return false;
+	}
+
+	bool isFull()
+	{
+		if (top == SIZE - 1)  // if capacity of stack = 5, when its index == 4, means full
+			return true;
+		else
+			return false;
+	}
+
+	void push(int val)
+	{
+		if (this->isFull())
+		{
+			cout << "stack overflow" << endl;
+		}
+		else
+		{
+			top++;
+			arr[top] = val;
+		}
+	}
+
+	int pop()
+	{
+		if (this->isEmpty())
+		{
+			cout << "stack underflow" << endl;
+			return 0;
+		}
+		else
+		{
+			int popValue = arr[top];
+			arr[top] = 0;
+			top--;
+			return popValue;
+		}
+	}
+
+	int count()
+	{
+		return(top + 1);
+	}
+
+	int peek(int pos)
+	{
+		if (this->isEmpty()) {
+			cout << "stack underflow" << endl;
+			return 0;
+		}
+		else
+		{
+			return arr[pos];
+		}
+	}
+
+	void change(int pos, int val)
+	{
+		arr[pos] = val;
+		cout << "value changed at location " << pos << endl;
+	}
+
+	void display()
+	{
+		cout << "All values in the stack are " << endl;
+		for (int i = SIZE - 1; i >= 0; i--)
+		{
+			cout << arr[i] << endl;
+		}
+	}
+};
+
+int main() {
+	
+	return 0;
+}
