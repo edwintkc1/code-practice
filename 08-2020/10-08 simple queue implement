@@ -1,0 +1,155 @@
+#include <iostream>
+using namespace std;
+#define SIZE 5
+
+class MyQueue
+{
+public:
+	int front, rear;
+	int arr[SIZE];
+
+	MyQueue()
+	{
+		front = rear = -1;
+		for (int i = 0; i < SIZE; i++) {
+			arr[i] = 0;
+		}
+	}
+
+
+	bool isEmpty()
+	{
+		if (front == -1 && rear == -1)
+			return true;
+		else
+			return false;
+	}
+
+	bool isFull()
+	{
+		if (rear == size(arr) - 1)
+			return true;
+		else
+			return false;
+	}
+
+	void enqueue(int value)
+	{
+		if (isFull())
+		{
+			cout << "Queue is full!" << endl;
+			return;
+		}
+		else if (isEmpty())
+		{
+			front = rear = 0;
+			arr[rear] = value;
+		}
+		else
+		{
+			rear++;
+			arr[rear] = value;
+		}
+	}
+
+	int dequeue()
+	{
+		int temp = 0;
+		if (this->isEmpty())
+		{
+			cout << "Queue is empty!" << endl;
+			return 0;
+		}
+		else if (front == rear)
+		{
+			temp = arr[front];
+			arr[front] = 0;
+			front = rear = -1;
+		}
+		else
+		{
+			temp = arr[front];
+			arr[front] = 0;
+			front++;
+		}
+		return temp;
+	}
+
+	int count()
+	{
+		if (rear == -1 && front == -1)
+			return 0;
+		return (rear - front + 1);
+	}
+
+	void display()
+	{
+		if (isEmpty())
+		{
+			cout << "There is no value in the queue!" << endl;
+			return;
+		}
+		for (int i = 0; i < count(); i++) {
+			cout << arr[i] << " ";
+		}
+		cout << endl;
+	}
+
+};
+
+
+int main() {
+	MyQueue q1;
+	int option, value;
+
+	do
+	{
+		cout << "What operation do you want to perform? " << endl;
+		cout << "1. Enqueue()" << endl;
+		cout << "2. Dequeue()" << endl;
+		cout << "3. isEmpty()" << endl;
+		cout << "4. isFull()" << endl;
+		cout << "5. count()" << endl;
+		cout << "6. display()" << endl;
+
+		cin >> option;
+		switch (option)
+		{
+		case 0:
+			break;
+		case 1:
+			cout << "Please enter an integer: " << endl;
+			cin >> value;
+			q1.enqueue(value);
+			break;
+		case 2:
+			cout << "Dequeued value is : " << q1.dequeue() << endl;
+			break;
+		case 3:
+			if (q1.isEmpty())
+				cout << "Queue is empty! " << endl;
+			else
+				cout << "Queue is not empty! " << endl;
+			break;
+		case 4:
+			if (q1.isFull())
+				cout << "Queue is full! " << endl;
+			else
+				cout << "Queue is not full! " << endl;
+			break;
+		case 5:
+			cout << "Cout of items in Queue: " << q1.count() << endl;
+			break;
+		case 6:
+			q1.display();
+			break;
+		default:
+			break;
+		}
+		system("pause");
+		system("cls");
+	} while (option != 0);
+
+
+	return 0;
+}
