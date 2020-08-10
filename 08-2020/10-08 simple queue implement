@@ -27,7 +27,7 @@ public:
 
 	bool isFull()
 	{
-		if (rear == size(arr) - 1)
+		if (front == (rear + 1) % SIZE)  // circular queue implrementation  **important
 			return true;
 		else
 			return false;
