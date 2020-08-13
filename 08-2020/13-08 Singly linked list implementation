@@ -1,0 +1,282 @@
+#include <iostream>
+using namespace std;
+
+//Singly linked list implementation
+
+class Node
+{
+public:
+	int key;  // used when it comes to change of data
+	int data;
+	Node* next;
+
+	Node() : key(0), data(0), next(NULL) 
+	{
+	}
+
+	Node(int k, int d) :key(k), data(d), next(NULL)
+	{
+	}
+
+};
+
+class SinglyLinkedList
+{
+public:
+	Node* head;
+
+	SinglyLinkedList(): head(NULL) 
+	{
+	}
+
+	SinglyLinkedList(Node* n) : head(n) 
+	{
+	}
+
+	// 0. Check if a particular key node exists
+	Node* nodeExists(int k)
+	{
+		Node* temp = NULL; 
+		Node* ptr = head;
+		while (ptr != NULL)  // go through linked list, if key value exists, return that particular node
+		{                               // otherwise return NULL
+			if (ptr->key == k)
+			{
+				temp = ptr;
+				break;
+			}
+			ptr = ptr->next;
+		}
+		return temp;
+	}
+
+	// 1. Append a node to the list
+	void appendNode(Node* n)
+	{
+		if (nodeExists(n->key) != NULL)
+		{
+			cout << "Node already exists with key value " << n->key << endl;
+		}
+		else
+		{
+			if (head == NULL)  // first node
+			{
+				head = n;
+				cout << "Node appended" << endl;
+			}
+			else // node(s) exist(s), go through all the nodes, append new node at the end
+			{
+				Node* ptr = head;
+				while (ptr->next != NULL)
+				{
+					ptr = ptr->next;
+				}
+				ptr->next = n;
+				cout << "Node appended" << endl;
+			}
+		}
+	}
+
+	// 2. Attach a node at the start
+	void prependNode(Node* n)
+	{
+		if (nodeExists(n->key) != NULL)
+		{
+			cout << "Node already exists with key value " << n->key <<endl;
+		}
+		else
+		{
+			n->next = head;
+			head = n;
+			cout << "Node prepended" << endl;
+		}
+	}
+
+	// 3. Insert a node after a particular node 
+	void insertNode(int k, Node *n)  // if key = 2, add a node after the node with key 2
+	{
+		Node* ptr = nodeExists(k);
+		if (ptr == NULL)  
+		{
+			cout << "No node exists with key value " << n->key <<endl;
+		}
+		else
+		{
+			if (nodeExists(n->key) != NULL)  // check if the key of new node exists or not
+			{
+				cout << "Node already exists with key value " << n->key <<endl;
+			}
+			else  
+			{
+				n->next = ptr->next;
+				ptr->next = n;
+				cout << "Node inserted" << endl;
+			}
+		}
+
+	}
+
+	// 4. Delete node by key
+	void deleteNode(int k)
+	{
+		if (head == NULL)
+		{
+			cout << "Linked list is empty." << endl;
+		}
+		else
+		{
+			if (head->key == k)  // if we want to delete the first node
+			{
+				head = head->next;  
+				cout << "Node with key value " << k << " deleted" << endl;
+			}
+			else // delete other node rather than the first one
+			{
+				Node* temp = NULL; // store the deleted node
+				Node* prevptr = head;
+				Node* currentptr = head->next;
+				while (currentptr != NULL)
+				{
+					if (currentptr->key == k)
+					{
+						temp = currentptr;
+						currentptr = NULL;
+					}
+					else
+					{
+						prevptr = prevptr->next;
+						currentptr = currentptr->next;
+					}
+				}
+
+				if (temp == NULL)  // the node with key k does not exists
+				{
+					cout << "Node with key " << k << " does not exists" << endl;
+				}
+				else
+				{
+					prevptr->next = temp->next;
+					cout << "Node with key value " << k << " deleted" << endl;
+				}
+			}
+		}
+	}
+
+	// 5. Update node by key
+	void updateNode(int k, int d) // d = data
+	{
+		Node* ptr = nodeExists(k);
+		if (ptr != NULL)
+		{
+			ptr->data = d;
+			cout << "Node data updated" << endl;
+		}
+		else
+		{
+			cout << "Node with key " << k << " does not exists" << endl;
+		}
+	}
+
+	// 6. Print linked list
+	void printList()
+	{
+		if (head == NULL)
+		{
+			cout << "No nodes in singly linked list" << endl;
+		}
+		else
+		{
+			cout << "Singly linked list values: " << endl;
+			Node* temp = head;
+			while (temp != NULL)
+			{
+				cout << "key: " << temp->key << "\tdata: " << temp->data << endl;
+				temp = temp->next;
+			}
+		}
+
+	}
+};
+
+
+int main() {
+	SinglyLinkedList ll;
+	int option;
+	int key, data;
+	while(1)
+	{
+		cout << "What operation do you want to perform?" << endl;
+		cout << "1. appendNode()" << endl;
+		cout << "2. prependNode()" << endl;
+		cout << "3. insertNodeAfter()" << endl;
+		cout << "4. deleteNodeByKey()" << endl;
+		cout << "5. updateNodeByKey()" << endl;
+		cout << "6. printLinkedList()" << endl;
+		cout << "0. exit" << endl;
+
+		cin >> option;
+		Node* n = new Node();
+
+		switch (option)
+		{
+		case 0:
+			return 0;
+
+		case 1:
+			cout << "Please enter the key of new node: ";
+			cin >> key;
+			cout << "Please enter the data of new node: ";
+			cin >> data;
+			n->key = key;
+			n->data = data;
+			ll.appendNode(n);
+			break;
+
+		case 2:
+			cout << "Please enter the key of new node: ";
+			cin >> key;
+			cout << "Please enter the data of new node: ";
+			cin >> data;
+			n->key = key;
+			n->data = data;
+			ll.prependNode(n);
+			break;
+
+		case 3:
+			cout << "Please enter the key of existing node after which you want to insert the new node: ";
+			int tempKey;
+			cin >> tempKey;
+			cout << "Please enter the key of new node: ";
+			cin >> key;
+			cout << "Please enter the data of new node: ";
+			cin >> data;
+			n->key = key;
+			n->data = data;
+			ll.insertNode(tempKey, n);
+			break;
+
+		case 4:
+			cout << "Please enter the key of the node: ";
+			cin >> key;
+			ll.deleteNode(key);
+			break;
+
+		case 5:
+			cout << "Please enter the key of the node: ";
+			cin >> key;
+			cout << "Please enter the data of the node: ";
+			cin >> data;
+			ll.updateNode(key, data);
+			break;
+			
+		case 6:
+			ll.printList();
+			break;
+		}
+		system("pause");
+		system("cls");
+	}
+
+
+	return 0;
+}
