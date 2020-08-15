@@ -7,7 +7,7 @@ class Node
 {
 public:
     Node * next;
-    Node * prev;
+    Node * prev;  // difference between singly ll and doubly ll
     int key;
     int data;
     
@@ -72,7 +72,7 @@ public:
                     temp = head->next;
                 }
                 temp->next = n;
-                n->prev = temp;
+                n->prev = temp;  
                 cout << "Node appended" << endl;
             }
 
@@ -144,15 +144,18 @@ public:
         }
         else
         {
-            if(head->key == k) // delete head node
+            // 1. deleting the head node
+            if(head->key == k)
             {
                 head = head->next;
             }
-            else if(nextNode == NULL) // delete end node
+            // 2. deletint the  end node
+            else if(nextNode == NULL)
             {
                 prevNode->next = NULL;
             }
-            else  // delete in between
+            // 3. deleting in between
+            else
             {
                 prevNode->next = nextNode;
                 nextNode->prev = prevNode;
