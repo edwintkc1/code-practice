@@ -1,0 +1,112 @@
+#include <iostream>
+using namespace std;
+
+// doubly linked list implementation
+
+class Node
+{
+public:
+    Node * next;
+    Node * prev;
+    int key;
+    int data;
+    
+    Node(): next(NULL), prev(NULL), key(0), data(0)
+    {
+    }
+    
+    Node(int k, int d): next(NULL), prev(NULL), key(k), data(d)
+    {
+    }
+};
+
+class DoublyLinkedList
+{
+public:
+    Node *head;
+    
+    DoublyLinkedList():head(NULL)
+    {
+    }
+    
+    DoublyLinkedList(Node *n):head(n)
+    {
+    }
+    
+    // 0. Check if the node exists by key value
+    Node * nodeExists(int k)
+    {
+        Node * temp = NULL;   // return type
+        Node * ptr = head;
+        while(ptr != NULL)
+        {
+            if(ptr->key == k)
+            {
+                temp = ptr;
+                break;
+            }
+            ptr = ptr->next;
+        }
+        return temp;
+    }
+    
+    // 1. Append node to the linked list
+    void appendNode(Node *n)
+    {
+        if(nodeExists(n->key) != NULL)
+        {
+            cout << "Node already exists with key value " << n->key << endl;
+        }
+        else
+        {
+            if(head == NULL)  // first node
+            {
+                head = n;
+                cout << "Node appended" << endl;
+            }
+            else
+            {
+                Node * temp = head;
+                while(head->next != NULL)
+                {
+                    temp = head->next;
+                }
+                temp->next = n;
+                n->prev = temp;
+                cout << "Node appended" << endl;
+            }
+
+        }
+    }
+    
+    // 2. Attach a node at the start
+    void prependNode(Node* n)
+    {
+        if(nodeExists(n->key) != NULL)
+        {
+            cout << "Node already exists with key value " << n->key << endl;
+        }
+        else
+        {
+            n->next = head;
+            head->prev = n;
+            head = n;
+            cout<<"Node prepended"<<endl;
+        }
+    }
+    
+    // 3. Insert a node after a node
+    void insertNode(int k, Node* n)
+    {
+        Node* ptr = nodeExists(k);
+        if(ptr == NULL)
+        {
+            cout<<"No node exists with key value "<<k<<endl;
+        }
+    }
+};
+
+
+int main(){
+
+}
