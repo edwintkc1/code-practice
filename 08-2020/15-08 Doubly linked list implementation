@@ -103,10 +103,175 @@ public:
         {
             cout<<"No node exists with key value "<<k<<endl;
         }
+        else
+        {
+            if(nodeExists(n->key) != NULL)
+            {
+                cout << "Node already exists with key value " << n->key << endl;
+            }
+            else
+            {
+                Node* nextNode = ptr->next;
+                // 1. insert at the end
+                if(nextNode == NULL)
+                {
+                    ptr->next = n;
+                    n->prev = ptr;
+                    cout<<"Node inserted at the end"<<endl;
+                }
+                else  // 2. insert in bewtween
+                {
+                    n->next = nextNode;
+                    nextNode->prev = n;
+                    n->prev = ptr;
+                    ptr->next = n;
+                    cout<<"Node inserted in between"<<endl;
+                }
+            }
+        }
+    }
+    
+    // 4. Delete a node by key
+    void deleteNode(int k)
+    {
+        Node * ptr = nodeExists(k);
+        Node * nextNode = ptr->next;
+        Node * prevNode = ptr->prev;
+        
+        if(ptr == NULL)
+        {
+            cout<<"Node with key "<<k<<" does not exists"<<endl;
+        }
+        else
+        {
+            if(head->key == k) // delete head node
+            {
+                head = head->next;
+            }
+            else if(nextNode == NULL) // delete end node
+            {
+                prevNode->next = NULL;
+            }
+            else  // delete in between
+            {
+                prevNode->next = nextNode;
+                nextNode->prev = prevNode;
+            }
+        }
+        cout<<"Node with key "<<k<<" deleted"<<endl;
+    }
+    
+    // 5. Update node by key
+    void updateNode(int k, int d)
+    {
+        Node* ptr = nodeExists(k);
+        if(ptr != NULL)  // exists
+        {
+            ptr->data = d;
+            cout<<"Node data updated"<<endl;
+        }
+        else
+        {
+            cout<<"Node with key "<<k<<" does not exists"<<endl;
+        }
+    }
+    
+    // 6. Print doubly linked list
+    void printList()
+    {
+        if(head == NULL)
+        {
+            cout<<"The doubly linked list is empty"<<endl;
+        }
+        else
+        {
+            Node* temp = head;
+            while(temp->next != NULL)
+            {
+                cout << "key: " << temp->key << "\tdata: " << temp->data << endl;
+                temp = temp->next;
+            }
+        }
     }
 };
 
 
 int main(){
+    DoublyLinkedList ll;
+    int option;
+    int key, data;
+    while(1)
+    {
+        cout << "What operation do you want to perform?" << endl;
+        cout << "1. appendNode()" << endl;
+        cout << "2. prependNode()" << endl;
+        cout << "3. insertNodeAfter()" << endl;
+        cout << "4. deleteNodeByKey()" << endl;
+        cout << "5. updateNodeByKey()" << endl;
+        cout << "6. printLinkedList()" << endl;
+        cout << "0. exit" << endl;
 
+        cin >> option;
+        Node* n = new Node();
+
+        switch (option)
+        {
+        case 0:
+            return 0;
+
+        case 1:
+            cout << "Please enter the key of new node: ";
+            cin >> key;
+            cout << "Please enter the data of new node: ";
+            cin >> data;
+            n->key = key;
+            n->data = data;
+            ll.appendNode(n);
+            break;
+
+        case 2:
+            cout << "Please enter the key of new node: ";
+            cin >> key;
+            cout << "Please enter the data of new node: ";
+            cin >> data;
+            n->key = key;
+            n->data = data;
+            ll.prependNode(n);
+            break;
+
+        case 3:
+            cout << "Please enter the key of existing node after which you want to insert the new node: ";
+            int tempKey;
+            cin >> tempKey;
+            cout << "Please enter the key of new node: ";
+            cin >> key;
+            cout << "Please enter the data of new node: ";
+            cin >> data;
+            n->key = key;
+            n->data = data;
+            ll.insertNode(tempKey, n);
+            break;
+
+        case 4:
+            cout << "Please enter the key of the node: ";
+            cin >> key;
+            ll.deleteNode(key);
+            break;
+
+        case 5:
+            cout << "Please enter the key of the node: ";
+            cin >> key;
+            cout << "Please enter the data of the node: ";
+            cin >> data;
+            ll.updateNode(key, data);
+            break;
+            
+        case 6:
+            ll.printList();
+            break;
+        }
+        system("pause");
+        system("cls");
+    }
+    return 0;
 }
