@@ -76,6 +76,12 @@ int main()
 using namespace std;
 #define SIZE 10
 
+// int arr = [7,5,9,4,2];
+// 假設從小至大排列
+// 設定一個temp value (minOrMax) 儲存宜家最細嘅value嘅index
+// 每次搵出當前arr最細嘅value嘅index
+// 將佢調到最前(已排序sub arr嘅後面一個)
+
 void selectionSort(int arr[], int choice)
 {
     for(int i = 0;i < SIZE-1; i++)
