@@ -3,6 +3,23 @@
 using namespace std;
 #define SIZE 10
 
+// 細到大
+// 揀下一個element (x)
+// 將佢同左邊sorted sub list嘅每一個element做對比
+// 如果有一個元素大過x（例如y）,將呢個元素及之後嘅sorted sub list 元素移向後一格 (直接覆蓋)
+// 將宜家果個元素x，直接insert係y嘅位置
+// 9,7,3,6
+// 9,9,3,6
+// 7,9,3,6
+// 7,9,9,6
+// 7,7,9,6
+// 3,7,9,6
+// 3,7,9,9
+// 3,7,7,9
+// 3,6,7,9
+
+
+
 void insertionSort(int arr[])
 {
     for(int i = 1; i < SIZE; i++)
