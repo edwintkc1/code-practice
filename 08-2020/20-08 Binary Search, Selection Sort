@@ -4,6 +4,12 @@
 using namespace std;
 #define SIZE 10
 
+// 每次cut一半，如果儲存係果個index嘅value大過想搵嘅value
+// 姐係個value係arr嘅左邊，將right移到宜家mid嘅左一格
+// 反之，將left移到宜家mid嘅右一格
+// 重複以上動作，直到cut到left == right
+// 如果想搵嘅value係arr入面，就會搵到，反之，唔係arr入面，return -1
+
 int binarySearch(int arr[], int left, int right, int num)
 {
     while(left <= right)
