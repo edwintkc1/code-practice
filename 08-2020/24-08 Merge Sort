@@ -1,0 +1,85 @@
+#include <iostream>
+using namespace std;
+#define SIZE 5
+
+void merge(int arr[],int l, int m, int r)
+{
+    int i = l, j = m+1, k = l;   // i = 左邊sub list的最左一項
+    int temp[SIZE]= {0};              //  j = 右邊sub list的最左一項
+                                 //  k = merged list的最左一項
+
+    // 比較左右sub list嘅最左邊一個元素
+    // 將較小的一個放入temp merged list
+    while(i<=m && j <= r)
+    {
+        if(arr[i] <= arr[j])     // 左邊sub list嘅最左一項細過右邊sub list嘅最左一項
+        {
+            temp[k] = arr[i];    // 將左邊sub list最左一項放入temp merged list
+            i++, k++;
+        }
+        else
+        {
+            temp[k] = arr[j];
+            j++, k++;
+        }
+    }
+
+    // 做完上面個while之後，應該會有其中一個sub list 無曬野
+    // 將仲有野嘅sub list入面嘅elements放曬入temp merged list就得
+    // 唔洗再比較左右sub list
+    while(i <= m) // 左面sub list有野
+    {
+        temp[k] = arr[i];
+        i++, k++;
+    }
+    while(j <= r) // 右面sub list有野
+    {
+        temp[k] = arr[j];
+        j++, k++;
+    }
+    
+    // 最後一步，將temp merged list 放入真正嘅list
+    // 注意唔可以 x = 0, x < SIZE
+    // 因為呢個唔係最尾一次merge先用到，而係次次都用
+    // 當係最低果幾層merge果陣，係唔會有SZIE 咁多個elements
+    // 所以要用翻每一層嘅最左同最右， 姐係l 同 r 黎做條件
+    for(int x = l; x <= r; x++)
+    {
+        arr[x] = temp[x];
+    }
+
+}
+
+void mergeSort(int arr[], int l, int r)
+{
+    if(l < r)
+    {
+        int m = (l+r)/2;  // midpoint
+        mergeSort(arr,l,m);
+        mergeSort(arr,m+1,r);
+        merge(arr,l,m,r);
+    }
+}
+
+int main()
+{
+
+    cout << "Plase enter " << SIZE << " integers:" << endl;
+    int arr[SIZE] = {0};
+    for (int i = 0; i < SIZE; i++)
+    {
+        cin >> arr[i];
+    }
+
+    mergeSort(arr,0,SIZE-1);
+
+    cout << "The sorted array is: " << endl;
+    for (int i = 0; i < SIZE; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    system("pause");
+    return 0;
+}
