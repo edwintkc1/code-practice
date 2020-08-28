@@ -8,6 +8,8 @@ using namespace std;
 // 所以swap pIndex's element and pivot
 // 做完就好似咁 [3,2,7,9,6], i = 4, pIndex = 2
 // 再cut佢，一半一半咁重複以上步驟，搞掂
+// Time complexity = O(nlogn)
+// Space complexity = logn
 
 
 int Partition(int arr[], int s, int e)  // test, 1st partition
