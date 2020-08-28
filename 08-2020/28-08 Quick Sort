@@ -1,0 +1,61 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+// 揀一個pivot, 通常揀arr嘅最尾一個
+// 將所有細過佢嘅數，調去最左邊，整個pIndex一路加，做左邊嘅index value
+// 做完一輪for loop，細過pivot嘅數應該係曬pIndex左邊，大過pivot嘅數係曬pIndex右邊
+// 所以swap pIndex's element and pivot
+// 做完就好似咁 [3,2,7,9,6], i = 4, pIndex = 2
+// 再cut佢，一半一半咁重複以上步驟，搞掂
+
+
+int Partition(int arr[], int s, int e)  // test, 1st partition
+{   // s = 0, e = 4
+    int pivot = arr[e];     // always choose the last element, pivot = 6
+    int pIndex = s; 
+    for(int i = s; i < e; i++)  // [7,9,3,2,6]  , i = 0, pIndex = 0, 7 <= 6? no
+    {                           // [7,9,3,2,6]  , i = 1, pIndex = 0, 9 <= 6? no , pIndex = 0
+        if(arr[i] < pivot)      // [7,9,3,2,6]  , i = 2, pIndex = 0, 3 <= 6? yes, swap, pIndex++
+        {                       // [3,9,7,2,6]  , i = 3, pIndex = 1, 2 <= 6? yes, swap, pIndex++
+            swap(arr[pIndex], arr[i]);  // [3,2,7,9,6], i = 4, pIndex = 2
+            pIndex++;
+        }
+    }                           // out of for loop, pIndex = 2
+    swap(arr[pIndex], arr[e]);  // swap pivot and current element stored in pIndex
+    return pIndex;              // [3,2,6,9,7]
+}
+
+void QuickSort(int arr[], int s, int e)   // s = start, e = end
+{
+    if(s < e)
+    {
+        int p = Partition(arr,s,e);
+        QuickSort(arr,s,p-1);  // Sort the left part
+        QuickSort(arr,p+1,e);  // Sort the right part
+    }
+}
+
+int main()
+{
+    cout<<"Plese enter size of array: ";
+    int size = 0;
+    cin>>size;
+
+    cout<<"Please enter "<< size << " int numbers: ";
+    int arr[size] = {0};
+    for(int i = 0;i < size; i++)
+    {
+        cin>>arr[i];
+    }
+
+    QuickSort(arr,0,size-1);
+    cout<<"After sorting:"<<endl;
+    for(int i = 0;i < size; i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    system("pause");
+    return 0;
+}
