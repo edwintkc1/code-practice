@@ -7,5 +7,7 @@ For code practice
 
 05-2020 ： 583  lines
 
+08-2020 ： 1985 lines
+
 
 codeforces: https://www.a2oj.com/Ladders.html
