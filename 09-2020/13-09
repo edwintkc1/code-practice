@@ -1,0 +1,51 @@
+----------------------------------------------------------------------------------------------------------------------
+// 雜題
+// #71      
+// print the last digit of fibonacci number
+// e.g   input: 3    output: 2
+         input: 7    output: 13
+         input: 100  output:: 5
+ // 1<=n<=1000
+ // fib num嘅尾數，每60個一個循環，只要我地將頭60個尾數放入arr
+ // 之後無論佢input咩，用mod ouput翻arr入面個ans俾佢就得
+ // 如果用傳統方法，input完個n再計fib num，再mod
+ // input大嘅話出黎個fib num會爆，long long都唔夠用，所以唔ok
+ 
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+#define ll long long
+
+void fibNum(ll arr[], int num = 60)
+{
+	// calculate the first 60 fib num (last digit) and put it into arr
+	for (ll i = 2; i < num; i++)
+	{
+		arr[i] = (arr[i - 2] + arr[i - 1]) % 10;
+	}
+}
+
+void lastDigit(const int& n)
+{
+	ll arr[60] = { 0 };
+	// arr[0] is 0, arr[1] is 1, we would use this 2 value to calculate all fib num
+	arr[1] = 1;
+
+	// As the last digit of fib num repeats with length 60
+	// Simply get those 60 numbers and put it into arr
+	fibNum(arr);
+
+	cout << arr[n % 60] << endl;
+}
+
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		lastDigit(n);
+	}
+
+	return 0;
+}
