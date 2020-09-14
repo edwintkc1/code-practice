@@ -1,0 +1,248 @@
+[33mcommit 027c331a5f4db165fa3d850c55a1ff7c97824d09[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: edwintkc <edwintkc1@gmail.com>
+Date:   Sun Sep 13 19:39:00 2020 +0800
+
+    delete wrong file(09-20)
+
+[33mcommit 8c00bfe957453778ce3a2249539ead06f924dc7f[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Sun Sep 13 17:55:13 2020 +0800
+
+    Create 13-09
+
+[33mcommit f9a9936c325fcac334d766d1e385a083319da48f[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Tue Sep 1 22:27:44 2020 +0800
+
+    Update README.md
+
+[33mcommit 149aedce4d62f0569642f2b9994d2099055c70ee[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Tue Sep 1 22:27:14 2020 +0800
+
+    Delete 08.md
+
+[33mcommit f496af3c3e23d9a1b4e21ff2d6deee43c6e152a0[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Fri Aug 28 11:07:25 2020 +0800
+
+    Update 08.md
+
+[33mcommit f024478dfbef749812f515678b46199850cbde9f[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Fri Aug 28 11:06:42 2020 +0800
+
+    Update 28-08 Quick Sort
+
+[33mcommit ca3986928e88e5ce71513cd4c72a28ebbd0b151e[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Fri Aug 28 11:06:04 2020 +0800
+
+    Create 28-08 Quick Sort
+
+[33mcommit c4057548d5327b893887a0dc6531c51718fb6728[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 24 12:19:51 2020 +0800
+
+    Update 08.md
+
+[33mcommit 361aa49fc4e9dec1652f6ebb3f455f5184262534[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 24 12:19:29 2020 +0800
+
+    Create 24-08 Merge Sort
+
+[33mcommit f3dcbfb33f9eb26f2f1d1173432c7cb95e66679e[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Sun Aug 23 22:01:55 2020 +0800
+
+    Update 21-08 Insertion Sort
+
+[33mcommit 5a090ad211ff7e033ba5ce37948756b473adaae8[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Sun Aug 23 21:42:53 2020 +0800
+
+    Update 20-08 Binary Search, Selection Sort
+
+[33mcommit 568a5c257d8b1e6bd7c5b838b35212ce0a20bc57[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Sun Aug 23 21:31:52 2020 +0800
+
+    Update 20-08 Binary Search, Selection Sort
+
+[33mcommit cdf0de3685477461fc941720ccf482ae2c80e01f[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Fri Aug 21 11:22:42 2020 +0800
+
+    Update 08.md
+
+[33mcommit 176015096b9074d35c9be9b8f83d6535e2fdc438[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Fri Aug 21 11:22:17 2020 +0800
+
+    Create 21-08 Insertion Sort
+
+[33mcommit 5c359fabf3a937aa6178df88d116bedc4bb4230a[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Thu Aug 20 14:14:27 2020 +0800
+
+    Update 20-08 Binary Search, Selection Sort
+
+[33mcommit 85e8a63693808ef0fe8d807080d8dc23e6de856b[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Thu Aug 20 14:06:10 2020 +0800
+
+    Update 08.md
+
+[33mcommit d9a151e362aa28a31698a6123423e3955cab7704[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Thu Aug 20 14:05:46 2020 +0800
+
+    Update and rename 20-08 Binary Search to 20-08 Binary Search, Selection Sort
+
+[33mcommit 4f2fbf5f8b6add6265fd2f493ecded9e5ae7fe08[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Thu Aug 20 11:59:13 2020 +0800
+
+    Update 08.md
+
+[33mcommit 7ae3156c9ed899254c30ac9dac45a355a57539a4[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Thu Aug 20 11:58:47 2020 +0800
+
+    Create 20-08 Binary Search
+
+[33mcommit 15d26b4896610a69e4236dbd9b75a5dfca5554f5[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 17 21:06:39 2020 +0800
+
+    Update 08.md
+
+[33mcommit b6427b37c7410f2bae7ce671a84e017921089f81[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 17 21:06:13 2020 +0800
+
+    Create tools.py
+
+[33mcommit cbca9b686d6a672377fdc911c48f40b3c32376d3[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 17 21:05:31 2020 +0800
+
+    Delete main.py
+
+[33mcommit cc14cfa0ba416c8b80f96b063635b558aeb0c1dd[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 17 21:05:10 2020 +0800
+
+    Create main.py
+
+[33mcommit a092de0b269cd3f39a763913d793b3c86c876c81[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 17 21:04:49 2020 +0800
+
+    Create main.py
+
+[33mcommit ab3625a9efd26a8bc9e83961d638c7df7fc37cc6[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Sat Aug 15 15:32:20 2020 +0800
+
+    Update 08.md
+
+[33mcommit 17d54626c594476087a5a2021f6b5c76252a08b4[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Sat Aug 15 15:30:23 2020 +0800
+
+    Update 15-08 Doubly linked list implementation
+
+[33mcommit 96285a89efd9134df788109173188072167eae35[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Sat Aug 15 15:27:51 2020 +0800
+
+    Update 15-08 Doubly linked list implementation
+
+[33mcommit 394dc9e1b15718ad1672ce8a33bf49ffadfcfe0e[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Sat Aug 15 14:50:35 2020 +0800
+
+    Create 15-08 Doubly linked list implementation
+
+[33mcommit 032131c47a3c594be02d9ffc26a3418c971abbb1[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Thu Aug 13 15:15:43 2020 +0800
+
+    Update 08.md
+
+[33mcommit 959f1691a9360b5abe66437607b252a495a06e46[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Thu Aug 13 15:15:23 2020 +0800
+
+    Create 13-08 Singly linked list implementation
+
+[33mcommit 3f69496b780f6b10d4b79131f2d12cd0aa7d657b[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 10 11:41:39 2020 +0800
+
+    Rename 10-08 simple circular queue implement to 10-08 simple circular queue implementation
+
+[33mcommit c8cf44d9c437578d1bad4df0e079c0fc110e3ce5[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 10 11:41:27 2020 +0800
+
+    Rename 04-08 simple stack implement to 04-08 simple stack implementation
+
+[33mcommit 4a438e1423feb3f224550be00b99316218cd388a[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 10 11:40:22 2020 +0800
+
+    Update and rename 10-08 simple queue implement to 10-08 simple circular queue implement
+
+[33mcommit ed6a8fb59b018ac09715cd756a6bd88039f37548[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 10 11:28:40 2020 +0800
+
+    Update 10-08 simple queue implement
+
+[33mcommit 93d14eca71c7d9965be7eb10d00f68ad6e870882[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 10 11:26:44 2020 +0800
+
+    Update 10-08 simple queue implement
+
+[33mcommit 5d5403d894db9b4c8655d735aeeaa64d00dda937[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 10 11:23:41 2020 +0800
+
+    Update 10-08 simple queue implement
+
+[33mcommit 1effad86a8fdfde1e0e58c260b8b46a17878a9ad[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 10 11:22:55 2020 +0800
+
+    Update 10-08 simple queue implement
+
+[33mcommit 1ec94b524a452a13efe22427832955ec0ae0cc48[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 10 11:02:59 2020 +0800
+
+    Update 08.md
+
+[33mcommit 905c314c1b1f8416c1926d3d6cdea9296a13e419[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Mon Aug 10 11:02:38 2020 +0800
+
+    Create 10-08 simple queue implement
+
+[33mcommit 6408384b157c4f3ee21ab8eb33625455e4a4af5c[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Tue Aug 4 14:29:46 2020 +0800
+
+    Create 08.md
+
+[33mcommit 58642dacbc71c5dad16948ef47d6bb503c730dbc[m
+Author: edwintkc <59564150+edwintkc1@users.noreply.github.com>
+Date:   Tue Aug 4 14:27:47 2020 +0800
+
+    Create 04-08 simple stack implement
+
+[33mcommit 649d704e3d453293b8c96fdab2d4710ebffca352[m
+Author: edwintkc1 <edwintkc1@gmail.com
