@@ -1,6 +1,11 @@
 import pygame
 import plane_sprites
 
+# TODO 
+    change the space attack to single
+    explosion effect
+    score
+
 class PlaneGame(object):
     """PLANE WAR"""
 
