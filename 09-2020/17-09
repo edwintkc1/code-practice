@@ -1,0 +1,132 @@
+#include <iostream>
+#include <string.h>
+#include <string>
+using namespace std;
+
+class Node
+{
+public:
+    Node* next;
+    string s;
+    int count;
+    
+    Node(): next(NULL), s(""), count(0)
+    {
+    }
+    
+    Node(string input):next(NULL), s(input), count(1)
+    {
+    }
+};
+
+class CircularLL
+{
+public:
+    CircularLL(): head(NULL)
+    {
+    }
+    
+    Node* nodeExists(string s)
+    {
+        Node* temp = NULL;
+        Node* ptr = head;
+        while(ptr != NULL)
+        {
+            if(ptr->s == s)
+            {
+                temp = ptr;
+                break;
+            }
+            ptr = ptr->next;
+        }
+        return temp;
+    }
+    
+    void append(Node* n)
+    {
+        Node* temp = nodeExists(n->s);
+        if(temp != NULL) // node with input string exists
+        {
+            temp->count ++;
+        }
+        else
+        {
+            if(head == NULL)
+            {
+                head = n;
+            }
+            else
+            {
+                Node* ptr = head;
+                while(ptr->next != NULL)
+                {
+                    ptr = ptr->next;
+                }
+                ptr->next = n;
+            }
+        }
+    }
+    
+    void printList()
+    {
+        Node* ptr = head;
+        while(ptr != NULL)
+        {
+            cout << ptr->s << " " << ptr->count << endl;
+            ptr = ptr->next;
+        }
+    }
+    
+private:
+    Node* head;
+    
+};
+
+Node* merge(Node* n1, Node* n2)
+{
+    Node* tail = new Node("");
+    while(n1 && n2){
+        if(strcmp(n1->s, n2->s))
+            swap(n1,n2);
+        tail->next = n1;
+        n1 = n1->next;
+        tail = tail->next;
+    }
+    if(n1)
+        tail->next = n1;
+    if(n2)
+        tail->next = n2;
+    return tail->next;
+}
+
+Node* sortList(Node* head)
+{
+    if(! head || !head->next)
+        return head;
+    Node* slow = head;
+    Node* fast = head->next;
+    while(fast && fast->next){
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    Node* mid = slow->next;
+    slow->next= NULL;
+    return merge(sortList(head), sortList(mid));
+}
+
+
+int main()
+{
+    string s;
+    CircularLL linkl;
+    int test = 0;
+    while(cin >> s && test != 5)
+    {
+        Node* temp = new Node(s);
+        linkl.append(temp);
+        test++;
+    }
+    linkl.printList();
+    
+    return 0;
+}
