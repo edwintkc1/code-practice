@@ -107,3 +107,22 @@ int main()
     linkl.printList();
     return 0;
 }
+
+----------------------------------------------------------------------------------------------------------------------
+// typedef (ACMer) 版本
+// 注意map會自動排序
+
+#include <bits/stdc++.h>
+using namespace std;
+
+map<string, int> M;
+
+string str;
+
+int main() {
+	while (cin >> str)
+		++M[str];
+	for (map<string, int>::iterator it = M.begin(); it != M.end(); ++it)
+		cout << it->first << " " << it->second << endl;
+	return 0;
+}
