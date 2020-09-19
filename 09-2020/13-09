@@ -1,4 +1,3 @@
-----------------------------------------------------------------------------------------------------------------------
 // 雜題
 // #71      
 // print the last digit of fibonacci number
@@ -47,5 +46,23 @@ int main()
 		lastDigit(n);
 	}
 
+	return 0;
+}
+----------------------------------------------------------------------------------------------------------------------
+// typedef (ACMer) 版本
+
+#include <bits/stdc++.h>
+using namespace std;
+
+const int Max_N = 1005;
+
+int N, F[Max_N];
+
+int main() {
+	F[0] = 0, F[1] = 1;
+	for (int i = 2; i < Max_N; i++)
+		F[i] = (F[i - 1] + F[i - 2]) % 10;
+	while (scanf("%d", &N) != EOF)
+		printf("%d\n", F[N]);
 	return 0;
 }
