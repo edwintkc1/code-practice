@@ -1,3 +1,9 @@
+// 讀入string，new node
+// 每次將呢個node入面嘅string同current node嘅string比較
+// 如果搵到一樣嘅string，count++就得
+// 如果input node嘅string較細，prepend node
+// 如果推出while loop之後都無加到入linked list，姐係呢個string係最大果個，擺佢係最後就ok
+
 #include <iostream>
 #include <string.h>
 #include <string>
