@@ -67,9 +67,9 @@ public:
             else
             {
                 Node * temp = head;
-                while(head->next != NULL)
+                while(temp->next != NULL)
                 {
-                    temp = head->next;
+                    temp = temp->next;
                 }
                 temp->next = n;
                 n->prev = temp;  
