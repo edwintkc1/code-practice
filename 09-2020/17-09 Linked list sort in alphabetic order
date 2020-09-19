@@ -1,0 +1,103 @@
+#include <iostream>
+#include <string.h>
+#include <string>
+using namespace std;
+
+class Node
+{
+public:
+    Node* next;
+    Node* prev;
+    string s;
+    int count;
+
+    Node() : next(NULL), prev(NULL), s(""), count(0)
+    {
+    }
+
+    Node(string input) :next(NULL), prev(NULL), s(input), count(1)
+    {
+    }
+};
+
+class LinkedList
+{
+public:
+    LinkedList() : head(NULL), total(0)
+    {
+    }
+
+    void add(Node* n)
+    {
+        if (head == NULL) {
+            head = n;
+            total++;
+        }
+        else {
+            int currentTotal = this->total;
+            Node* ptr = head;
+            while (ptr != NULL) // not ptr->next != NULL beacause we need to check the last one
+            {
+                if (n->s == ptr->s) {
+                    ptr->count++;
+                    total++;
+                    break;
+                }
+                else if (strcmp(n->s.c_str(), ptr->s.c_str()) < 0) { // n->s is less than ptr->s, prepend node
+                    // if this node prepend in the front
+                    if (ptr == head) {
+                        n->next = ptr;
+                        ptr->prev = n;
+                        head = n;  // reset head
+                    }
+                    else {
+                    // prepend in between
+                        n->next = ptr;
+                        n->prev = ptr->prev;
+                        ptr->prev->next = n;
+                        ptr->prev = n;
+                    }
+                    total++;
+                    break;
+                }
+                if (ptr->next == NULL) // after checking the last one, break the loop
+                    break;
+                ptr = ptr->next;
+            }
+            // if exists while loop, but the currentTotal == total
+            // means the input node in not added yet, n->s is the largest, then append at the end
+            if (currentTotal == total) {
+                ptr->next = n;
+                n->prev = ptr;
+            }
+        }
+    }
+
+    void printList()
+    {
+        Node* ptr = head;
+        while (ptr != NULL){
+            cout << ptr->s << " " << ptr->count << endl;
+            ptr = ptr->next;
+        }
+    }
+
+private:
+    Node* head;
+    int total;
+};
+
+
+int main()
+{
+    string s;
+    LinkedList linkl;
+    while (cin >> s)
+    {
+        Node* temp = new Node(s);
+        linkl.add(temp);
+    }
+    
+    linkl.printList();
+    return 0;
+}
