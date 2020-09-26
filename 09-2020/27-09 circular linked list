@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+	Node* next;
+	int tag;
+	Node(int t): next(NULL), tag(t)
+	{
+	};
+};
+
+class CircularLinkedList
+{
+private:
+	Node* head;
+	Node* end;
+public:
+	void add(int tag) {
+		Node* temp = new Node(tag);
+		if (head == NULL) {
+			head = temp;
+			end = temp;
+		}
+		else {
+			Node* ptr = head;
+			while(ptr !=)
+		}
+	}
+
+};
+
+int main()
+{
+	int N;
+	cin >> N;
+	while (N--) {
+		int x;
+		cin >> x;
+		// do something
+	}
+	int Q;
+	cin >> Q;
+	while (Q--) {
+		// do something
+	}
+
+
+	return 0;
+}
