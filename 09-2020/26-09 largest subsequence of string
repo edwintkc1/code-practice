@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void solution(string s)
+{
+	int max_index = 0;
+	int s_len_max = s.length();
+	int count = s.length();
+	string ans = "";
+	
+	while (max_index != s_len_max) {
+		int i = max_index;
+		while (i != s_len_max) {
+			if (s[i] > s[max_index]) {
+				max_index = i;
+			}
+			i++;
+		}
+		ans += s[max_index];
+		max_index++;
+	}
+
+	cout << ans <<endl;
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+	string s;
+	while (n--) {
+		cin >> s;
+		solution(s);
+	}
+
+	return 0;
+}
