@@ -15,19 +15,28 @@ class CircularLinkedList
 {
 private:
 	Node* head;
-	Node* end;
 public:
 	void add(int tag) {
 		Node* temp = new Node(tag);
-		if (head == NULL) {
+		if (head == NULL)
 			head = temp;
-			end = temp;
-		}
 		else {
 			Node* ptr = head;
-			while(ptr !=)
+			while (ptr->next != head)
+				ptr = ptr->next;
+			temp->next = head;
+			ptr->next = temp;
 		}
 	}
+
+	void append(int tag, int n) {
+		Node* temp = new Node(tag);
+		Node* ptr = head;
+		for (int i = 1; i < n; i++)
+			ptr = ptr->next;
+
+	}
+
 
 };
 
@@ -35,10 +44,11 @@ int main()
 {
 	int N;
 	cin >> N;
+	CircularLinkedList ll;
 	while (N--) {
 		int x;
 		cin >> x;
-		// do something
+		ll.add(x, 1); // tag, go how many steps
 	}
 	int Q;
 	cin >> Q;
