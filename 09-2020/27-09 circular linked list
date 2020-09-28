@@ -1,61 +1,137 @@
+題目為大致為創建一個circular linked list， 並有以下3項功能
+1. Student with tag T is added to the circle.
+2. Remove a student from the circle
+3. Do the query on current circle.
+
+(1) 1 i tag : A new student will be inserted after the i-th student
+counting from the reference point in clockwise direction. It is
+guaranteed that i is a positive integer. After this operation, the new
+reference point points to the newly inserted student.
+選擇第一項，即append一個node到i項之後，並設置該node為ref point (即head)
+做法：先創建該node，然後創建traverse ll的ptr，設置完後即刻將head = new added node，因為要換ref point
+     然後一直行到所需位置，加上去
+
+(2) 2 i : remove the student at i-th position counting from the reference
+point in clockwise direction. The new reference point points to the
+student who follows the removed student.
+選擇第二項，即刪除i項的下一個node，並設置已刪除node的下一個node為ref point
+例如list為 0 3 5 9，刪除第二項邊位0 5 9，所以ref point設置為tag為5的node，變成5 9 0
+
+(3) 3 i : print the tag of the i-th student counting from the reference
+point in clockwise direction. The new reference point points to this
+student.
+選擇第三項，即打印第i項的tag
+
+input：                        
+6               // n個tag
+1 5 3 3 2 10    // tag
+4               // 4個操作    
+1 3 20          // 相應的操作， ll加入新node後變為 {1→5→3→20→3→2→10}，換ref point變為 {20→3→2→10→1→5→3}
+3 3		// output 2，因為從剛剛的步驟，head = 20，第三個 = 2，換ref point變為 {2→10→1→5→3→20→3}
+2 5             // del 第五個node，即第一個3，del後再換ref point變為  {20→3→2→10→1→5}
+3 6		// output 5
+
 #include <iostream>
 using namespace std;
 
 class Node
 {
 public:
-	Node* next;
-	int tag;
-	Node(int t): next(NULL), tag(t)
-	{
-	};
+    Node* next;
+    int tag;
+    Node(int t): next(NULL), tag(t)
+    {
+    };
 };
 
 class CircularLinkedList
 {
 private:
-	Node* head;
+    Node* head;
 public:
-	void add(int tag) {
-		Node* temp = new Node(tag);
-		if (head == NULL)
-			head = temp;
-		else {
-			Node* ptr = head;
-			while (ptr->next != head)
-				ptr = ptr->next;
-			temp->next = head;
-			ptr->next = temp;
-		}
-	}
+    CircularLinkedList(): head(NULL)
+    {
+    }
+    
+    void add(int tag) {
+        Node* temp = new Node(tag);
+        if (head == NULL){
+            head = temp;
+            temp->next = head;
+        }
+        else {
+            Node* ptr = head;
+            while (ptr->next != head)
+                ptr = ptr->next;
+            temp->next = head;
+            ptr->next = temp;
+        }
+    }
 
-	void append(int tag, int n) {
-		Node* temp = new Node(tag);
-		Node* ptr = head;
-		for (int i = 1; i < n; i++)
-			ptr = ptr->next;
-
-	}
-
+    void append(int tag, int n) {
+        Node* temp = new Node(tag);
+        Node* ptr = head;
+        head = temp;
+        for (int i = 1; i < n; i++)
+            ptr = ptr->next;
+        temp->next = ptr->next;
+        ptr->next = temp;
+        
+    }
+    
+    void del(int n){
+        Node* ptr = head;
+        for (int i = 1; i < n - 1; i++) // to the node before that position
+            ptr = ptr->next;
+        ptr->next = ptr->next->next;
+        head = ptr->next;
+    }
+    
+    void print(int n){
+        Node* ptr = head;
+        for(int i = 1; i < n; i++)
+            ptr = ptr->next;
+        cout << ptr->tag << endl;
+        head = ptr;
+    }
 
 };
 
 int main()
 {
-	int N;
-	cin >> N;
-	CircularLinkedList ll;
-	while (N--) {
-		int x;
-		cin >> x;
-		ll.add(x, 1); // tag, go how many steps
-	}
-	int Q;
-	cin >> Q;
-	while (Q--) {
-		// do something
-	}
+    int N;
+    cin >> N;
+    CircularLinkedList ll;
+    while (N--) {
+        int x;
+        cin >> x;
+        ll.add(x);
+    }
+    int Q;
+    cin >> Q;
+    int choice, n;
+    while (Q--) {
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                int tag;
+                cin >> n;
+                cin >> tag;
+                ll.append(tag, n);
+                break;
+            case 2:
+                cin >> n;
+                ll.del(n);
+                break;
+            case 3:
+                cin >> n;
+                ll.print(n);
+                break;
+            default:
+                break;
+        }
+    }
 
 
-	return 0;
+    return 0;
 }
