@@ -27,9 +27,9 @@ input：
 1 5 3 3 2 10    // tag
 4               // 4個操作    
 1 3 20          // 相應的操作， ll加入新node後變為 {1→5→3→20→3→2→10}，換ref point變為 {20→3→2→10→1→5→3}
-3 3		// output 2，因為從剛剛的步驟，head = 20，第三個 = 2，換ref point變為 {2→10→1→5→3→20→3}
+3 3		      // output 2，因為從剛剛的步驟，head = 20，第三個 = 2，換ref point變為 {2→10→1→5→3→20→3}
 2 5             // del 第五個node，即第一個3，del後再換ref point變為  {20→3→2→10→1→5}
-3 6		// output 5
+3 6		      // output 5
 
 #include <iostream>
 using namespace std;
