@@ -1,0 +1,128 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Node
+{
+public:
+    Node* next;
+    int tag;
+    Node(int t) : next(NULL), tag(t)
+    {
+    };
+};
+
+class CircularLinkedList
+{
+private:
+    Node* head;
+public:
+    CircularLinkedList() : head(NULL)
+    {
+    }
+
+    void add(int tag) {
+        Node* temp = new Node(tag);
+        if (head == NULL) {
+            head = temp;
+            temp->next = head;
+        }
+        else {
+            Node* ptr = head;
+            while (ptr->next != head)
+                ptr = ptr->next;
+            temp->next = head;
+            ptr->next = temp;
+        }
+    }
+
+    void append(int tag, int n) {
+        Node* temp = new Node(tag);
+        Node* ptr = head;
+        for (int i = 1; i < n; i++)
+            ptr = ptr->next;
+        temp->next = ptr->next;
+        ptr->next = temp;
+    }
+
+    void del(int n) {
+        Node* ptr = head;
+        if (n == 1) {  // delete the first node, traverse to the last node first
+            while (ptr->next != head)
+                ptr = ptr->next;
+            ptr->next = ptr->next->next;
+        }
+        else {
+            for (int i = 1; i < n - 1; i++)
+                ptr = ptr->next;
+            ptr->next = ptr->next->next;
+        }
+    }
+
+    void print(int n) {
+        Node* ptr = head;
+        for (int i = 1; i < n; i++)
+            ptr = ptr->next;
+        cout << ptr->tag << endl;
+    }
+
+    void reverse(int i, int j) {
+        // copy those number to an temp arr[]
+        // reverse the array
+        // put them into node->tag
+        vector<int> v;
+        Node* ptr = head;
+        Node* start = NULL;
+        for (int x = 1; x < i; i++)
+            ptr = ptr->next;
+        start = ptr;  // for later usage
+        for (int x = 0; x < (j-i); x++) {
+            v.push_back(ptr->tag);
+            ptr = ptr->next;
+        }
+        for (int x = 0; x < v.size(); x++)
+            cout << v[x] << " ";
+        cout << endl;
+        
+        
+    }
+
+};
+
+int main()
+{
+    int N;
+    cin >> N;
+    CircularLinkedList ll;
+    while (N--) {
+        int x;
+        cin >> x;
+        ll.add(x);
+    }
+    int Q;
+    cin >> Q;
+    int choice, n;
+    while (Q--) {
+        cin >> choice;
+        switch (choice) {
+        case 1:
+            int tag;
+            cin >> n;
+            cin >> tag;
+            ll.append(tag, n);
+            break;
+        case 2:
+            cin >> n;
+            ll.del(n);
+            break;
+        case 3:
+            cin >> n;
+            ll.print(n);
+            break;
+        default:
+            break;
+        }
+    }
+    return 0;
+}
