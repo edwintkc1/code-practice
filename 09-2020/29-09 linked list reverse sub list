@@ -1,3 +1,11 @@
+大體上同2前面個一樣，多左個reverse sub linked list
+例如個list係， 1,2,3,4,5,6
+reverse(2,5)嘅話就係將node[2,5] reverse，其他不變
+用取巧方法，先用ptr去到2果個位，再用第二ptr(start)記錄呢個位置，後面會用到
+將2去到5全部加入vector入面，reverse vector
+用翻start呢個ptr，重新traverse一次node[2,5]，並將入面嘅tag換做vector入面嘅elements
+搞掂
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -51,6 +59,7 @@ public:
         if (n == 1) {  // delete the first node, traverse to the last node first
             while (ptr->next != head)
                 ptr = ptr->next;
+            head = ptr->next->next;
             ptr->next = ptr->next->next;
         }
         else {
@@ -74,17 +83,18 @@ public:
         vector<int> v;
         Node* ptr = head;
         Node* start = NULL;
-        for (int x = 1; x < i; i++)
+        for (int x = 1; x < i; x++)
             ptr = ptr->next;
         start = ptr;  // for later usage
-        for (int x = 0; x < (j-i); x++) {
+        for (int x = 0; x <= (j-i); x++) {
             v.push_back(ptr->tag);
             ptr = ptr->next;
         }
-        for (int x = 0; x < v.size(); x++)
-            cout << v[x] << " ";
-        cout << endl;
-        
+        std::reverse(v.begin(), v.end());
+        for (int x = 0; x <= (j - i); x++) {
+            start->tag = v[x];
+            start = start->next;
+        }
         
     }
 
@@ -117,6 +127,11 @@ int main()
             ll.del(n);
             break;
         case 3:
+            int i, j;
+            cin >> i >> j;
+            ll.reverse(i, j);
+            break;
+        case 4:
             cin >> n;
             ll.print(n);
             break;
