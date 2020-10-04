@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+using namespace std;
+#define SIZE 500
+
+class stack
+{
+public:
+	int top;
+	char arr[SIZE];
+	stack() : top(-1)
+	{
+	}
+
+	bool isEmpty() {
+		return (top == -1) ? true : false;
+	}
+
+	void push(char c)
+	{
+		top++;
+		arr[top] = c;
+	}
+
+	void pop()
+	{
+		if (this->isEmpty())
+			return;
+		else 
+			top--;
+	}
+
+	void clear()
+	{
+		top = -1;
+		for (int i = 0; i < SIZE; i++)
+			arr[i] = ' ';
+	}
+};
+
+bool isPair(char left, char right)
+{
+	if (left == '(' && right == ')')
+		return true;
+	else if (left == '[' && right == ']')
+		return true;
+	else if (left == '{' && right == '}')
+		return true;
+	return false;
+}
+
+int main()
+{
+	string s;
+	stack myStack;
+	while (getline(cin, s)) {
+		int i = 0, openWrong = 0, closeWrong = 0;
+		char c = s[i];
+		while (c) {
+			if (c == '(' || c == '[' || c == '{') {
+				if(myStack.isEmpty())
+					openWrong = i;
+				myStack.push(c);
+			}
+			else if (c == ')' || c == ']' || c == '}')
+			{
+				if (myStack.isEmpty() || !isPair(myStack.arr[myStack.top], c)) {
+					closeWrong = i;
+					i++;
+					break;
+				}
+				else
+					myStack.pop();
+			}
+			i++;
+			c = s[i];
+		}
+		
+		if (myStack.isEmpty())
+			cout << "Success\n";
+		else if (closeWrong > openWrong)
+			cout << closeWrong + 1 << endl;
+		else
+			cout << openWrong + 1 << endl;
+		myStack.clear();
+	}
+
+	return 0;
+}
