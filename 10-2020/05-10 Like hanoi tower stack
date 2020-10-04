@@ -1,0 +1,114 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class stack
+{
+private:
+	int arr[3001] = { 0 };
+	int top = -1;
+public:
+
+	void push(int x) {
+		arr[++top] = x;
+	}
+
+	void pop() {
+		top--;
+	}
+
+	int getTop() {
+		return arr[top];
+	}
+
+	bool isEmpty() {
+		return (top == -1) ? true : false;
+	}
+
+	void changeTop(int i) {
+		top += i;
+	}
+
+	void clear() {
+		while (!isEmpty())
+			arr[top--] = 0;
+	}
+};
+
+bool compare(stack s, vector<int> v, int n)
+{
+	int index = n - 1;
+	int i;
+	for (i = 0; i < n; i++) {
+		int top = s.getTop();
+		if (top == v[index]) {
+			s.pop();
+			index--;
+		}
+		else
+			break;
+	}
+	if (i == n)
+		return true;
+	return false;
+}
+
+
+int main()
+{
+	stack A, B, S, want;
+	int T;
+	cin >> T;
+	while (T--)
+	{
+		int n, input;
+		vector<int> want;
+		cin >> n;
+		for (int i = 0; i < n; i++) {
+			cin >> input;
+			A.push(input);
+		}
+
+		int m;
+		cin >> m;
+		while (m--)
+		{
+			for (int i = 0; i < n; i++) {
+				int x;
+				cin >> x;
+				want.push_back(x);
+			}
+
+			int index = 0;
+			while(A.isEmpty() == false) {
+				int temp = A.getTop();
+				if (temp == want[index]) {
+					A.pop();
+					B.push(temp);
+					index++;
+				}
+				else {
+					A.pop();
+					S.push(temp);
+				}
+			}
+			while (S.isEmpty() == false) {
+				int temp = S.getTop();
+				S.pop();
+				B.push(temp);
+			}
+
+			if (compare(B, want, n)) // final stack B, vector<int> want, number of times
+				cout << "Aye" << endl;
+			else
+				cout << "Impossible" << endl;
+
+			want.clear();  // clear vector
+			A.changeTop(n);
+			B.clear();
+			S.clear();
+		}
+			
+	}
+	return 0;
+}
