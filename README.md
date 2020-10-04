@@ -9,5 +9,7 @@ For code practice
 
 08-2020 ： 1985 lines
 
+09-2020 ： 413  lines
+
 
 codeforces: https://www.a2oj.com/Ladders.html
