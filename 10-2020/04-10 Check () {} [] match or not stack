@@ -1,15 +1,45 @@
+input 一堆野，包括符號，數字，字母，空白鍵，(),{},[]等
+要你檢查入面嘅()[]{} match 唔match
+Print “Success” if all the brackets [] {} () are matched. Otherwise, print
+the position where the first unmatched closing bracket is found, and if
+there are no unmatched closing bracket, print the position of the first
+unmatched opening bracket.
+input:
+{[()]()}[]                       //Success
+{}([[]			         //3
+{}([[]}]			 //7
+{}{(]}				 //5
+{}{](}				 //4
+( [43]( i++ ; ) ) { lol = 3 ; }	 //Success
+]				 //1
+()]				 //3
+
+做法：
+逐個逐個char check，如果係open bracket 或者 close bracket先做野，否則skip
+如果係open：push入stack
+如果係close：check下stack嘅top同佢match唔match，match就pop
+如果最尾stack係empty，就係success
+留意，input 尾二同最尾個case係special，因為根據我以上做法，淨係見到一個]，無push 入stack
+stack都係empty，都會ouput Success，所以要改良
+因此開多個wrongDetect嘅stack，如果有唔match嘅closing bracket，擺入去
+output果陣只要check左呢個wrongDect stack先，如果有野就代表closing唔啱，直接output
+無野就再決定output Success定open bracket index 定close bracket index就ok！
+
 #include <iostream>
 #include <string>
 using namespace std;
-#define SIZE 50001
+#define SIZE 5000
 
 class stack
 {
 public:
 	int top;
 	char arr[SIZE];
-	stack() : top(-1)
-	{
+
+	stack() {
+		top = -1;
+		for (int i = 0; i < SIZE; i++)
+			arr[i] = ' ';
 	}
 
 	bool isEmpty() {
@@ -52,7 +82,7 @@ bool isPair(char left, char right)
 int main()
 {
 	string s;
-	stack myStack;
+	stack myStack, wrongDetect;
 	while (getline(cin, s)) {
 		int i = 0, openWrong = 0, closeWrong = 0;
 		char c = s[i];
@@ -67,6 +97,7 @@ int main()
 				if (myStack.isEmpty() || !isPair(myStack.arr[myStack.top], c)) {
 					closeWrong = i;
 					i++;
+					wrongDetect.push(c);
 					break;
 				}
 				else
@@ -76,13 +107,18 @@ int main()
 			c = s[i];
 		}
 
-		if (myStack.isEmpty())
-			cout << "Success\n";
-		else if (closeWrong > openWrong)
+		if (!wrongDetect.isEmpty())
 			cout << closeWrong + 1 << endl;
-		else
-			cout << openWrong + 1 << endl;
+		else {
+			if (myStack.isEmpty())
+				cout << "Success\n";
+			else if (closeWrong > openWrong)
+				cout << closeWrong + 1 << endl;
+			else
+				cout << openWrong + 1 << endl;
+		}
 		myStack.clear();
+		wrongDetect.clear();
 	}
 
 	return 0;
