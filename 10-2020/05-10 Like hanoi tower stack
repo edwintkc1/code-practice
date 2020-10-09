@@ -1,3 +1,24 @@
+有3個stack，A，B，S
+會input幾個數擺入A，input幾個數 = 想要嘅sequence
+你可以將A嘅數擺入B，或者B嘅數擺入S
+最尾check下stack S 入面嘅sequence同想要嘅sequence一唔一樣
+做法：用vector store想要嘅sequence，每次同A.top()比較，如果一樣直接擺入S.push()
+唔一樣就check下B.top()係咪宜家想要嘅數，係就B.pop() S.push()
+如果都唔一樣，就將宜家嘅A.top()擺入B
+重複做
+例子: 
+2  //幾多個test case
+5  //宜家嘅test case有幾多個數擺入A
+11 13 12 14 10  // 擺入A
+3  //呢個test case有3個要test
+10 12 14 11 13 //擺入want，test，output Aye
+10 12 14 13 11 // Aye
+11 14 13 10 12 // Impossible
+5  // 第二個test case有幾多個數擺入A
+1 2 3 4 5 //擺入A
+1
+1 2 3 4 5 // Aye
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -22,7 +43,7 @@ public:
 	}
 
 	bool isEmpty() {
-		return (top == -1) ? true : false;
+		return (top == -1);
 	}
 
 	void changeTop(int i) {
@@ -87,6 +108,11 @@ int main()
 					B.push(temp);
 					index++;
 				}
+				else if (S.getTop() == want[index]) {
+					B.push(S.getTop());
+					S.pop();
+					index++;
+				}
 				else {
 					A.pop();
 					S.push(temp);
@@ -108,7 +134,8 @@ int main()
 			B.clear();
 			S.clear();
 		}
-			
+		A.clear();
+		S.clear();
 	}
 	return 0;
 }
