@@ -1,0 +1,99 @@
+#include <iostream>
+using namespace std;
+#define SIZE 5001
+
+class Stack
+{
+private:
+	int top;
+	int arr[SIZE];
+	int max;
+
+public:
+	Stack() {
+		top = -1;
+		for (int i = 0; i < SIZE; i++)
+			arr[i] = 0;
+		max = 0;
+	}
+
+	void push(int i) {
+		arr[++top] = i;
+	}
+
+	bool isEmpty() {
+		return (top == -1);
+	}
+
+	int pop() {
+		if (!isEmpty()) {
+			int temp = arr[top];
+			arr[top--] = 0;
+			max = 0;
+			return temp;
+		}
+	}
+
+	int getMax() {
+		for (int i = 0; i < SIZE; i++) {
+			if (arr[i] == 0)
+				break;
+			if (arr[i] > max)
+				max = arr[i];
+		}
+		return max;
+	}
+
+	void clear() {
+		for (int i = 0; i < SIZE; i++) {
+			arr[i] = 0;
+		}
+		top = -1;
+		max = 0;
+	}
+};
+
+
+int main()
+{
+	Stack myStack;
+	int T;
+	cin >> T;
+	while (T--)
+	{
+		int n;
+		cin >> n;
+		while (n--) {
+			int x;
+			cin >> x;
+			myStack.push(x);
+		}
+		int m;
+		cin >> m;
+		while (m--) {
+			char input;
+			cin >> input;
+			switch (input)
+			{
+			case 'm': {
+				int max = myStack.getMax();
+				cout << max << endl;
+				break;
+			}
+			case 'r': 
+				myStack.pop();
+				break;
+			case 'a': {
+				int i;
+				cin >> i;
+				myStack.push(i);
+				break;
+			}
+			default:
+				break;
+			}
+		}
+		myStack.clear();
+	}
+	return 0;
+}
