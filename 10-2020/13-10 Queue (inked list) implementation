@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+	int data;
+	Node* next;
+
+	Node() : data(0), next(NULL)
+	{
+	}
+
+	Node(int d) : data(d), next(NULL)
+	{
+	}
+};
+
+class Queue
+{
+public:
+	Node* front;
+	Node* rear;
+
+	Queue():front(NULL), rear(NULL)
+	{
+	}
+
+	bool isEmpty()
+	{
+		if (front == rear == NULL)
+			return true;
+		return false;
+	}
+
+	void enqueue(Node* n)
+	{
+		if (isEmpty())
+		{
+			front = n;
+			rear = n;
+		}
+		else
+		{
+			rear->next = n;
+			rear = n;
+		}
+	}
+
+	Node* dequeue()
+	{
+		Node* temp = NULL;
+		if (isEmpty())
+			return temp;
+		else
+		{
+			if (temp == rear) // 1 element
+			{
+				front = NULL;
+				rear = NULL;
+				return temp;
+			}
+			else  // more than 1
+			{
+				temp = front;
+				front = front->next;
+				return temp;
+			}
+		}
+	}
+
+};
+
+int main()
+{
+	return 0;
+}
