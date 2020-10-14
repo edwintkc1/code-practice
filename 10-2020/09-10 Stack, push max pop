@@ -1,7 +1,8 @@
-132122
+簡單stack push, delete top, find max
+
 #include <iostream>
 using namespace std;
-#define SIZE 5001
+#define SIZE 1000001
 
 class Stack
 {
@@ -81,7 +82,7 @@ int main()
 				cout << max << endl;
 				break;
 			}
-			case 'r': 
+			case 'r':
 				myStack.pop();
 				break;
 			case 'a': {
