@@ -1,0 +1,73 @@
+#include <iostream>
+#include <utility>
+#define SIZE 1005
+using namespace std;
+
+class queue
+{
+public:
+	int front, rear;
+	pair<int, int> p[SIZE];
+
+	queue() {
+		front = -1;
+		rear = -1;
+		for (int i = 0; i < SIZE; i++) {
+			p[i] = make_pair(0, 0);
+		}
+	}
+
+	bool isEmpty() {
+		return(front == rear);
+	}
+
+	bool isFull() {
+		return((rear + 1) % SIZE == front);
+	}
+
+	void enqueue(int data, int index) {
+		if (!isFull) {
+			pair<int, int> temp = make_pair(data, index);
+			p[rear] = temp;
+			rear = (rear + 1) % SIZE;
+		}
+	}
+
+	int dequeue() {
+		int ret = 0;
+		if (!isEmpty()) {
+			ret = p[front].first;
+			front = (front + 1) % SIZE;
+			return ret;
+		}
+	}
+
+};
+
+
+int main()
+{
+	int T;
+	cin >> T;
+
+	queue myQueue;
+	while (T--) {
+		int N, K;
+		cin >> N >> K; // N = N numbers,  K = take out how many numbers each time
+
+		int index = 1; // for the number's index
+		while (N--) {
+			int data;
+			cin >> data;
+			myQueue.enqueue(data, index++);
+		}
+
+		pair<int, int> temp[20];
+		while (myQueue.isEmpty() == false) {
+			for (int i = 0; i < K; i++) {
+
+			}
+		}
+	}
+	return 0;
+}
