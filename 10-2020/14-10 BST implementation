@@ -1,0 +1,118 @@
+#include <iostream>
+#define SPACE 10
+using namespace std;
+
+class Node
+{
+public:
+	int data;
+	Node* left;
+	Node* right;
+
+	Node() :data(0), left(NULL), right(NULL)
+	{
+	}
+
+	Node(int d):data(d), left(NULL), right(NULL)
+	{
+	}
+};
+
+class BST
+{
+public:
+	Node* root;
+
+	BST() : root(NULL)
+	{
+	}
+
+	bool isEmpty() {
+		return (root == NULL);
+	}
+
+	void insertNode(Node* n) {
+		if (isEmpty())
+			root = n;
+		else {
+			Node* temp = root;
+			while (temp != NULL) {
+				if (n->data == temp->data)  // duplicated data is not allowed
+					return;
+				else if ((n->data < temp->data) && temp->left == NULL) {
+					temp->left = n;
+					break;
+				}
+				else if (n->data < temp->data)
+					temp = temp->left;
+				else if ((n->data > temp->data) && temp->right == NULL) {
+					temp->right = n;
+					break;
+				}
+				else
+					temp = temp->right;
+			}
+		}
+	}
+
+	void print2D(Node* n, int space) {
+		if (n == NULL)
+			return;
+		space += SPACE;
+		print2D(n->right, space);
+		cout << endl;
+		for (int i = SPACE; i < space; i++)
+			cout << " ";
+		cout << n->data << endl;
+		print2D(n->left, space);
+	}
+
+};
+
+int main()
+{
+	int option;
+	BST bst;
+	do
+	{
+		cout << "1. Insert node\n";
+		cout << "2. Search node\n";
+		cout << "3. Delete node\n";
+		cout << "4. Print tree\n";
+		cout << "5. Clear screen\n";
+		cout << "6. Exit\n";
+
+		cin >> option;
+		Node* n = new Node();
+		int value;
+
+		switch (option)
+		{
+		case 0:
+			break;
+		case 1:
+			cout << "Insert: ";
+			cin >> value;
+			n->data = value;
+			bst.insertNode(n);
+			break;
+		case 2:
+			cout << "Search: ";
+			break;
+		case 3:
+			cout << "Delete: ";
+			break;
+		case 4:
+			cout << "The tree is:\n ";
+			bst.print2D(bst.root, 5);
+			break;
+		case 5:
+			system("cls");
+			break;
+		default:
+			break;
+		}
+	} while (option != 0);
+
+	return 0;
+}
