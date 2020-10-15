@@ -55,6 +55,46 @@ public:
 		}
 	}
 
+	Node* minValueOfRightSubTree(Node* n) {
+		Node* current = n;
+		while (n->left != NULL)  // the left most of current node has the min value
+			current = current->left;
+		return current;
+	}
+
+	Node* deleteNode(Node* n, int value) {  // node for start, value you want to del
+		if (n == NULL)
+			return n;
+		else if (value < n->data) // value < n->data, go to left subtree
+			n->left = deleteNode(n->left, value);
+		else if (value > n->data) // value > n->data, go to right subtree
+			n->right = deleteNode(n->right, value);
+		else { // value == n->data
+			if (n->left == NULL) { // the node has right child (return n) || has no child (return NULL)
+				Node* temp = n->right;
+				delete n;
+				return temp;
+			}
+			else if (n->right == NULL) { // node has left child only
+				Node* temp = n->left;
+				delete n;
+				return temp;
+			}
+			// node has 2 children
+			// here we have 2 options
+			// 1. find the maximum value of left subtree
+			// 2. find the minimum value of right subtree
+			// we use 2 
+			else {
+				Node* temp = minValueOfRightSubTree(n->right);
+				n->data = temp->data; // just copy the data
+				n->right = deleteNode(n->right, temp->data); // delete here
+				// notice that we could not pass n, temp->data, because n->data == temp->data now
+			}
+		}
+		return n;
+	}
+
 	void print2D(Node* n, int space) {
 		if (n == NULL)
 			return;
@@ -80,7 +120,7 @@ int main()
 		cout << "3. Delete node\n";
 		cout << "4. Print tree\n";
 		cout << "5. Clear screen\n";
-		cout << "6. Exit\n";
+		cout << "0. Exit\n";
 
 		cin >> option;
 		Node* n = new Node();
@@ -100,7 +140,9 @@ int main()
 			cout << "Search: ";
 			break;
 		case 3:
-			cout << "Delete: ";
+			cout << "Value you want to delete: ";
+			cin >> value;
+			bst.deleteNode(bst.root,value);
 			break;
 		case 4:
 			cout << "The tree is:\n ";
