@@ -69,7 +69,6 @@ int main()
 		getline(cin, send_msg);
 		//send(client, send_msg.c_str(), send_msg.size() + 1, 0);
 		cout << "clinet: " << send_msg << endl;
-
 		if (send_msg == "POST")
 		{
 			string in;
@@ -77,29 +76,41 @@ int main()
 			{
 				send_msg += "\n";
 				getline(cin, in);
+				cout << "clinet: " << in << endl;
 				send_msg += in;
 			} while (in != ".");
 
-			send_msg += "\n\n";
+			send_msg += "\n";
 			send(client, send_msg.c_str(), send_msg.size() + 1, 0);
 		}
-		else if(send_msg == "READ")
+		else
 		{
+			//send_msg += "\n";
 			send(client, send_msg.c_str(), send_msg.size() + 1, 0);
+			if (send_msg == "READ")
+			{
+				string server_msg;
+				do
+				{
+					int bytesReceived = recv(client, recv_buf, BUF_SIZE, 0);
+					server_msg = string(recv_buf, 0, bytesReceived);
+					cout << "server: " << server_msg << endl;
+				} while (server_msg != ".");
+				continue;
+			}
 		}
-
-
 		int bytesReceived = recv(client, recv_buf, BUF_SIZE, 0);
-
 		string server_msg = string(recv_buf, 0, bytesReceived);
 		cout << "server: " << server_msg << endl;
+		if (send_msg == "QUIT")
+			break;
 
 	} while (1);
-
-
 
 	// Close socket
 	closesocket(client);
 	WSACleanup();
+	system("pause");
 	return 0;
 }
+
