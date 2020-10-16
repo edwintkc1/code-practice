@@ -1,0 +1,105 @@
+#include <iostream>
+#include <string>
+#include <WS2tcpip.h>
+
+#define BUF_SIZE 2048
+#define SERVER_PORT 16000
+#pragma comment (lib, "WS2_32.lib")
+using namespace std;
+
+void createWinSoc()
+{
+	WSADATA wsaData;
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
+}
+
+SOCKET& createSocket()
+{
+	SOCKET client = socket(AF_INET, SOCK_STREAM, 0);
+	return client;
+}
+
+void setServerInfo(SOCKADDR_IN &server, string IP)
+{
+	// Set server information
+	server.sin_family = AF_INET;
+	inet_pton(AF_INET, IP.c_str(), &server.sin_addr.s_addr);
+	server.sin_port = htons(SERVER_PORT);
+}
+
+void connect(SOCKET &client, SOCKADDR_IN &server, string IP)
+{
+	int ret = connect(client, (sockaddr*)&server, sizeof(SOCKADDR_IN));
+	cout << "IP Address: " << IP << "\t\t";
+	cout << "Port Number: " << SERVER_PORT << endl;
+	if (ret == SOCKET_ERROR) {
+		cout << "Connect status: fail" << endl;
+		exit(1);
+	}
+	else
+		cout << "Connect status: success" << endl;
+}
+
+int main()
+{
+	// Create winsock
+	createWinSoc();
+
+	// Create socket
+	SOCKET client = createSocket();
+
+	// Let user input server IP
+	string IP;
+	cout << "Input the IP address:" << endl;
+	getline(cin, IP);
+
+	// Set server information
+	SOCKADDR_IN server;
+	memset(&server, 0, sizeof(SOCKADDR_IN));
+	setServerInfo(server, IP);
+
+	// Connect to the server
+	connect(client, server, IP);
+
+	// Send and receive data
+	char recv_buf[BUF_SIZE];
+	string send_msg;
+	do
+	{
+		getline(cin, send_msg);
+		//send(client, send_msg.c_str(), send_msg.size() + 1, 0);
+		cout << "clinet: " << send_msg << endl;
+
+		if (send_msg == "POST")
+		{
+			string in;
+			do
+			{
+				send_msg += "\n";
+				getline(cin, in);
+				send_msg += in;
+			} while (in != ".");
+
+			send_msg += "\n\n";
+			send(client, send_msg.c_str(), send_msg.size() + 1, 0);
+		}
+		else if(send_msg == "READ")
+		{
+			send(client, send_msg.c_str(), send_msg.size() + 1, 0);
+		}
+
+
+		int bytesReceived = recv(client, recv_buf, BUF_SIZE, 0);
+
+		string server_msg = string(recv_buf, 0, bytesReceived);
+		cout << "server: " << server_msg << endl;
+
+	} while (1);
+
+
+
+	// Close socket
+	closesocket(client);
+	WSACleanup();
+	return 0;
+}
