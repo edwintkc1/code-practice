@@ -1,0 +1,124 @@
+#include <iostream>
+#define SIZE 100005
+using namespace std;
+
+class queue
+{
+public:
+	int front, rear;
+	int arr[SIZE];
+
+	queue()
+	{
+		front = 0;
+		rear = 0;
+		for (int i = 0; i < SIZE; i++)
+			arr[i] = 0;
+	}
+
+	bool isEmpty()
+	{
+		return (front == rear);
+	}
+
+	void push(int i)
+	{
+		arr[rear] = i;
+		rear = (rear + 1) % SIZE;
+	}
+
+	void pop()
+	{
+		front = (front + 1) % SIZE;
+	}
+
+	int back()
+	{
+		return arr[rear - 1];
+	}
+
+	int getFront()
+	{
+		return arr[front];
+	}
+
+	int size()
+	{
+		return (rear - front);
+	}
+
+	void clear()
+	{
+		front = 0;
+		rear = 0;
+		for (int i = 0; i < SIZE; i++)
+			arr[i] = 0;
+	}
+
+};
+
+
+
+int main() {
+	int N;
+	while (cin >> N)
+	{
+		queue q;
+		for (int i = 0; i < N; i++)
+		{
+			int arrive, service, maxTolerate, totalWaitingTime;
+			cin >> arrive >> service >> maxTolerate;
+			totalWaitingTime = arrive + service;
+
+			if (i == 0) // simply push the first one into queue
+			{
+				q.push(totalWaitingTime);
+				if (N == 1) // debug for 1 customer
+					cout << q.back() << endl;
+			}
+			else // not the first one
+			{
+				if (arrive >= q.back()) // means when this customer come, all the previous ppl are gone
+				{
+					while (q.isEmpty() != false)  // take them out
+						q.pop();
+				}
+				else // some ppl are still waiting
+				{
+					while (arrive >= q.getFront()) // pop the gone ppl
+					{
+						q.pop();
+						if (maxTolerate >= q.size())
+							break;
+					}
+				}
+				if (i != N - 1) 
+				{
+					if (maxTolerate >= q.size()) // new customer could tolerate the queue length
+					{
+						if (arrive >= q.back()) // eg 50 , >= 35
+							q.push(totalWaitingTime); // all ppl gone, simply push
+						else // still hv some ppl
+							q.push(service + q.back());
+					}
+
+				}
+				if (i == N - 1)
+				{
+					if (maxTolerate >= q.size())
+					{
+						if (arrive >= q.back()) // all ppl gone
+							cout << arrive << endl;
+						else
+							cout << q.back() << endl;
+					}
+					else
+						cout << "-1" << endl;
+				}
+			}
+		}
+		q.clear();
+	}
+	
+	return 0;
+}
