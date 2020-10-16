@@ -10,10 +10,10 @@ public:
 	pair<int, int> p[SIZE];
 
 	queue() {
-		front = -1;
-		rear = -1;
+		front = 0;
+		rear = 0;
 		for (int i = 0; i < SIZE; i++) {
-			p[i] = make_pair(0, 0);
+			p[i] = make_pair(-1005, -1005);
 		}
 	}
 
@@ -25,23 +25,28 @@ public:
 		return((rear + 1) % SIZE == front);
 	}
 
-	void enqueue(int data, int index) {
-		if (!isFull) {
-			pair<int, int> temp = make_pair(data, index);
+	void enqueue(pair<int,int> temp) {
+		if (!isFull()) {
 			p[rear] = temp;
 			rear = (rear + 1) % SIZE;
 		}
 	}
 
-	int dequeue() {
-		int ret = 0;
+	pair<int,int> dequeue() {
 		if (!isEmpty()) {
-			ret = p[front].first;
+			pair<int, int> temp = p[front];
 			front = (front + 1) % SIZE;
-			return ret;
+			return temp;
 		}
 	}
 
+	void clear() {
+		front = 0;
+		rear = 0;
+		for (int i = 0; i < SIZE; i++) {
+			p[i] = make_pair(-1005, -1005);
+		}
+	}
 };
 
 
@@ -59,15 +64,53 @@ int main()
 		while (N--) {
 			int data;
 			cin >> data;
-			myQueue.enqueue(data, index++);
+			pair<int, int> temp = make_pair(data, index++);
+			myQueue.enqueue(temp);
 		}
 
-		pair<int, int> temp[20];
-		while (myQueue.isEmpty() == false) {
-			for (int i = 0; i < K; i++) {
+		while (myQueue.isEmpty() != true)
+		{
+			pair<int, int> temp[20];
+			for (int i = 0; i < 20; i++)
+				temp[i] = make_pair(-1005, -1005);
 
+
+			while (myQueue.isEmpty() == false) {
+				for (int i = 0; i < K; i++) {
+					temp[i] = myQueue.dequeue();
+					if (myQueue.isEmpty())
+						break;
+				}
+
+				// find the max one
+				int max = -1006, maxIndex = 0;
+				for (int i = 0; i < K; i++) {
+					if (temp[i].first > max)
+					{
+						max = temp[i].first;
+						maxIndex = i;
+					}
+				}
+				// delete the max, simply set both to 0
+				cout << temp[maxIndex].second;
+				temp[maxIndex] = make_pair(-1005, -1005);
+
+				// decrease the rest K-1 elements by 1
+				// insert back to the queue
+				for (int i = 0; i < K; i++)
+				{
+					if (temp[i].first != -1005) {
+						temp[i].first--;
+						myQueue.enqueue(temp[i]);
+						temp[i] = make_pair(-1005, -1005);
+					}
+				}
+				if(myQueue.isEmpty() == false)
+					cout << ' ';
 			}
 		}
+		cout << endl;
+		myQueue.clear();
 	}
 	return 0;
 }
