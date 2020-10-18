@@ -57,8 +57,6 @@ public:
 
 };
 
-
-
 int main() {
 	int N;
 	while (cin >> N)
@@ -73,38 +71,41 @@ int main() {
 			if (i == 0) // simply push the first one into queue
 			{
 				q.push(arrive);
-				if (N == 1) // debug for 1 customer
+				if (N == 1) // debug for 1 customer only
 					cout << q.back() << endl;
 			}
 			else // not the first one
 			{
-				if (arrive >= q.back()) // means when this customer come, all the previous ppl are gone
+				if (i != N - 1) // not the last one
 				{
-					while (q.isEmpty() != false)  // take them out
-						q.pop();
-				}
-				else // some ppl are still waiting
-				{
-					while (arrive >= q.getFront()) // pop the gone ppl
-					{
-						q.pop();
-						if (maxTolerate >= q.size())
-							break;
-					}
-				}
-				if (i != N - 1) 
-				{
+					// pop the gone people first
+					if (arrive >= q.back()) // means all ppl should be gone, pop all
+						while (q.isEmpty() == false)
+							q.pop();
+					else // some ppl shoule be gone, pop some of the front customer
+						while (arrive >= q.getFront())
+							q.pop();
+
 					if (maxTolerate >= q.size()) // new customer could tolerate the queue length
 					{
-						if (arrive >= q.back()) // eg 50 , >= 35
-							q.push(totalWaitingTime); // all ppl gone, simply push
-						else // still hv some ppl
+						if (arrive >= q.back()) // simply push
+							q.push(totalWaitingTime);
+						else // someone is waiting
 							q.push(service + q.back());
 					}
+					else // could not tolerate, move to next customer
+						continue;
 
 				}
-				if (i == N - 1)
+				else  // last one
 				{
+					if (arrive >= q.back()) // means all ppl should be gone, pop all
+						while (q.isEmpty() == false)
+							q.pop();
+					else // some ppl shoule be gone, pop some of the front customer
+						while (arrive >= q.getFront())
+							q.pop();
+
 					if (maxTolerate >= q.size())
 					{
 						if (arrive >= q.back()) // all ppl gone
@@ -119,6 +120,6 @@ int main() {
 		}
 		q.clear();
 	}
-	
+
 	return 0;
 }
