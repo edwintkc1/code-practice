@@ -68,11 +68,12 @@ int main() {
 			cin >> arrive >> service >> maxTolerate;
 			totalWaitingTime = arrive + service;
 
+			if (N == 1) { // debug for 1 customer only
+				cout << arrive << endl;
+			}
 			if (i == 0) // simply push the first one into queue
 			{
-				q.push(arrive);
-				if (N == 1) // debug for 1 customer only
-					cout << q.back() << endl;
+				q.push(totalWaitingTime);
 			}
 			else // not the first one
 			{
