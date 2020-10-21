@@ -1,0 +1,86 @@
+// input a string in infix format, output its postfix format
+input: ((a+b-c)*d^e^f)/g
+output: ab+c-def^^*g/
+
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int priority(char c)
+{
+	if (c == '^')
+		return 100;
+	else if (c == '*' || c == '/')
+		return 2;
+	else if (c == '+' || c == '-')
+		return 1;
+	return 0;
+}
+
+void infixToPostfix(stack<char> s, string infix)
+{
+	string postfix;
+	for (int i = 0; i < infix.length(); i++)
+	{
+		if ((infix[i] >= 'a' && infix[i] <= 'z') || (infix[i] >= 'A' && infix[i] <= 'Z'))
+			postfix += infix[i]; // operand, simply add
+
+		else if (infix[i] == '(')
+			s.push(infix[i]);
+		else if (infix[i] == ')')
+		{
+			while((s.top() != '(') && (s.empty() == false))
+			{
+				char x = s.top();
+				postfix += x;
+				s.pop();
+			}
+			if (s.top() == '(')
+				s.pop();
+		}
+		else
+		{
+			if (s.empty())
+				s.push(infix[i]);
+			else // pop the operator and check the priority
+			{
+				if (priority(infix[i]) > priority(s.top()))
+					s.push(infix[i]);
+				else if ((priority(infix[i]) == priority(s.top())) && (infix[i] == '^')) // special case
+					s.push(infix[i]);
+				else
+				{
+					while ((s.empty() == false) && (priority(infix[i]) <= priority(s.top())))
+					{
+						char x = s.top();
+						postfix += x;
+						s.pop();
+					}
+					s.push(infix[i]);
+				}
+			}
+		}
+	}
+
+	while (s.empty() == false)
+	{
+		postfix += s.top();
+		s.pop();
+	}
+
+	cout << postfix << endl;
+}
+
+int main()
+{
+	string infix;
+	while (cin >> infix)
+	{
+		stack<char> s;
+
+		infixToPostfix(s, infix);
+	}
+
+	return 0;
+}
