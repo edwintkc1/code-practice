@@ -1,0 +1,59 @@
+calculate postfix expression:
+	given一條式，例如62+31-4*7+*，要計結果，做法係(6+2)*((3-1)*4+7)，就係前面2個數depends on後面嘅符號
+	1. 見到數字就擺落去stack，見到符號，pop 2下，根據翻符號得出結果，將結果擺翻入去stack	
+	2. 重複
+*** 無除法
+input: 62+31-4*7+*
+output:120
+
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main()
+{
+	stack<int> s;
+	string input;
+	while (cin >> input)
+	{
+		for (int i = 0; i < input.length(); i++)
+		{
+			if (input[i] >= '0' && input[i] <= '9')
+			{
+				char x = input[i];
+				int num = x - '0';
+				s.push(num);
+			}
+			else if (input[i] == '+')
+			{
+				int last = s.top();
+				s.pop();
+				int first = s.top();
+				s.pop();
+				s.push(first + last);
+			}
+			else if (input[i] == '-')
+			{
+				int last = s.top();
+				s.pop();
+				int first = s.top();
+				s.pop();
+				s.push(first - last);
+			}
+			else if (input[i] == '*')
+			{
+				int last = s.top();
+				s.pop();
+				int first = s.top();
+				s.pop();
+				s.push(first * last);
+			}
+			
+
+		}
+		cout << s.top() << endl;
+	}
+
+	return 0;
+}
