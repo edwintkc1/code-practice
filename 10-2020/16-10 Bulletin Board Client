@@ -27,17 +27,18 @@ void setServerInfo(SOCKADDR_IN &server, string IP)
 	server.sin_port = htons(SERVER_PORT);
 }
 
-void connect(SOCKET &client, SOCKADDR_IN &server, string IP)
+int connect(SOCKET &client, SOCKADDR_IN &server, string IP)
 {
 	int ret = connect(client, (sockaddr*)&server, sizeof(SOCKADDR_IN));
 	cout << "IP Address: " << IP << "\t\t";
 	cout << "Port Number: " << SERVER_PORT << endl;
 	if (ret == SOCKET_ERROR) {
 		cout << "Connect status: fail" << endl;
-		exit(1);
+		return -1;
 	}
 	else
 		cout << "Connect status: success" << endl;
+	return 1;
 }
 
 int main()
@@ -59,13 +60,16 @@ int main()
 	setServerInfo(server, IP);
 
 	// Connect to the server
-	connect(client, server, IP);
+	int ret = connect(client, server, IP);
+	if (ret == -1) // cannot connect 
+		return 0;
 
 	// Send and receive data
 	char recv_buf[BUF_SIZE];
 	string send_msg;
 	do
 	{
+
 		getline(cin, send_msg);
 		//send(client, send_msg.c_str(), send_msg.size() + 1, 0);
 		cout << "clinet: " << send_msg << endl;
@@ -85,24 +89,30 @@ int main()
 		}
 		else
 		{
-			//send_msg += "\n";
-			send(client, send_msg.c_str(), send_msg.size() + 1, 0);
-			if (send_msg == "READ")
+			if (send_msg == "") // debug
+				continue;
+
+			send_msg += "\n";
+
+			send(client, send_msg.c_str(), send_msg.size() + 1, 0);  // send msg
+
+			if (send_msg == "READ\n")
 			{
 				string server_msg;
 				do
 				{
-					int bytesReceived = recv(client, recv_buf, BUF_SIZE, 0);
+					int bytesReceived = recv(client, recv_buf, BUF_SIZE, 0); // receive msg
 					server_msg = string(recv_buf, 0, bytesReceived);
 					cout << "server: " << server_msg << endl;
 				} while (server_msg != ".");
 				continue;
 			}
+
 		}
 		int bytesReceived = recv(client, recv_buf, BUF_SIZE, 0);
 		string server_msg = string(recv_buf, 0, bytesReceived);
 		cout << "server: " << server_msg << endl;
-		if (send_msg == "QUIT")
+		if (send_msg == "QUIT\n")
 			break;
 
 	} while (1);
@@ -110,7 +120,5 @@ int main()
 	// Close socket
 	closesocket(client);
 	WSACleanup();
-	system("pause");
 	return 0;
 }
-
