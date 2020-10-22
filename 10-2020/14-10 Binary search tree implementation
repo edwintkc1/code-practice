@@ -13,7 +13,7 @@ public:
 	{
 	}
 
-	Node(int d):data(d), left(NULL), right(NULL)
+	Node(int d) :data(d), left(NULL), right(NULL)
 	{
 	}
 };
@@ -53,6 +53,23 @@ public:
 					temp = temp->right;
 			}
 		}
+	}
+
+	Node* search(int value)
+	{
+		if (this->root == NULL)
+			return this->root;
+		Node* temp = this->root;
+		while (temp != NULL)
+		{
+			if (value == temp->data)
+				return temp;
+			else if (value < temp->data) // on the left
+				temp = temp->left;
+			else // on the right
+				temp = temp->right;
+		}
+		return NULL;
 	}
 
 	Node* minValueOfRightSubTree(Node* n) {
@@ -95,6 +112,33 @@ public:
 		return n;
 	}
 
+	void printPreOrder(Node* n) // middle left right
+	{
+		if (n == NULL)
+			return;
+		cout << n->data << " ";
+		printPreOrder(n->left);
+		printPreOrder(n->right);
+	}
+
+	void printInOrder(Node* n) // left middle right
+	{
+		if (n == NULL)
+			return;
+		printInOrder(n->left);
+		cout << n->data << " ";
+		printInOrder(n->right);
+	}
+
+	void printPostOrder(Node* n) // left right middle
+	{
+		if (n == NULL)
+			return;
+		printPostOrder(n->left);
+		printPostOrder(n->right);
+		cout << n->data << " ";
+	}
+
 	void print2D(Node* n, int space) {
 		if (n == NULL)
 			return;
@@ -126,6 +170,7 @@ int main()
 		Node* n = new Node();
 		int value;
 
+		Node* temp = new Node(); // for store data
 		switch (option)
 		{
 		case 0:
@@ -138,16 +183,54 @@ int main()
 			break;
 		case 2:
 			cout << "Search: ";
+			cin >> value;
+			temp = bst.search(value);
+			if (temp == NULL)
+				cout << "Not found" << endl;
+			else
+				cout << "Found, data = " << temp->data << endl;
 			break;
 		case 3:
 			cout << "Value you want to delete: ";
 			cin >> value;
-			bst.deleteNode(bst.root,value);
+			bst.deleteNode(bst.root, value);
 			break;
 		case 4:
-			cout << "The tree is:\n ";
-			bst.print2D(bst.root, 5);
+		{
+			int op;
+			do
+			{
+				cout << "1. Pre order" << endl;
+				cout << "2. In order" << endl;
+				cout << "3. Post order" << endl;
+				cout << "4. Print 2D graph" << endl;
+				cout << "0. Back" << endl;
+				cin >> op;
+				switch (op)
+				{
+					case 1:
+						bst.printPreOrder(bst.root);
+						cout << endl;
+						break;
+					case 2:
+						bst.printInOrder(bst.root);
+						cout << endl;
+						break;
+					case 3:
+						bst.printPostOrder(bst.root);
+						cout << endl;
+						break;
+					case 4:
+						cout << "The tree is:\n ";
+						bst.print2D(bst.root, 5);
+						break;
+					default:
+						break;
+				}
+
+			} while (op != 0);
 			break;
+		}
 		case 5:
 			system("cls");
 			break;
