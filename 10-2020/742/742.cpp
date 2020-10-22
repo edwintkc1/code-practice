@@ -28,12 +28,12 @@ int count(vector<string>& graph, int size, int x, int y)
 		int topRight = count(graph, newSize, x + newSize, y);
 		int bottomLeft = count(graph, newSize, x, y + newSize);
 		int bottomRight = count(graph, newSize, x + newSize, y + newSize);
-	
+
 		if (((topLeft == topRight == bottomLeft == bottomRight) == 1))
 			sum = 1;
 		else
 			sum = topLeft + topRight + bottomLeft + bottomRight;
-	
+
 		if (sum != 1) // if all same no need to + 1
 			sum++; // root 
 		return sum;
@@ -51,7 +51,7 @@ int main()
 
 		vector<string> graph;
 		graph.resize(n);
-	
+
 		string line;
 		int graphIndex = 0;
 		for (int i = 0; i < n; i++)
@@ -59,10 +59,10 @@ int main()
 			cin >> line;
 			graph[graphIndex++] = line;
 		}
-	
+
 		int ret = count(graph, n, 0, 0);
 		cout << ret << endl;
 	}
-	
+
 	return 0;
 }
