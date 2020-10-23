@@ -72,6 +72,21 @@ public:
 		return NULL;
 	}
 
+	int height(Node* n)
+	{
+		if (n == NULL)
+			return -1;
+		else
+		{
+			int leftHeight = height(n->left);
+			int rightHeight = height(n->right);
+			if (leftHeight > rightHeight)
+				return ++leftHeight;
+			else
+				return ++rightHeight;
+		}
+	}
+
 	Node* minValueOfRightSubTree(Node* n) {
 		Node* current = n;
 		while (n->left != NULL)  // the left most of current node has the min value
@@ -139,6 +154,27 @@ public:
 		cout << n->data << " ";
 	}
 
+	void printLevel(Node* n, int level)
+	{
+		if (n == NULL)
+			return;
+		else if (level == 0)
+			cout << n->data << " ";
+		else
+		{
+			printLevel(n->left, level - 1);
+			printLevel(n->right, level - 1);
+		}
+	}
+
+	void printBFS(Node* n)
+	{
+		int height = this->height(n);
+		for (int i = 0; i <= height; i++)
+			printLevel(n, i);
+		cout << endl;
+	}
+
 	void print2D(Node* n, int space) {
 		if (n == NULL)
 			return;
@@ -163,7 +199,8 @@ int main()
 		cout << "2. Search node\n";
 		cout << "3. Delete node\n";
 		cout << "4. Print tree\n";
-		cout << "5. Clear screen\n";
+		cout << "5. Print height\n";
+		cout << "6. Clear screen\n";
 		cout << "0. Exit\n";
 
 		cin >> option;
@@ -203,35 +240,42 @@ int main()
 				cout << "1. Pre order" << endl;
 				cout << "2. In order" << endl;
 				cout << "3. Post order" << endl;
-				cout << "4. Print 2D graph" << endl;
+				cout << "4. Print BFS" << endl;
+				cout << "5. Print 2D graph" << endl;
 				cout << "0. Back" << endl;
 				cin >> op;
 				switch (op)
 				{
-					case 1:
-						bst.printPreOrder(bst.root);
-						cout << endl;
-						break;
-					case 2:
-						bst.printInOrder(bst.root);
-						cout << endl;
-						break;
-					case 3:
-						bst.printPostOrder(bst.root);
-						cout << endl;
-						break;
-					case 4:
-						cout << "The tree is:\n ";
-						bst.print2D(bst.root, 5);
-						break;
-					default:
-						break;
+				case 1:
+					bst.printPreOrder(bst.root);
+					cout << endl;
+					break;
+				case 2:
+					bst.printInOrder(bst.root);
+					cout << endl;
+					break;
+				case 3:
+					bst.printPostOrder(bst.root);
+					cout << endl;
+					break;
+				case 4:
+					bst.printBFS(bst.root);
+					break;
+				case 5:
+					cout << "The tree is:\n ";
+					bst.print2D(bst.root, 5);
+					break;
+				default:
+					break;
 				}
 
 			} while (op != 0);
 			break;
 		}
 		case 5:
+			cout << "The height is " << bst.height(bst.root) << endl;
+			break;
+		case 6:
 			system("cls");
 			break;
 		default:
