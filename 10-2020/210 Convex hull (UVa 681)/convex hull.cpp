@@ -50,6 +50,16 @@ int crossProduct(coordinate a, coordinate b, coordinate c)
 	return 0; // collinear
 }
 
+bool occurBefore(vector<coordinate> &deleted, coordinate x)
+{
+	for (int i = 0; i < deleted.size(); i++)
+	{
+		if (x == deleted[i])
+			return true;
+	}
+	return false;
+}
+
 int main()
 {
 	int K;
@@ -67,6 +77,7 @@ int main()
 
 		vector<coordinate> list;
 		vector<coordinate> ans;
+		vector<coordinate> deleted;
 		while (N--)
 		{
 			int x, y;
@@ -74,8 +85,8 @@ int main()
 			list.push_back(coordinate(x,y));
 		}
 		cout << -1 << endl;
-		//if (uselessK == (K + 1))
-		//	cout << uselessK << endl;
+		if (uselessK == (K + 1))
+			cout << uselessK << endl;
 
 		coordinate startPoint = findStartPoint(list); // find the first point
 		coordinate previous = startPoint;
@@ -107,19 +118,45 @@ int main()
 					allPointCounterClockWise = false;
 			}
 
-			if (allPointCounterClockWise == true)
+			if (allPointCounterClockWise == true && !occurBefore(deleted, next))
 			{
 				previous = next;
 				ans.push_back(previous);
 				index = 0;
+
+				if (ans.size() > 2) {
+					coordinate secondOfLast = ans[ans.size() - 3];
+					coordinate last = ans[ans.size() - 2];
+					int checkColinnear = crossProduct(secondOfLast, last, previous); // here previous means self
+					if (checkColinnear == 0)
+					// collinear, means actually the secondOfLast point could link to current point directly
+					{
+						ans.pop_back(); // pop self
+						deleted.push_back(ans.back());
+						ans.pop_back(); // pop the collinear point
+						ans.push_back(previous); // add self
+					}
+				}
 			}
+
 		}
+		// Add the startpoint finally, but before that
+		// we need to check wheather the last point collinear with the firstpoint
+		// if yes, means the last point could be omitted
+		// we could only use the startpoint as the lastpoint
+		// check this, if collinear, pop lastpoint
 
-		ans.push_back(startPoint); // go back to start
-		int ansSize = ans.size();
+		coordinate secondOfLast = ans[ans.size() - 2];
+		coordinate last = ans[ans.size() - 1];
+		int checkColinnear = crossProduct(secondOfLast, last, startPoint);
+		if (checkColinnear == 0 && ans.size() > 2) // if only contains 2 or less point, no need to pop 
+		// collinear, means actually the secondOfLast point could link to startpoint directly
+			ans.pop_back();
 
-		cout << ansSize << endl;
-		for (int i = 0; i < ansSize; i++)
+		ans.push_back(startPoint); // collinear or not still need to add back startpoint
+
+		cout << ans.size() << endl;
+		for (int i = 0; i < ans.size(); i++)
 			cout << ans[i].x << " " << ans[i].y << endl;
 	}
 	return 0;
