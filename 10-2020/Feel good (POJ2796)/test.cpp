@@ -1,70 +1,49 @@
-﻿#include <iostream>
-#include <list>
+﻿// C++ program to print Postorder  
+// traversal from given Inorder  
+// and Preorder traversals.  
+#include <iostream> 
 using namespace std;
 
-class Hash
+int preIndex = 0;
+
+int search(int arr[], int startIn, int endIn, int data)
 {
-	int size;
-	list<int>* table;
-public:
-	Hash(int size)
-	{
-		this->size = size;
-		table = new list<int>[size];
-	}
+    int i = 0;
+    for (i = startIn; i < endIn; i++)
+    {
+        if (arr[i] == data)
+        {
+            return i;
+        }
+    }
+    return i;
+}
+void printPost(int arr[], int pre[], int inStrt, int inEnd)
+{
+    if (inStrt > inEnd)
+    {
+        return;
+    }
 
-	int hashFunction(int x)
-	{
-		return (x % size);
-	}
+    // Find index of next item in preorder  
+    // traversal in inorder.  
+    int inIndex = search(arr, inStrt, inEnd, pre[preIndex++]);
 
-	void insertItem(int x)
-	{
-		int index = hashFunction(x);
-		table[index].push_back(x);
-	}
+    // traverse left tree  
+    printPost(arr, pre, inStrt, inIndex - 1);
 
-	void deleteItem(int x)
-	{
-		int index = hashFunction(x);
-		
-		list<int>::iterator it = table[index].begin();
-		for (; it != table[index].end(); it++)
-			if (*it == x)
-				break;
+    // traverse right tree  
+    printPost(arr, pre, inIndex + 1, inEnd);
 
-		if (it != table[index].end()) // means found
-			table[index].erase(it);
-	}
+    // print root node at the end of traversal  
+    cout << arr[inIndex] << " ";
+}
 
-	void display()
-	{
-		for (int i = 0; i < size; i++)
-		{
-			cout << i;
-			for (auto j : table[i])
-				cout << "--> " << j;
-			cout << endl;
-		}
-		cout << "----------------------------------" << endl;
-	}
-};
-
+// Driver code  
 int main()
 {
-	int a[] = { 15, 11, 27, 8 , 12, 22 };
-	int size = sizeof(a) / sizeof(a[0]);
-
-	Hash h(7);
-
-	for (int i = 0; i < size; i++)
-		h.insertItem(a[i]);
-
-	h.display();
-
-	h.deleteItem(12);
-	h.deleteItem(22);
-
-	h.display();
-	return 0;
+    int arr[] = { 4, 2, 5, 1, 3, 6 };
+    int pre[] = { 1, 2, 4, 5, 3, 6 };
+    int len = sizeof(arr) / sizeof(arr[0]);
+    printPost(arr, pre, 0, len - 1);
 }

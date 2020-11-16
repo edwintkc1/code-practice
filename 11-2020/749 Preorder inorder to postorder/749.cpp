@@ -1,6 +1,9 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 using namespace std;
+
+//construct tree, print postorder
+//主要留意construct tree果度嘅recursion
 
 int preIndex = 0; // index of current root
 
@@ -80,7 +83,7 @@ int main()
 			in.push_back(temp);
 		}
 
-		Tree *tree = new Tree();
+		Tree* tree = new Tree();
 		tree->root = tree->disperse(pre, in, 0, N - 1);
 		tree->printPostorder(tree->root);
 
