@@ -1,15 +1,20 @@
 ﻿#include <iostream>
-#include <string>
+#include <cstdio>
 using namespace std;
 
 //試想想，如果col係fixed，咁我地只需要考慮每一個row反唔反，簡單好多
 //
 //->先將col反轉，然後再試果個情況下嘅 最好反row嘅可能性
 //Col 總共有2 ^ 9 可能性，因為每一個都有反同唔反呢2個probi，而係果個情況下，再check曬所有點去決定row反唔反，要9N
-
+//
 //每一個可能性 - 》得出最好嘅row
+//
+//2 ^ 9 x 9N
+//
+//留意反col果陣唔需要check 反唔反，直接反就得，因為check又浪費9N時間。
+//最尾係2 ^ 9個col 情況下，再反row，必定有一個情況係反得最少，果個就係ans
 
-int countRow(char** coins, int row, int col)
+int countRow(char**& coins, int& row, int& col)
 {
 	int cnt = 0;
 	for (int i = 0; i < row; i++)
@@ -25,7 +30,7 @@ int countRow(char** coins, int row, int col)
 	return cnt;
 }
 
-int countCol(char** coins, int row, int col)
+int countCol(char**& coins, int& row, int& col)
 {
 	int cnt = 0;
 	for (int i = 0; i < col; i++)
@@ -41,7 +46,7 @@ int countCol(char** coins, int row, int col)
 	return cnt;
 }
 
-void flipRow(char** coins, int row, int col, int lineNumber)
+void flipRow(char**& coins, int& row, int& col, int& lineNumber)
 {
 	for (int i = 0; i < col; i++)
 	{
@@ -52,7 +57,7 @@ void flipRow(char** coins, int row, int col, int lineNumber)
 	}
 }
 
-void flipCol(char** coins, int row, int col, int lineNumber)
+void flipCol(char**& coins, int& row, int& col, int& lineNumber)
 {
 	for (int i = 0; i < row; i++)
 	{
@@ -63,7 +68,7 @@ void flipCol(char** coins, int row, int col, int lineNumber)
 	}
 }
 
-char** genTempCoins(char** coins, int row, int col)
+char** genTempCoins(char**& coins, int& row, int& col)
 {
 	char** temp = new char* [row];
 	for (int r = 0; r < row; r++) // initialize and copy
@@ -75,11 +80,11 @@ char** genTempCoins(char** coins, int row, int col)
 	return temp;
 }
 
-int tryRow(char** coins, int row, int col)
+int tryRow(char**& coins, int& row, int& col)
 {
 	int sum = 0;
 
-	int totalTimeNeeded = 2 << row;
+	int totalTimeNeeded = 1 << row;
 	for (int i = 0; i < totalTimeNeeded; i++)
 	{
 		char** temp = genTempCoins(coins, row, col);
@@ -96,15 +101,18 @@ int tryRow(char** coins, int row, int col)
 		if (tempSum > sum)
 			sum = tempSum;
 
+		for (int j = 0; j < row; j++)
+			delete[] temp[j];
+		delete[]temp;
 	}
 	return sum;
 }
 
-int tryCol(char** coins, int row, int col)
+int tryCol(char**& coins, int& row, int& col)
 {
 	int sum = 0;
 
-	int totalTimeNeeded = 2 << col;
+	int totalTimeNeeded = 1 << col;
 	for (int i = 0; i < totalTimeNeeded; i++)
 	{
 
@@ -122,6 +130,11 @@ int tryCol(char** coins, int row, int col)
 		if (tempSum > sum)
 			sum = tempSum;
 
+
+		for (int j = 0; j < row; j++)
+			delete[] temp[j];
+		delete[]temp;
+
 	}
 	return sum;
 }
@@ -135,9 +148,11 @@ int main()
 		for (int i = 0; i < row; i++)
 			coins[i] = new char[col];
 
-		for (int i = 0; i < row; i++)
+		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++)
-				cin >> coins[i][j];
+				scanf(" %c", &coins[i][j]);
+
+		}
 
 		int ans = 0;
 		if (col < row)
@@ -145,7 +160,7 @@ int main()
 		else
 			ans = tryRow(coins, row, col);
 
-		cout << ans << endl;
+		printf("%d\n", ans);
 
 	}
 
