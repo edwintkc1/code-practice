@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+class node
+{
+public:
+    int data;
+    node*next;
+    
+    node(int d):data(d), next(NULL)
+    {
+    }
+};
+
+class queue
+{
+public:
+    node* front, *rear;
+    
+    bool isEmpty()
+    {
+        return (front == NULL);
+    }
+    
+    void enqueue(int val)
+    {
+        node *n = new node(val);
+        if(isEmpty()){
+            front = n;
+            rear = n;
+        }
+        else
+        {
+            rear->next = n;
+            rear = n;
+        }
+        // rear = n;  // or simplify by this
+    }
+    
+    int dequeue()
+    {
+        int temp;
+        if(!isEmpty())
+        {
+            temp = front->data;
+            front = front->next;
+            if(front == NULL) // only one data in queue, after one step , no data
+                rear = NULL;
+        }
+        return temp;
+    }
+    
+};
+
+int main()
+{
+    //int arr[6] = {5,3,1,2,6,4};
+
+    return 0;
+}
+
