@@ -1,0 +1,4 @@
+BST:
+  Worst for search = O(n)
+  Worst for insert = O(n)
+  Worst for delete = O(n)
