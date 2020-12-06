@@ -5,4 +5,4 @@ BST:
 
 Heap:
   Worst for insert = O(nlogn) , 每個val insert最壞要做logn次swap，從最低做到root (height = logn)，所以n * logn
-  delete = O(1) 
+  Worst for delete = O(nlogn), 雖然deelte = O(1),但係sink仲要log n，每個node都做就係nlogn
