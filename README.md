@@ -15,5 +15,7 @@ For code practice
 
 11-2020 ： 1097  lines
 
+12-2020 ： 470  lines
+
 
 codeforces: https://www.a2oj.com/Ladders.html
