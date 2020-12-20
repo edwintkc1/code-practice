@@ -1,8 +1,0 @@
-BST:
-  Worst for search = O(n)
-  Worst for insert = O(n)
-  Worst for delete = O(n)
-
-Heap:
-  Worst for insert = O(nlogn) , 每個val insert最壞要做logn次swap，從最低做到root (height = logn)，所以n * logn
-  Worst for delete = O(nlogn), 雖然deelte = O(1),但係sink仲要log n，每個node都做就係nlogn
